@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB;
 class DocenteController extends Controller
 {
     /**
@@ -13,7 +13,10 @@ class DocenteController extends Controller
      */
     public function index()
     {
-        //
+        $data = DB::table('docentes')->get();
+        return view('docente.lista',[
+            'docentes'=> $data
+        ]);
     }
 
     /**
@@ -23,7 +26,7 @@ class DocenteController extends Controller
      */
     public function create()
     {
-        //
+        return view('docente.registrar');
     }
 
     /**
@@ -34,7 +37,16 @@ class DocenteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $id = DB::table('docentes')
+        ->insertGetId([
+            'nombre'=> $request->nombre,
+            'apellidopaterno'=>$request->apellidopaterno,
+            'apellidomaterno'=>$request->apellidomaterno,
+            'titulodocente'=>$request->titulodocente,
+            'cargahoraria'=>$request->cargahoraria,
+            'telefono'=>$request->telefono
+        ]);
+        return redirect('docente.lista');
     }
 
     /**
@@ -56,7 +68,12 @@ class DocenteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $docente=DB::table('docentes')
+        ->where('docente.id',$id)
+        ->first();
+        return view('docente.edit',[
+            'docente'=>$docente
+        ]);
     }
 
     /**
@@ -68,7 +85,17 @@ class DocenteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $docente = DB::table('docentes')
+        ->where('id',$id)
+        ->update([
+            'nombre'=> $request->nombre,
+            'apellidopaterno'=>$request->apellidopaterno,
+            'apellidomaterno'=>$request->apellidomaterno,
+            'titulodocente'=>$request->titulodocente,
+            'cargahoraria'=>$request->cargahoraria,
+            'telefono'=>$request->telefono,
+        ]);
+        return redirect('docente');
     }
 
     /**
