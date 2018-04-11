@@ -7,11 +7,11 @@
 
 <div class="form-group">
     {!! Form::label('nombre','Nombre') !!}
-    {!! Form::text('nombre', $docente -> nombre, ['class'=>'form-control']) !!}
+    {!! Form::text('nombre', $docente -> nombre, ['class'=>'form-control','minlength'=>'3']) !!}
 </div>
 <div>
     {!! Form::label('apellidopaterno','Apellido Paterno') !!}
-    {!! Form::text('apellidopaterno',$docente -> apellidopaterno, ['class'=>'form-control']) !!}
+    {!! Form::text('apellidopaterno',$docente -> apellidopaterno, ['class'=>'form-control','minlength'=>'3']) !!}
 </div>
 <div class="form-group">
     {!! Form::label('apellidomaterno','Apellido Materno') !!}
@@ -19,7 +19,7 @@
 </div>
 <div class="form-group">
     {!! Form::label('titulodocente','Titulo Docente') !!}
-    {!! Form::text('titulodocente', $docente -> titulodocente, ['class'=>'form-control']) !!}
+    {!! Form::text('titulodocente', $docente -> titulodocente, ['class'=>'form-control','minlength'=>'3']) !!}
 </div>
 <div class="form-group">
     {!! Form::label('cargahoraria','Carga Horaria') !!}
@@ -27,11 +27,15 @@
 </div>
 <div class="form-group">
     {!! Form::label('telefono','Telefono') !!}
-    {!! Form::text('Telefono', $docente -> telefono, ['class'=>'form-control']) !!}
+    {!! Form::text('telefono', $docente -> telefono, ['class'=>'form-control']) !!}
 </div>
- {!! Form::submit('cancelar', ['route'=>'docente','class'=>'btn btn-succes']) !!}
- {!! Form::submit('actualizar', ['class'=>'btn btn-succes']) !!}
+<div class="form-group">
+    {!! Form::label('correo','Correo Electronico') !!}
+    {!! Form::text('correo', $docente -> correo, ['class'=>'form-control','minlength'=>'3']) !!}
+</div>
+ {!! Form::submit('cancelar', ['route'=>'docente','class'=>'btn btn-danger']) !!}
+ {!! Form::submit('actualizar', ['class'=>'btn btn-success']) !!}
  
 {!! Form::close() !!}
 
-@stop
+@endsection

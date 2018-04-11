@@ -46,7 +46,7 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/">Sugerir</a>
+              <a class="nav-link" href="{{ route('docente.index') }} ">Lista de Docentes</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/">Sugerir</a>

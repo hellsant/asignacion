@@ -15,12 +15,13 @@ class CreateDocentesTable extends Migration
     {
         Schema::create('docentes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre', 15);
-            $table->string('apellidopaterno',15);
-            $table->string('apellidomaterno',15);
-            $table->string('titulodocente',10);
-            $table->string('cargahoraria',15);
-            $table->string('telefono',10);
+            $table->string('nombre', 30);
+            $table->string('apellidopaterno', 30);
+            $table->string('apellidomaterno', 30)->nullable();;
+            $table->string('titulodocente', 10);
+            $table->string('cargahoraria')->nullable();;
+            $table->integer('telefono')->nullable();;
+            $table->string('correo');
             $table->timestamps();
         });
     }

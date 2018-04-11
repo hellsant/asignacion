@@ -14,9 +14,7 @@ class DocenteController extends Controller
     public function index()
     {
         $data = DB::table('docentes')->get();
-        return view('docente.lista',[
-            'docentes'=> $data
-        ]);
+        return view('docente.lista',['docentes'=> $data ]);
     }
 
     /**
@@ -44,9 +42,10 @@ class DocenteController extends Controller
             'apellidomaterno'=>$request->apellidomaterno,
             'titulodocente'=>$request->titulodocente,
             'cargahoraria'=>$request->cargahoraria,
-            'telefono'=>$request->telefono
+            'telefono'=>$request->telefono,
+            'correo'=>$request->correo
         ]);
-        return redirect('docente.lista');
+        return redirect('docente');
     }
 
     /**
@@ -68,8 +67,8 @@ class DocenteController extends Controller
      */
     public function edit($id)
     {
-        $docente=DB::table('docentes')
-        ->where('docente.id',$id)
+        $docente = DB::table('docentes')
+        ->where('docentes.id',$id)
         ->first();
         return view('docente.edit',[
             'docente'=>$docente
@@ -86,7 +85,7 @@ class DocenteController extends Controller
     public function update(Request $request, $id)
     {
         $docente = DB::table('docentes')
-        ->where('id',$id)
+        ->where('docentes.id',$id)
         ->update([
             'nombre'=> $request->nombre,
             'apellidopaterno'=>$request->apellidopaterno,
@@ -94,6 +93,7 @@ class DocenteController extends Controller
             'titulodocente'=>$request->titulodocente,
             'cargahoraria'=>$request->cargahoraria,
             'telefono'=>$request->telefono,
+            'correo'=>$request->correo
         ]);
         return redirect('docente');
     }
