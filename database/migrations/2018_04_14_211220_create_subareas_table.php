@@ -18,6 +18,9 @@ class CreateSubareasTable extends Migration
             $table->integer('COD_SUBAREA');
 		    $table->string('NOM_SUBAREA', 30)->nullable()->default(null);
 		    $table->text('DESC_SUBAREA')->nullable();
+
+            $table->integer('area_id')->unsigned();
+		    $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');	    
 		    
             $table->timestamps();
         });

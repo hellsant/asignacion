@@ -19,9 +19,6 @@ class CreateAreasTable extends Migration
 		    $table->string('NOMBRE_AREA', 30)->nullable()->default(null);
             $table->text('DESC_AREA')->nullable();	
 
-            $table->integer('subarea_id')->unsigned();
-		    $table->foreign('subarea_id')->references('id')->on('subareas')->onDelete('cascade');	    
-            
             $table->timestamps();
         });
     }
