@@ -37,7 +37,6 @@ class ProfecionalController extends Controller
     {
         $id = DB::table('profecional')
         ->insertGetId([
-            'COD_PROF'=>$request->COD_PROF,
             'NOM_PROF'=> $request->NOM_PROF,
             'AP_PAT_PROF'=>$request->AP_PAT_PROF,
             'AP_MAT_PROF'=>$request->AP_MAT_PROF,
@@ -91,7 +90,6 @@ class ProfecionalController extends Controller
         $profecional = DB::table('profecional')
         ->where('profecional.id',$id)
         ->update([
-            'COD_PROF'=>$request->COD_PROF,
             'NOM_PROF'=> $request->NOM_PROF,
             'AP_PAT_PROF'=>$request->AP_PAT_PROF,
             'AP_MAT_PROF'=>$request->AP_MAT_PROF,

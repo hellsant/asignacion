@@ -10,18 +10,16 @@
 
     <title>Asignacion de Tribunales</title>
     <link rel="icon" href="{{ asset ('img/fav-icon.png')}}" type="image/x-icon" />
-  
-    {!!Html::style('vendor/bootstrap/css/bootstrap.min.css')!!}
-    {!!Html::style('vendor/bootstrap/font-awesome/css/font-awesome.min.css')!!}
+    {!!Html::style('css/bootstrap.min.css')!!}
+    {!!Html::style('web-fonts-with-css/css/fontawesome-all.min.css')!!}
+    {!!Html::style('web-fonts-with-css/css/fa-solid.min.css')!!}
+    {!!Html::style('web-fonts-with-css/css/fa-brands.min.css')!!}
+    {!!Html::style('web-fonts-with-css/css/fa-regular.min.css')!!}
     {!!Html::style('https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic')!!}
     {!!Html::style('https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800')!!}
     {!!Html::style('css/clean-blog.min.css')!!}
- 
-  
   </head>
-
   <body>
-
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
@@ -65,7 +63,9 @@
             <div class="site-heading">
               <h1>@yield('titulo1')</h1>
               <span class="subheading">
+
                 @yield('titulo2')
+
               </span>
             </div>
           </div>
@@ -90,7 +90,9 @@
     </footer>
   </body>
   
-{!! Html::script('vendor/jquery/jquery.min.js') !!}
-{!! Html::script('vendor/bootstrap/js/bootstrap.bundle.min.js') !!}
-{!! Html::script('js/clean-blog.min.js') !!}
+  {!! Html::script('jquery/jquery.min.js') !!}
+  {!! Html::script('js/bootstrap.min.js') !!}
+  {!! Html::script('js/bootstrap.bundle.min.js') !!}
+  {!! Html::script('js/jqBootstrapValidation.min.js') !!}
+  {!! Html::script('js/clean-blog.min.js') !!}
 </html>
