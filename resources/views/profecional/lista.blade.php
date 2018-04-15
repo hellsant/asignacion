@@ -12,8 +12,15 @@
           <th scope="col">Apellido Materno</th>
           <th scope="col">Telefono</th>
           <th scope="col">Correo</th>
-          <th scope="col">Editar</th>
-          
+          <th scope="col">
+            <div class="text-center">
+              <h3>
+                <a href='{{ route('profecional.create')}}' data-toggle="tooltip" data-placement="right" title="Registar">
+                  <i class="fas fa-plus-square" aria-hidden="true" ></i>
+                </a>
+              </h3>
+            </div>
+          </th>
         </tr>
     </thead>
     <tbody>
@@ -25,7 +32,15 @@
         <td>{{ $profecional -> AP_MAT_PROF}} </td>
         <td>{{ $profecional -> TELF_PROF}} </td>
         <td>{{ $profecional -> CORREO_PROF}} </td>
-        <td><a href='{{ route('profecional.edit',$profecional->id)}}' class="btn btn-warnimg">editar</a> </td>
+        <td>
+            <div class="text-center">
+                <h4>
+                  <a href='{{ route('profecional.edit',$profecional->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">
+                      <i class="fas fa-pencil-alt"aria-hidden="true"></i>
+                  </a>
+              </h4>
+            </div> 
+        </td>
       </tr>
       @endforeach
     </tbody>

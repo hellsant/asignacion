@@ -15,7 +15,6 @@ class CreateprofecionalTable extends Migration
     {
         Schema::create('profecional', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('COD_PROF');
 		    $table->string('NOM_PROF', 30)->nullable()->default(null);
 		    $table->string('AP_PAT_PROF', 30)->nullable()->default(null);
 		    $table->string('AP_MAT_PROF', 30)->nullable()->default(null);
