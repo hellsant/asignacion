@@ -15,6 +15,13 @@ class CreateEstudiantesTable extends Migration
     {
         Schema::create('estudiantes', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('COD_SIS');
+		    $table->string('NOM_EST', 30)->nullable()->default(null);
+		    $table->string('AP_PAT_EST', 30)->nullable()->default(null);
+		    $table->string('AP_MAT_EST', 30)->nullable()->default(null);
+		    $table->integer('CI')->nullable()->default(null);
+		    $table->string('CORRETO_EST', 30)->nullable()->default(null);
+
             $table->timestamps();
         });
     }
