@@ -23,8 +23,8 @@ class CreateprofecionalTable extends Migration
 		    $table->integer('TELF_PROF')->nullable()->default(null);
 		    $table->string('DIREC_PROF', 30)->nullable()->default(null);
 		    $table->integer('CI_PROF')->nullable()->default(null);
-		    $table->integer('COD_SIS_PROF')->nullable()->default(null);
-		    $table->integer('TIPO_PROF')->nullable()->default(null);
+            $table->integer('COD_SIS_PROF')->nullable()->default(null);
+            $table->enum('Tipo', ['Interno', 'Externo']);
 		    $table->string('CORREO_PROF', 30)->nullable()->default(null);
             $table->timestamps();
         });
