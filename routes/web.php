@@ -15,5 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('docente', 'DocenteController');
-
+Route::resource('profecional', 'ProfecionalController');
