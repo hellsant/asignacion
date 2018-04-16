@@ -1,6 +1,6 @@
 @extends('layouts.principal')
 @section('titulo1', 'ACTUALIZAR')
-@section('titulo2', 'INFORMACION DEL profecional')
+@section('titulo2', 'INFORMACION DEL PROFISIONAL')
 @section('content')
 
 <div>

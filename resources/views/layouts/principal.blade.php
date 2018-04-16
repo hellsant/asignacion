@@ -38,9 +38,9 @@
                 Registrar
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="{{ route('profecional.create') }} ">Registrar Profesional</a>
-                <a class="dropdown-item" href="#">Registrar Perfil</a>
-                <a class="dropdown-item" href="#">Registrar Area</a>
+                <a class="dropdown-item" href="{{ route('profecional.create') }}">Registrar Profesional</a>
+                <a class="dropdown-item" href="{{ route('proyecto.create') }}">Registrar Perfil</a>
+                <a class="dropdown-item" href="{{ route('areas.create') }}">Registrar Area</a>
               </div>
             </li>
             <li class="nav-item">
