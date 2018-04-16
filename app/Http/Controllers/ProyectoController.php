@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB;
 class ProyectoController extends Controller
 {
     /**
@@ -13,7 +13,10 @@ class ProyectoController extends Controller
      */
     public function index()
     {
-        //
+        $data = DB::table('proyectos')
+        ->join('modalidades','proyectos.modalidad_id','=','modalidad_id')
+        ->get();
+        return view('proyecto.lista',['proyectos'=> $data ]);
     }
 
     /**
@@ -23,7 +26,7 @@ class ProyectoController extends Controller
      */
     public function create()
     {
-        //
+        return view('proyecto.registrar');
     }
 
     /**
@@ -34,7 +37,24 @@ class ProyectoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $mod=DB::table('modalidades')
+        ->where('Tipo', $request->Tipo)
+        ->value('id');
+        
+        $idP = DB::table('proyectos')
+        ->insertGetId([
+            'TITULO_PERFIL'=> $request->TITULO_PERFIL,
+            'FECHA_REGISTRO'=>$request->FECHA_REGISTRO,
+            'FECHA_LIMITE'=>$request->FECHA_LIMITE,
+            'OBJ_GRAL'=>$request->OBJ_GRAL,
+            'OBJ_ESP'=>$request->OBJ_ESP,
+            'DESCRIPCION'=>$request->DESCRIPCION,
+            'FECHA_INI'=>$request->FECHA_INI,
+            'FECHA_DEF'=>$request->FECHA_DEF,
+            'FECHA_PRORR'=>$request->FECHA_PRORR,
+            'modalidad_id'=>$mod
+            ]);
+        return redirect('proyecto');
     }
 
     /**
