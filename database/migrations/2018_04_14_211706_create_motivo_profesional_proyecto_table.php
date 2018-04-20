@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateprofesionalProyectoTable extends Migration
+class CreatemotivoprofesionalProyectoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,15 +15,17 @@ class CreateprofesionalProyectoTable extends Migration
     {
         Schema::create('profesional_proyeto', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('Tipo', ['Tribunal', 'Tutor']);
+
+            $table->integer('motivo_id')->unsigned();
+            $table->foreign('motivo_id')->references('id')->on('motivos')->onDelete('cascade');
 
             $table->integer('profesional_id')->unsigned();
-		    $table->foreign('profesional_id')->references('id')->on('profesional')->onDelete('cascade');
-            
+		        $table->foreign('profesional_id')->references('id')->on('profesional')->onDelete('cascade');
+
             $table->integer('proyecto_id')->unsigned();
-		    $table->foreign('proyecto_id')->references('id')->on('proyectos')->onDelete('cascade');
-		   
-            $table->timestamps();
+		        $table->foreign('proyecto_id')->references('id')->on('proyectos')->onDelete('cascade');
+
+           $table->timestamps();
         });
     }
 
