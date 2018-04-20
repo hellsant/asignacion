@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAreaprofecionalTable extends Migration
+class CreateAreaprofesionalTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateAreaprofecionalTable extends Migration
      */
     public function up()
     {
-        Schema::create('area_profecional', function (Blueprint $table) {
+        Schema::create('area_profesional', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('area_id')->unsigned();
             $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
            
-            $table->integer('profecional_id')->unsigned();
-            $table->foreign('profecional_id')->references('id')->on('profecional')->onDelete('cascade');
+            $table->integer('profesional_id')->unsigned();
+            $table->foreign('profesional_id')->references('id')->on('profesional')->onDelete('cascade');
 		 		
             $table->timestamps();
         });
@@ -32,6 +32,6 @@ class CreateAreaprofecionalTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('area_profecional');
+        Schema::dropIfExists('area_profesional');
     }
 }

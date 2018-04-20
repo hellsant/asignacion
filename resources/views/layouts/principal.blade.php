@@ -38,13 +38,13 @@
                 Registrar
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="{{ route('profecional.create') }}">Registrar Profesional</a>
+                <a class="dropdown-item" href="{{ route('profesional.create') }}">Registrar Profesional</a>
                 <a class="dropdown-item" href="{{ route('proyecto.create') }}">Registrar Perfil</a>
                 <a class="dropdown-item" href="{{ route('areas.create') }}">Registrar Area</a>
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('profecional.index') }} ">Lista de profecionales</a>
+              <a class="nav-link" href="{{ route('profesional.index') }} ">Lista de profesionales</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/">Sugerir</a>
