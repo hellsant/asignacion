@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateprofecionalProyectoTable extends Migration
+class CreateprofesionalProyectoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateprofecionalProyectoTable extends Migration
      */
     public function up()
     {
-        Schema::create('profecional_proyeto', function (Blueprint $table) {
+        Schema::create('profesional_proyeto', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('Tipo', ['Tribunal', 'Tutor']);
 
-            $table->integer('profecional_id')->unsigned();
-		    $table->foreign('profecional_id')->references('id')->on('profecional')->onDelete('cascade');
+            $table->integer('profesional_id')->unsigned();
+		    $table->foreign('profesional_id')->references('id')->on('profesional')->onDelete('cascade');
             
             $table->integer('proyecto_id')->unsigned();
 		    $table->foreign('proyecto_id')->references('id')->on('proyectos')->onDelete('cascade');
@@ -34,6 +34,6 @@ class CreateprofecionalProyectoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('profecional_proyeto');
+        Schema::dropIfExists('profesional_proyeto');
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-class ProfecionalController extends Controller
+class ProfesionalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +13,8 @@ class ProfecionalController extends Controller
      */
     public function index()
     {
-        $data = DB::table('profecional')->get();
-        return view('profecional.lista',['profecionales'=> $data ]);
+        $data = DB::table('profesional')->get();
+        return view('profesional.lista',['profesionales'=> $data ]);
     }
 
     /**
@@ -24,7 +24,7 @@ class ProfecionalController extends Controller
      */
     public function create()
     {
-        return view('profecional.registrar');
+        return view('profesional.registrar');
     }
 
     /**
@@ -35,7 +35,7 @@ class ProfecionalController extends Controller
      */
     public function store(Request $request)
     {
-        $id = DB::table('profecional')
+        $id = DB::table('profesional')
         ->insertGetId([
             'NOM_PROF'=> $request->NOM_PROF,
             'AP_PAT_PROF'=>$request->AP_PAT_PROF,
@@ -48,7 +48,7 @@ class ProfecionalController extends Controller
             'Tipo'=>$request->Tipo,
             'CORREO_PROF'=>$request->CORREO_PROF
             ]);
-        return redirect('profecional');
+        return redirect('profesional');
     }
 
     /**
@@ -70,11 +70,11 @@ class ProfecionalController extends Controller
      */
     public function edit($id)
     {
-        $profecional = DB::table('profecional')
-        ->where('profecional.id',$id)
+        $profesional = DB::table('profesional')
+        ->where('profesional.id',$id)
         ->first();
-        return view('profecional.edit',[
-            'profecional'=>$profecional
+        return view('profesional.edit',[
+            'profesional'=>$profesional
         ]);
     }
 
@@ -87,8 +87,8 @@ class ProfecionalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $profecional = DB::table('profecional')
-        ->where('profecional.id',$id)
+        $profesional = DB::table('profesional')
+        ->where('profesional.id',$id)
         ->update([
             'NOM_PROF'=> $request->NOM_PROF,
             'AP_PAT_PROF'=>$request->AP_PAT_PROF,
@@ -101,7 +101,7 @@ class ProfecionalController extends Controller
             'Tipo'=>$request->Tipo,
             'CORREO_PROF'=>$request->CORREO_PROF
         ]);
-        return redirect('profecional');
+        return redirect('profesional');
     }
 
     /**

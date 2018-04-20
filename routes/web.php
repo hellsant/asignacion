@@ -15,4 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('profecional', 'ProfecionalController');
+Route::resource('profesional', 'ProfesionalController');
+Route::resource('proyecto', 'ProyectoController');
+Route::resource('areas', 'AreasController');

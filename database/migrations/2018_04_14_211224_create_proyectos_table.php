@@ -15,8 +15,6 @@ class CreateProyectosTable extends Migration
     {
         Schema::create('proyectos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('COD_PERFIL');
-		    $table->integer('COD_MOD')->unsigned();
 		    $table->string('TITULO_PERFIL', 30)->nullable()->default(null);
 		    $table->date('FECHA_REGISTRO')->nullable()->default(null);
 		    $table->date('FECHA_LIMITE')->nullable()->default(null);
