@@ -14,7 +14,7 @@ class ProyectoController extends Controller
     public function index()
     {
         $data = DB::table('proyectos')
-        ->join('modalidades','proyectos.modalidad_id','=','modalidad_id')
+        ->join('modalidades','proyectos.modalidad_id','=','modalidades.id')
         ->get();
         return view('proyecto.lista',['proyectos'=> $data ]);
     }
@@ -39,7 +39,7 @@ class ProyectoController extends Controller
     {
         $mod=DB::table('modalidades')
         ->where('Tipo', $request->Tipo)
-        ->value('id');
+        ->first();
         
         $idP = DB::table('proyectos')
         ->insertGetId([
@@ -52,7 +52,7 @@ class ProyectoController extends Controller
             'FECHA_INI'=>$request->FECHA_INI,
             'FECHA_DEF'=>$request->FECHA_DEF,
             'FECHA_PRORR'=>$request->FECHA_PRORR,
-            'modalidad_id'=>$mod
+            'modalidad_id'=>$mod->id
             ]);
         return redirect('proyecto');
     }
@@ -76,7 +76,11 @@ class ProyectoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $proyecto = DB::table('proyectos')
+        ->join('modalidades','proyectos.modalidad_id','=','modalidades.id')
+        ->where('proyectos.id',$id)
+        ->first();
+        return view('proyecto.edit',['proyecto'=>$proyecto]);
     }
 
     /**
@@ -88,7 +92,21 @@ class ProyectoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $proyecto = DB::table('proyectos')
+        ->where('proyectos.id',$id)
+        ->update([
+            'TITULO_PERFIL'=> $request->TITULO_PERFIL,
+            'FECHA_REGISTRO'=>$request->FECHA_REGISTRO,
+            'FECHA_LIMITE'=>$request->FECHA_LIMITE,
+            'OBJ_GRAL'=>$request->OBJ_GRAL,
+            'OBJ_ESP'=>$request->OBJ_ESP,
+            'DESCRIPCION'=>$request->DESCRIPCION,
+            'FECHA_INI'=>$request->FECHA_INI,
+            'FECHA_DEF'=>$request->FECHA_DEF,
+            'FECHA_PRORR'=>$request->FECHA_PRORR,
+            'modalidad_id'=>$request->modalidad_id
+        ]);
+        return redirect('proyecto');
     }
 
     /**
