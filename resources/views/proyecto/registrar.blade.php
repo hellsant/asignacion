@@ -5,11 +5,11 @@
 
 <div>
 
-    {!! Form::open(['route'=>'proyecto.store','method'=>'POST']) !!}
+    {!! Form::open(['route'=>'proyecto.store','method'=>'patch test-form','data-parsley-validate'=>""]) !!}
     <div class="form-group row">
         {!! Form::label('TITULO_PERFIL','Titulo Perfil',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('TITULO_PERFIL', old('TITULO_PERFIL'), ['class'=>'form-control','required' =>'true','minlength'=>'3']) !!}
+            {!! Form::text('TITULO_PERFIL', old('TITULO_PERFIL'), ['class'=>'form-control',  'data-parsley-type'=>"number",'placeholder'=>"Ingrese el Codigo Sis", 'required' =>'true','data-parsley-error-message'=>"Ingrese solo numeros",'required' =>'true']) !!}
         </div>
     </div>
     <div class="form-group row">
@@ -27,7 +27,7 @@
     <div class="form-group row">
         {!! Form::label('OBJ_GRAL','Objetivo General',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('OBJ_GRAL', old('OBJ_GRAL'), ['class'=>'form-control','required' =>'true','minlength'=>'3']) !!}
+            {!! Form::text('OBJ_GRAL', old('OBJ_GRAL'), ['class'=>'form-control','required' =>'true','placeholder'=>"Ingrese el Objetivo General", 'required' =>'true','minlength'=>'3']) !!}
         </div>
     </div>
     <div class="form-group row">
@@ -41,13 +41,13 @@
     <div class="form-group row">
         {!! Form::label('OBJ_ESP','Objetivos Espesificos',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('OBJ_ESP', old('OBJ_ESP'), ['class'=>'form-control']) !!}
+            {!! Form::text('OBJ_ESP', old('OBJ_ESP'), ['class'=>'form-control','placeholder'=>"Ingrese el Objetivo Especifico"]) !!}
         </div>
     </div>
     <div class="form-group row">
         {!! Form::label('DESCRIPCION','Descripcion',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('DESCRIPCION', old('DESCRIPCION'), ['class'=>'form-control']) !!}
+            {!! Form::text('DESCRIPCION', old('DESCRIPCION'), ['class'=>'form-control','placeholder'=>"Ingrese La Descripcion"]) !!}
         </div>
     </div>
     <div class="form-group row">

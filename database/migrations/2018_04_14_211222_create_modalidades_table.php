@@ -17,7 +17,6 @@ class CreateModalidadesTable extends Migration
             $table->increments('id');
             $table->integer('COD_MOD');
 		    $table->enum('Tipo', ['Adscripcion', 'Tesis','Proyecto de Grado','Trabajo Dirigido','Titulacion Por Exelencia']);
-		    
             $table->timestamps();
         });
     }
