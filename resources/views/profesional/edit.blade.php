@@ -38,21 +38,15 @@
         </div>
     </div>
     <div class="form-group row">
-        {!! Form::label('Direccion','Direccion',['class'=>'col-sm-2 col-form-label']) !!}
-        <div class="col-sm-10">
-            {!! Form::text('DIREC_PROF', $profesional->DIREC_PROF, ['class'=>'form-control','placeholder'=>"Ingrese La direccion"]) !!}
-        </div>
-    </div>
-    <div class="form-group row">
         {!! Form::label('CI_PROF','CI',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
             {!! Form::number('CI_PROF', $profesional->CI_PROF,  ['class'=>'form-control',  'data-parsley-type'=>"number",'placeholder'=>"Ingrese el CI", 'required' =>'true','data-parsley-error-message'=>"Ingrese solo numeros",'required' =>'true']) !!}
         </div>
     </div>
     <div class="form-group row">
-        {!! Form::label('COD_SIS_PROF','Codigo SIS',['class'=>'col-sm-2 col-form-label']) !!}
+        {!! Form::label('MON_CUENTA','Nombre de cuenta',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::number('COD_SIS_PROF', $profesional->COD_SIS_PROF,  ['class'=>'form-control',  'data-parsley-type'=>"number",'placeholder'=>"Ingrese el Codigo Sis", 'required' =>'true','data-parsley-error-message'=>"Ingrese solo numeros",'required' =>'true']) !!}
+            {!! Form::text('MON_CUENTA', $profesional->MON_CUENTA, ['class'=>'form-control','placeholder'=>"Ingrese La direccion"]) !!}
         </div>
     </div>
     <div class="form-group row">

@@ -32,7 +32,7 @@
         <td>{{ $estudiante -> AP_PAT_EST}} </td>
         <td>{{ $estudiante -> AP_MAT_EST}} </td>
         <td>{{ $estudiante -> CI}} </td>
-        <td>{{ $estudiante -> TEL}} </td>
+        <td>{{ $estudiante -> TELF}} </td>
         <td>{{ $estudiante -> CORRETO_EST}} </td>
         <td>
             <div class="text-center">

@@ -38,9 +38,9 @@
         </div>
     </div>
     <div class="form-group row">
-        {!! Form::label('TEL','TEL',['class'=>'col-sm-2 col-form-label']) !!}
+        {!! Form::label('TELF','TELF',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::number('TEL', $estudiante->TEL, ['class'=>'form-control',  'data-parsley-type'=>"number",'placeholder'=>"Ingrese el Telefono", 'required' =>'true','data-parsley-error-message'=>"Ingrese solo numeros",'required' =>'true']) !!}
+            {!! Form::number('TELF', $estudiante->TELF, ['class'=>'form-control',  'data-parsley-type'=>"number",'placeholder'=>"Ingrese el Telefono", 'required' =>'true','data-parsley-error-message'=>"Ingrese solo numeros",'required' =>'true']) !!}
         </div>
     </div>
     <div class="form-group row">

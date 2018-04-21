@@ -42,7 +42,7 @@ class EstudianteController extends Controller
             'AP_PAT_EST'=>$request->AP_PAT_EST,
             'AP_MAT_EST'=>$request->AP_MAT_EST,
             'CI'=>$request->CI,
-            'TEL'=>$request->TEL,
+            'TELF'=>$request->TELF,
             'CORRETO_EST'=>$request->CORRETO_EST
             ]);
         return redirect('estudiante');
@@ -92,7 +92,7 @@ class EstudianteController extends Controller
             'AP_PAT_EST'=>$request->AP_PAT_EST,
             'AP_MAT_EST'=>$request->AP_MAT_EST,
             'CI'=>$request->CI,
-            'TEL'=>$request->TEL,
+            'TELF'=>$request->TELF,
             'CORRETO_EST'=>$request->CORRETO_EST,
         ]);
         return redirect('estudiante');

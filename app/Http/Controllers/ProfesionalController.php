@@ -42,9 +42,8 @@ class ProfesionalController extends Controller
             'AP_MAT_PROF'=>$request->AP_MAT_PROF,
             'TITULO_PROF'=>$request->TITULO_PROF,
             'TELF_PROF'=>$request->TELF_PROF,
-            'DIREC_PROF'=>$request->DIREC_PROF,
             'CI_PROF'=>$request->CI_PROF,
-            'COD_SIS_PROF'=>$request->COD_SIS_PROF,
+            'MON_CUENTA'=>$request->MON_CUENTA,
             'Tipo'=>$request->Tipo,
             'CORREO_PROF'=>$request->CORREO_PROF
             ]);
@@ -95,9 +94,8 @@ class ProfesionalController extends Controller
             'AP_MAT_PROF'=>$request->AP_MAT_PROF,
             'TITULO_PROF'=>$request->TITULO_PROF,
             'TELF_PROF'=>$request->TELF_PROF,
-            'DIREC_PROF'=>$request->DIREC_PROF,
             'CI_PROF'=>$request->CI_PROF,
-            'COD_SIS_PROF'=>$request->COD_SIS_PROF,
+            'MON_CUENTA'=>$request->MON_CUENTA,
             'Tipo'=>$request->Tipo,
             'CORREO_PROF'=>$request->CORREO_PROF
         ]);

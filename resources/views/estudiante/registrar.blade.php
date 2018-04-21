@@ -36,9 +36,9 @@
         </div>
     </div>
     <div class="form-group row">
-        {!! Form::label('TEL','TEL',['class'=>'col-sm-2 col-form-label control-label','data-smk-icon'=>"glyphicon-remove"]) !!}
+        {!! Form::label('TELF','TELF',['class'=>'col-sm-2 col-form-label control-label','data-smk-icon'=>"glyphicon-remove"]) !!}
         <div class="col-sm-10">
-            {!! Form::number('TEL', old('TEL'), ['class'=>'form-control',  'data-parsley-type'=>"number",'placeholder'=>"Ingrese el Telefono", 'required' =>'true','data-parsley-error-message'=>"Ingrese solo numeros",'required' =>'true']) !!}
+            {!! Form::number('TELF', old('TELF'), ['class'=>'form-control',  'data-parsley-type'=>"number",'placeholder'=>"Ingrese el Telefono", 'required' =>'true','data-parsley-error-message'=>"Ingrese solo numeros",'required' =>'true']) !!}
         </div>
     </div>
     <div class="form-group row">
