@@ -37,21 +37,15 @@
         </div>
     </div>
     <div class="form-group row">
-        {!! Form::label('Direccion','Direccion',['class'=>'col-sm-2 col-form-label']) !!}
-        <div class="col-sm-10">
-            {!! Form::text('DIREC_PROF', old('DIREC_PROF'), ['class'=>'form-control']) !!}
-        </div>
-    </div>
-    <div class="form-group row">
         {!! Form::label('CI_PROF','CI',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
             {!! Form::text('CI_PROF', old('CI_PROF'), ['class'=>'form-control','required' =>'true']) !!}
         </div>
     </div>
     <div class="form-group row">
-        {!! Form::label('COD_SIS_PROF','Codigo SIS',['class'=>'col-sm-2 col-form-label']) !!}
+        {!! Form::label('MON_CUENTA','Cuenta',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('COD_SIS_PROF', old('COD_SIS_PROF'), ['class'=>'form-control','required' =>'true']) !!}
+            {!! Form::text('MON_CUENTA', old('MON_CUENTA'), ['class'=>'form-control','required' =>'true']) !!}
         </div>
     </div>
     <div class="form-group row">
