@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB;
 class ModalidadController extends Controller
 {
     /**
@@ -13,7 +13,8 @@ class ModalidadController extends Controller
      */
     public function index()
     {
-        //
+        $data = DB::table('modalidades')->get();
+        return view('modalidad.lista',['modalidades'=> $data ]);
     }
 
     /**
@@ -23,7 +24,7 @@ class ModalidadController extends Controller
      */
     public function create()
     {
-        //
+        return view('modalidad.registrar');
     }
 
     /**
@@ -34,7 +35,11 @@ class ModalidadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('MODALIDADES')->insertGetId([
+            'NOM'=>$request->NOM,
+            'DESC'=>$request->DESC
+        ]);
+        return redirect('modalidad');
     }
 
     /**
@@ -56,7 +61,12 @@ class ModalidadController extends Controller
      */
     public function edit($id)
     {
-        //
+        $modalidad = DB::table('modalidades')
+        ->where('modalidades.id',$id)
+        ->first();
+        return view('modalidad.edit',[
+            'modalidad'=>$modalidad
+        ]);
     }
 
     /**
@@ -68,7 +78,13 @@ class ModalidadController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       $modalidad = DB::table('modalidades')
+        ->where('modalidades.id',$id)
+        ->update([
+            'NOM'=>$request->NOM,
+            'DESC'=>$request->DESC
+        ]);
+        return redirect('modalidad');
     }
 
     /**
