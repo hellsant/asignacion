@@ -15,9 +15,8 @@ class CreateModalidadesTable extends Migration
     {
         Schema::create('modalidades', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('COD_MOD');
-		    $table->enum('Tipo', ['Adscripcion', 'Tesis','Proyecto de Grado','Trabajo Dirigido','Titulacion Por Exelencia']);
-		    
+		    $table->string('MON');
+            $table->text('DESC')->nullable()->default(null);
             $table->timestamps();
         });
     }
