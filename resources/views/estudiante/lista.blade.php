@@ -13,6 +13,9 @@
           <th scope="col">CI</th>
           <th scope="col">Telefono</th>
           <th scope="col">Correo</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+
           <th scope="col">
             <div class="text-center">
               <h3>
