@@ -34,11 +34,21 @@
         <td>{{ $estudiante -> CI}} </td>
         <td>{{ $estudiante -> TELF}} </td>
         <td>{{ $estudiante -> CORRETO_EST}} </td>
+        <td></td>
         <td>
             <div class="text-center">
                 <h4>
                   <a href='{{ route('estudiante.edit',$estudiante->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">
                       <i class="fas fa-pencil-alt"aria-hidden="true"></i>
+                  </a>
+              </h4>
+            </div> 
+        </td>
+        <td>
+            <div class="text-center">
+                <h4>
+                  <a href='{{ route('estudiante.edit',$estudiante->id)}}' data-toggle="tooltip" data-placement="right" title="Eliminar">
+                      <i class="fas fa-trash-alt" aria-hidden="true"></i>
                   </a>
               </h4>
             </div> 
