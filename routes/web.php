@@ -17,5 +17,6 @@ Route::get('/', function () {
 
 Route::resource('profesional', 'ProfesionalController');
 Route::resource('proyecto', 'ProyectoController');
-Route::resource('areas', 'AreasController');
+Route::resource('area', 'AreasController');
 Route::resource('modalidad', 'ModalidadController');
+Route::resource('subarea', 'SubAreatoController');

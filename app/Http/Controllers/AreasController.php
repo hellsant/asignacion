@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB;
 class AreasController extends Controller
 {
     /**
@@ -13,7 +13,8 @@ class AreasController extends Controller
      */
     public function index()
     {
-        //
+        $data = DB::table('areas')->get();
+        return view('area.lista',['areas'=> $data ]);
     }
 
     /**
@@ -23,7 +24,7 @@ class AreasController extends Controller
      */
     public function create()
     {
-        //
+        return view('area.registrar');
     }
 
     /**
@@ -34,7 +35,12 @@ class AreasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $id = DB::table('areas')->insertGetId([
+            'COD_AREA'=> $request->COD_AREA,
+            'NOMBRE_AREA'=> $request->NOMBRE_AREA,
+            'DESC_AREA'=> $request->DESC_AREA
+        ]);
+        return redirect('area');
     }
 
     /**
@@ -56,7 +62,10 @@ class AreasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $areas = DB::table('areas')
+        ->where('areas.id',$id)
+        ->first();
+        return view('area.edit',['area'=>$areas]);
     }
 
     /**
@@ -68,7 +77,14 @@ class AreasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $areas = DB::table('areas')
+        ->where('areas.id',$id)
+        ->update([
+            'COD_AREA'=> $request->COD_AREA,
+            'NOMBRE_AREA'=> $request->NOMBRE_AREA,
+            'DESC_AREA'=> $request->DESC_AREA
+        ]);
+        return redirect('area');
     }
 
     /**
