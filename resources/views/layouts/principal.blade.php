@@ -41,6 +41,7 @@
                 <a class="dropdown-item" href="{{ route('profesional.create') }}">Registrar Profesional</a>
                 <a class="dropdown-item" href="{{ route('proyecto.create') }}">Registrar Perfil</a>
                 <a class="dropdown-item" href="{{ route('areas.create') }}">Registrar Area</a>
+                <a class="dropdown-item" href="{{ route('estudiante.create') }} ">Registrar Estudiantes</a>
               </div>
             </li>
             <li class="nav-item">
