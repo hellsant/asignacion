@@ -11,6 +11,7 @@
     <title>Asignacion de Tribunales</title>
     <link rel="icon" href="{{ asset ('img/fav-icon.png')}}" type="image/x-icon" />
     {!!Html::style('css/bootstrap.min.css')!!}
+    {!!Html::style('css/parsley.css')!!}
     {!!Html::style('web-fonts-with-css/css/fontawesome-all.min.css')!!}
     {!!Html::style('web-fonts-with-css/css/fa-solid.min.css')!!}
     {!!Html::style('web-fonts-with-css/css/fa-brands.min.css')!!}
@@ -38,13 +39,26 @@
                 Registrar
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="{{ route('profesional.create') }}">Registrar Profesional</a>
-                <a class="dropdown-item" href="{{ route('proyecto.create') }}">Registrar Perfil</a>
-                <a class="dropdown-item" href="{{ route('areas.create') }}">Registrar Area</a>
+                <a class="dropdown-item" href="{{ route('profesional.create') }} ">Registrar Profesional</a>
+                <a class="dropdown-item" href="{{ route('estudiante.create') }} ">Registrar Estudiantes</a>
+                <!--<a class="dropdown-item" href="#">Registrar Perfil</a>
+                <a class="dropdown-item" href="{{ route('area.create') }}">Registrar Area</a>
+                <a class="dropdown-item" href="{{ route('subarea.create') }}">Registrar Subarea</a>
+                <a class="dropdown-item" href="{{ route('carrera.create') }}">Registrar Carrera</a>-->
               </div>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('profesional.index') }} ">Lista de profesionales</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Listas
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="{{ route('profesional.index') }} ">Lista de profesionales</a>
+                <!--<a class="dropdown-item" href="{{ route('estudiante.index') }}">Lista de Estudiantes</a>
+                <a class="dropdown-item" href="#">Lista de Perfiles</a>
+                <a class="dropdown-item" href="{{ route('area.index') }} ">Lista de areas</a>
+                <a class="dropdown-item" href="{{ route('subarea.index') }} ">Lista de subareas</a>
+                <a class="dropdown-item" href="{{ route('carrera.index') }}">Lista de carreras</a>-->
+              </div>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/">Sugerir</a>
@@ -91,6 +105,9 @@
   </body>
   
   {!! Html::script('jquery/jquery.min.js') !!}
+  {!! Html::script('jquery/parsley.min.js') !!}
+  {!! Html::script('jquery/parsley.js') !!}
+  {!! Html::script('js/main.js') !!}
   {!! Html::script('js/bootstrap.min.js') !!}
   {!! Html::script('js/bootstrap.bundle.min.js') !!}
   {!! Html::script('js/jqBootstrapValidation.min.js') !!}
