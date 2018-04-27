@@ -40,6 +40,7 @@
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="{{ route('profesional.create') }}">Registrar Profesional</a>
                 <a class="dropdown-item" href="{{ route('proyecto.create') }}">Registrar Perfil</a>
+                <a class="dropdown-item" href="{{ route('carrera.create') }}">Registrar Carrera</a>
                 <a class="dropdown-item" href="{{ route('areas.create') }}">Registrar Area</a>
               </div>
             </li>
