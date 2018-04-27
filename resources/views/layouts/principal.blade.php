@@ -19,6 +19,7 @@
     {!!Html::style('https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic')!!}
     {!!Html::style('https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800')!!}
     {!!Html::style('css/clean-blog.min.css')!!}
+
   </head>
   <body>
     <!-- Navigation -->
@@ -40,11 +41,6 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="{{ route('profesional.create') }} ">Registrar Profesional</a>
-                <a class="dropdown-item" href="{{ route('estudiante.create') }} ">Registrar Estudiantes</a>
-                <!--<a class="dropdown-item" href="#">Registrar Perfil</a>
-                <a class="dropdown-item" href="{{ route('area.create') }}">Registrar Area</a>
-                <a class="dropdown-item" href="{{ route('subarea.create') }}">Registrar Subarea</a>
-                <a class="dropdown-item" href="{{ route('carrera.create') }}">Registrar Carrera</a>-->
               </div>
             </li>
             <li class="nav-item dropdown">
@@ -53,11 +49,6 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="{{ route('profesional.index') }} ">Lista de profesionales</a>
-                <!--<a class="dropdown-item" href="{{ route('estudiante.index') }}">Lista de Estudiantes</a>
-                <a class="dropdown-item" href="#">Lista de Perfiles</a>
-                <a class="dropdown-item" href="{{ route('area.index') }} ">Lista de areas</a>
-                <a class="dropdown-item" href="{{ route('subarea.index') }} ">Lista de subareas</a>
-                <a class="dropdown-item" href="{{ route('carrera.index') }}">Lista de carreras</a>-->
               </div>
             </li>
             <li class="nav-item">
@@ -77,9 +68,7 @@
             <div class="site-heading">
               <h1>@yield('titulo1')</h1>
               <span class="subheading">
-
                 @yield('titulo2')
-
               </span>
             </div>
           </div>
@@ -103,12 +92,13 @@
       </div>
     </footer>
   </body>
-  
   {!! Html::script('jquery/jquery.min.js') !!}
+  {!! Html::script('jquery/jquery.js') !!}
   {!! Html::script('jquery/parsley.min.js') !!}
   {!! Html::script('jquery/parsley.js') !!}
   {!! Html::script('js/main.js') !!}
   {!! Html::script('js/bootstrap.min.js') !!}
+  {!! Html::script('js/bootstrap.js') !!}
   {!! Html::script('js/bootstrap.bundle.min.js') !!}
   {!! Html::script('js/jqBootstrapValidation.min.js') !!}
   {!! Html::script('js/clean-blog.min.js') !!}
