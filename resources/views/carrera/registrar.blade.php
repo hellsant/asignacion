@@ -18,7 +18,7 @@
             {!! Form::text('NOM_CARRERA', old('NOM_CARRERA'), ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese el Nombre de la Carrera", 'required' =>'true','data-parsley-error-message'=>"Ingrese solo letras y espacios",'minlength'=>'3']) !!}
         </div>
     </div>
-    {!! Form::submit('cancelar', ['route'=>'carrera','class'=>'btn btn-danger']) !!}
+    <a href="{{ route('carrera.index') }}" class="btn btn-danger">Cancel</a>
     {!! Form::submit('registrar', ['class'=>'btn btn-success']) !!}
     {!! Form::close() !!}
 </div>

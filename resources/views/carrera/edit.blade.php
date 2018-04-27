@@ -6,7 +6,7 @@
 <div>
 
     {!! Form::open(['route'=>['carrera.update', $carrera->id],'method'=>'POST test-form','data-parsley-validate'=>""]) !!}
-    
+    {{method_field('PUT')}}
     <div class="form-group row">
         {!! Form::label('COD_CARRERA','Codigo SIS',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
@@ -19,7 +19,7 @@
             {!! Form::text('NOM_CARRERA',$carrera->NOM_CARRERA,  ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese el Nombre de la Carrera", 'required' =>'true','data-parsley-error-message'=>"Ingrese solo letras y espacios",'minlength'=>'3']) !!}
         </div>
     </div>
-    {!! Form::submit('cancelar', ['route'=>'carrera','class'=>'btn btn-danger']) !!}
+    <a href="{{ route('carrera.index') }}" class="btn btn-danger">Cancel</a>
     {!! Form::submit('actualizar', ['class'=>'btn btn-success']) !!}
     {!! Form::close() !!}
 </div>
