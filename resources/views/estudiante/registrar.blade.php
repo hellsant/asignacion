@@ -48,12 +48,12 @@
         </div>
     </div>
     <div class="form-group pull-right">
-        {!! Form::button('cancelar', ['route'=>"estudiante",'class'=>'btn btn-danger']) !!}  
+        <a href="{{ route('estudiante.index') }}" class="btn btn-danger">Cancel</a>
         {!! Form::submit('registrar', ['type'=>"submit",'class'=>'btn btn-success', 'id'=>"btnreg"]) !!}
         
     </div>
     {!! Form::close() !!}
-    <a href='{{ route('estudiante')}}'></a>
+    
 </div>
 @endsection
 

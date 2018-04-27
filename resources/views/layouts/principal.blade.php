@@ -48,6 +48,9 @@
               <a class="nav-link" href="{{ route('profesional.index') }} ">Lista de profesionales</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{{ route('estudiante.index') }} ">Lista de estudiantes</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="/">Sugerir</a>
             </li>
           </ul>
