@@ -38,7 +38,7 @@
     <div class="form-group row">
         {!! Form::label('AP_MAT_EST','Apellido Materno',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('AP_MAT_EST', $estudiante->AP_MAT_EST, ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese el Apellido Materno", 'required' =>'true','data-parsley-error-message'=>"Ingrese solo letras y espacios",'minlength'=>'3']) !!}
+            {!! Form::text('AP_MAT_EST', $estudiante->AP_MAT_EST, ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese el Apellido Materno", 'data-parsley-error-message'=>"Ingrese solo letras y espacios",'minlength'=>'3']) !!}
         </div>
     </div>
     <div class="form-group row">
