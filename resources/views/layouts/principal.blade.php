@@ -38,14 +38,19 @@
                 Registrar
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="{{ route('profesional.create') }}">Registrar Profesional</a>
+                <a class="dropdown-item" href="{{ route('profesional.create') }} ">Registrar Profesional</a>
                 <a class="dropdown-item" href="{{ route('proyecto.create') }}">Registrar Perfil</a>
-                <a class="dropdown-item" href="{{ route('carrera.create') }}">Registrar Carrera</a>
-                <a class="dropdown-item" href="{{ route('areas.create') }}">Registrar Area</a>
+                
+                <a class="dropdown-item" href="{{ route('carrera.create') }}">Registrar Perfil</a>
               </div>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('profesional.index') }} ">Lista de profesionales</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Listas
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="{{ route('profesional.index') }} ">Lista de profesionales</a>
+              </div>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/">Sugerir</a>
