@@ -59,7 +59,7 @@
             {!! Form::email('CORRETO_EST', $estudiante->CORRETO_EST, ['class'=>'form-control',  'data-parsley-type'=>"email",'placeholder'=>"Ingrese un correo", 'data-parsley-error-message'=>"null",'required' =>'true']) !!}
         </div>
     </div>
-    {!! Form::submit('atras', ['route'=>'estudiante','class'=>'btn btn-info']) !!}
+    <a href="{{ route('estudiante.index') }}" class="btn btn-danger">Cancel</a>
     {!! Form::submit('actualizar', ['class'=>'btn btn-success']) !!}
     {!! Form::close() !!}
 </div>
