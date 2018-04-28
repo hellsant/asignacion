@@ -31,11 +31,9 @@
         </div>
     </div>
     <div class="form-group row">
-            {!! Form::label('Tipo','Tipo',['class'=>'col-sm-2 col-form-label']) !!}
+            {!! Form::label('MODALIDAD','Modalidad',['class'=>'col-sm-2 col-form-label']) !!}
             <div class="col-sm-10">
-                {!! Form::select('Tipo',array('Adscripcion' => 'Adscripcion', 'Tesis' => 'Tesis',
-                'Proyecto de Grado'=>'Proyecto de Grado','Trabajo Dirigido'=>'Trabajo Dirigido','Titulacion Por Exelencia'=>'Titulacion Por Exelencia')
-                , 'Proyecto de Grado',['class'=>'form-control']) !!}
+                {!! Form::select('MODALIDAD',[$listaMonbres],null,['class'=>'form-control']) !!}
             </div>
         </div>
     <div class="form-group row">

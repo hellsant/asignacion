@@ -26,7 +26,12 @@ class ProyectoController extends Controller
      */
     public function create()
     {
-        return view('proyecto.registrar');
+        $mod=DB::table('modalidades')->get();
+        $listaMonbres=array();
+        foreach ($mod as $modalidad){
+            array_push($listaMonbres,$modalidad->NOM);
+        }
+        return view('proyecto.registrar',['listaMonbres'=>$listaMonbres]);
     }
 
     /**
@@ -38,9 +43,8 @@ class ProyectoController extends Controller
     public function store(Request $request)
     {
         $mod=DB::table('modalidades')
-        ->where('Tipo', $request->Tipo)
-        ->first();
-        
+        ->where('id',$request->MODALIDAD+1)
+        ->value('id');
         $idP = DB::table('proyectos')
         ->insertGetId([
             'TITULO_PERFIL'=> $request->TITULO_PERFIL,
@@ -52,7 +56,7 @@ class ProyectoController extends Controller
             'FECHA_INI'=>$request->FECHA_INI,
             'FECHA_DEF'=>$request->FECHA_DEF,
             'FECHA_PRORR'=>$request->FECHA_PRORR,
-            'modalidad_id'=>$mod->id
+            'modalidad_id'=>$mod
             ]);
         return redirect('proyecto');
     }
