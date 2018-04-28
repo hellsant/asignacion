@@ -20,3 +20,4 @@ Route::resource('proyecto', 'ProyectoController');
 Route::resource('areas', 'AreasController');
 Route::resource('estudiante', 'EstudianteController');
 Route::resource('modalidad', 'ModalidadController');
+Route::resource('carrera', 'CarreraController');
