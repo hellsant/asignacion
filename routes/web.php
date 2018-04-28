@@ -18,4 +18,5 @@ Route::get('/', function () {
 Route::resource('profesional', 'ProfesionalController');
 Route::resource('proyecto', 'ProyectoController');
 Route::resource('areas', 'AreasController');
+Route::resource('estudiante', 'EstudianteController');
 Route::resource('modalidad', 'ModalidadController');
