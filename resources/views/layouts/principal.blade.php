@@ -42,6 +42,7 @@
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="{{ route('profesional.create') }} ">Registrar Profesional</a>
                 <a class="dropdown-item" href="{{ route('proyecto.create') }}">Registrar Perfil</a>
+                <a class="dropdown-item" href="{{ route('estudiante.create') }}">Registrar Perfil</a>
               </div>
             </li>
             <li class="nav-item dropdown">
@@ -50,6 +51,7 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="{{ route('profesional.index') }} ">Lista de profesionales</a>
+                <a class="dropdown-item" href="{{ route('Estudiante.index') }} ">Lista de profesionales</a>
               </div>
             </li>
             <li class="nav-item">
