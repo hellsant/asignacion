@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB;
 class EstudianteController extends Controller
 {
     /**
@@ -13,7 +13,8 @@ class EstudianteController extends Controller
      */
     public function index()
     {
-        //
+        $data = DB::table('estudiantes')->get();
+        return view('estudiante.lista',['estudiantes'=> $data ]);
     }
 
     /**
@@ -23,7 +24,7 @@ class EstudianteController extends Controller
      */
     public function create()
     {
-        //
+        return view('estudiante.registrar');
     }
 
     /**
@@ -34,7 +35,17 @@ class EstudianteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $id = DB::table('estudiantes')
+        ->insertGetId([
+            'COD_SIS'=> $request->COD_SIS,
+            'NOM_EST'=>$request->NOM_EST,
+            'AP_PAT_EST'=>$request->AP_PAT_EST,
+            'AP_MAT_EST'=>$request->AP_MAT_EST,
+            'CI'=>$request->CI,
+            'TELF'=>$request->TELF,
+            'CORRETO_EST'=>$request->CORRETO_EST
+            ]);
+        return redirect('estudiante');
     }
 
     /**
@@ -56,7 +67,12 @@ class EstudianteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $estudiante = DB::table('estudiantes')
+        ->where('estudiantes.id',$id)
+        ->first();
+        return view('estudiante.edit',[
+            'estudiante'=>$estudiante
+        ]);
     }
 
     /**
@@ -68,7 +84,18 @@ class EstudianteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $estudiante = DB::table('estudiantes')
+        ->where('estudiantes.id',$id)
+        ->update([
+            'COD_SIS'=> $request->COD_SIS,
+            'NOM_EST'=>$request->NOM_EST,
+            'AP_PAT_EST'=>$request->AP_PAT_EST,
+            'AP_MAT_EST'=>$request->AP_MAT_EST,
+            'CI'=>$request->CI,
+            'TELF'=>$request->TELF,
+            'CORRETO_EST'=>$request->CORRETO_EST,
+        ]);
+        return redirect('estudiante');
     }
 
     /**
