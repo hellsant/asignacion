@@ -28,10 +28,14 @@
         <td>{{ $area -> DESC_AREA}} </td>
         <td>
             <div class="text-center">
-                <h4>
-                  <a href='{{ route('area.edit',$area->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">
-                      <i class="fas fa-pencil-alt"aria-hidden="true"></i>
-                  </a>
+              <h4>
+                <a href='{{ route('area.edit',$area->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">
+                  <i class="fas fa-pencil-alt"aria-hidden="true"></i>
+                </a>
+                <a href='{{ route('subarea.create',$area->NOMBRE_AREA) }}' data-toggle="tooltip" data-placement="right" title="Registar Subarea">
+                  <i class="fas fa-plus-square" 
+                      aria-hidden="true" ></i>
+                </a>
               </h4>
             </div> 
         </td>
