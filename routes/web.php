@@ -20,5 +20,5 @@ Route::resource('proyecto', 'ProyectoController');
 Route::resource('area', 'AreasController');
 Route::resource('estudiante', 'EstudianteController');
 Route::resource('modalidad', 'ModalidadController');
+Route::resource('carrera', 'CarreraController');
 Route::resource('subarea', 'SubAreatoController');
-
