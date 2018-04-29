@@ -12,13 +12,6 @@
           <th scope="col">Descripcion</th>
           <th scope="col">Nombre del Area al que pertenece</th>
           <th scope="col">
-            <div class="text-center">
-              <h3>
-                <a href='{{ route('subarea.create')}}' data-toggle="tooltip" data-placement="right" title="Registar">
-                  <i class="fas fa-plus-square" aria-hidden="true" ></i>
-                </a>
-              </h3>
-            </div>
           </th>
         </tr>
     </thead>

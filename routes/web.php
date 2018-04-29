@@ -21,4 +21,5 @@ Route::resource('area', 'AreasController');
 Route::resource('estudiante', 'EstudianteController');
 Route::resource('modalidad', 'ModalidadController');
 Route::resource('carrera', 'CarreraController');
+Route::get('subarea/{area}/create','SubAreatoController@recibe');
 Route::resource('subarea', 'SubAreatoController');

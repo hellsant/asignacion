@@ -101,4 +101,9 @@ class SubAreatoController extends Controller
     {
         //
     }
+
+    public function recibe($area)
+    {
+        return view('subarea.registrar',compact('area'));
+    }
 }
