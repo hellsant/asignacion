@@ -36,7 +36,7 @@
     <div class="form-group row">
         {!! Form::label('NOMBRE_AREA','Nombre del area al que pertenece',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('NOMBRE_AREA', $subarea->NOMBRE_AREA, ['class'=>'form-control']) !!}
+            {!! Form::text('NOMBRE_AREA', $subarea->NOMBRE_AREA, ['class'=>'form-control','readonly']) !!}
         </div>
     </div>
     {!! Form::submit('cancelar', ['route'=>'subarea','class'=>'btn btn-danger']) !!}
