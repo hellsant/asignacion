@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB;
 class SubAreatoController extends Controller
 {
     /**
@@ -13,17 +13,18 @@ class SubAreatoController extends Controller
      */
     public function index()
     {
-        //
+        $data = DB::table('subareas')->get();
+        return view('subarea.lista',['subareas'=> $data]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function create()
     {
-        //
+        return view('subarea.registrar');
     }
 
     /**
@@ -34,7 +35,14 @@ class SubAreatoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $id = DB::table('subareas')->insertGetId([
+            'COD_SUBAREA'=>$request->COD_SUBAREA,
+            'NOM_SUBAREA'=>$request->NOM_SUBAREA,
+            'DESC_SUBAREA'=>$request->DESC_SUBAREA,
+            'NOMBRE_AREA'=>$request->NOMBRE_AREA,
+            'area_id'=>DB::table('areas')->where('NOMBRE_AREA',$request->NOMBRE_AREA)->value('id')
+        ]);
+        return redirect('subarea'); 
     }
 
     /**
@@ -56,7 +64,10 @@ class SubAreatoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $subarea = DB::table('subareas')
+        ->where('subareas.id',$id)
+        ->first();
+        return view('subarea.edit',['subarea'=>$subarea]);
     }
 
     /**
@@ -68,7 +79,16 @@ class SubAreatoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $subarea = DB::table('subareas')
+        ->where('subareas.id',$id)
+        ->update([
+            'COD_SUBAREA'=> $request->COD_SUBAREA,
+            'NOM_SUBAREA'=> $request->NOM_SUBAREA,
+            'DESC_SUBAREA'=> $request->DESC_SUBAREA,
+            'NOMBRE_AREA'=>$request->NOMBRE_AREA,
+            'area_id'=>DB::table('areas')->where('NOMBRE_AREA',$request->NOMBRE_AREA)->value('id')
+        ]);
+        return redirect('subarea');
     }
 
     /**
@@ -80,5 +100,10 @@ class SubAreatoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function recibe($area)
+    {
+        return view('subarea.registrar',compact('area'));
     }
 }
