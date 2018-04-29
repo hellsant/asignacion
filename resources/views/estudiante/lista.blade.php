@@ -2,6 +2,19 @@
 @section('titulo1', 'LISTA')
 @section('titulo2', 'DE ESTUDIANTES')
 @section('content')
+<div>
+  {!! Form::open(array('url'=>'estudiante','method'=>'GET','autocomplete'=>'off','role'=>'search')) !!}
+  <div class="form-group">
+    <div class="input-group">
+      <input type="number" class="form-control" name="searchSIS" placeholder="Buscar por Codigo SIS..." value="{{$searchSIS}}">
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+      </span>
+    </div>
+  </div>
+
+{{Form::close()}}
+</div>
 <div class="table-responsive">
 <table class="table">
     <thead class="thead-light">
@@ -60,6 +73,7 @@
       @endforeach
     </tbody>
   </table>
+   
 </div>
-  
+ 
 @endsection
