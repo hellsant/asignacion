@@ -11,10 +11,15 @@ class EstudianteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = DB::table('estudiantes')->get();
-        return view('estudiante.lista',['estudiantes'=> $data ]);
+        if($request){
+            $query=trim($request->get('searchSIS'));
+            $data = DB::table('estudiantes') ->where('COD_SIS','LIKE','%'.$query.'%') 
+            ->orderBy('COD_SIS','desc')
+            ->paginate(10);
+            return view('estudiante.lista',['estudiantes'=> $data, "searchSIS"=>$query ]);
+        }
     }
 
     /**
