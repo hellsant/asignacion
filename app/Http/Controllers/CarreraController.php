@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Carrera;
 use DB;
 class CarreraController extends Controller
 {
@@ -13,7 +14,7 @@ class CarreraController extends Controller
      */
     public function index()
     {
-        $data = DB::table('carreras')->get();
+        $data = Carrera::all();
         return view('carrera.lista',['carreras'=> $data ]);
     }
 
@@ -35,11 +36,7 @@ class CarreraController extends Controller
      */
     public function store(Request $request)
     {
-        $id = DB::table('carreras')
-        ->insertGetId([
-            'COD_CARRERA'=> $request->COD_CARRERA,
-            'NOM_CARRERA'=>$request->NOM_CARRERA
-            ]);
+        Carrera::create($request->all());
         return redirect('carrera');
     }
 
@@ -62,9 +59,7 @@ class CarreraController extends Controller
      */
     public function edit($id)
     {
-        $carrera = DB::table('carreras')
-        ->where('carreras.id',$id)
-        ->first();
+        $carrera =Carrera::findOrFail($id);
         return view('carrera.edit',[
             'carrera'=>$carrera
         ]);
@@ -79,12 +74,7 @@ class CarreraController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $carrera = DB::table('carreras')
-        ->where('carreras.id',$id)
-        ->update([
-            'COD_CARRERA'=> $request->COD_CARRERA,
-            'NOM_CARRERA'=>$request->NOM_CARRERA
-        ]);
+        Carrera::findOrFail($id)->update($request->all());
         return redirect('carrera');
     }
 

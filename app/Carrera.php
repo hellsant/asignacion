@@ -4,10 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Modalidades extends Model
+class Carrera extends Model
 {
     protected $fillable=[
-        'NOM',
-        'DESC'
-    ];
+    'COD_CARRERA',
+    'NOM_CARRERA'];
 }
