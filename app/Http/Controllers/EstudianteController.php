@@ -17,7 +17,8 @@ class EstudianteController extends Controller
             $query=trim($request->get('searchSIS'));
             $data = DB::table('estudiantes') 
             ->where('COD_SIS','LIKE','%'.$query.'%') 
-            ->orderBy('COD_SIS','desc');
+            ->orderBy('COD_SIS','desc')
+            ->paginate(3);
             return view('estudiante.lista',['estudiantes'=> $data, "searchSIS"=>$query ]);
         }
     }

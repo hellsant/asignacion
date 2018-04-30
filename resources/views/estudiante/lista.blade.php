@@ -73,7 +73,7 @@
       @endforeach
     </tbody>
   </table>
-   
+  {!!$estudiantes->render()!!}
 </div>
  
 @endsection
