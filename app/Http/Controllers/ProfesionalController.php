@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Profesional;
 use Illuminate\Http\Request;
 use DB;
 class ProfesionalController extends Controller
@@ -13,7 +13,7 @@ class ProfesionalController extends Controller
      */
     public function index()
     {
-        $data = DB::table('profesional')->get();
+        $data = Profesional::all();
         return view('profesional.lista',['profesionales'=> $data ]);
     }
 
@@ -35,18 +35,7 @@ class ProfesionalController extends Controller
      */
     public function store(Request $request)
     {
-        DB::table('profesional')
-        ->insertGetId([
-            'NOM_PROF'=> $request->NOM_PROF,
-            'AP_PAT_PROF'=>$request->AP_PAT_PROF,
-            'AP_MAT_PROF'=>$request->AP_MAT_PROF,
-            'TITULO_PROF'=>$request->TITULO_PROF,
-            'TELF_PROF'=>$request->TELF_PROF,
-            'CI_PROF'=>$request->CI_PROF,
-            'MON_CUENTA'=>$request->MON_CUENTA,
-            'Tipo'=>$request->Tipo,
-            'CORREO_PROF'=>$request->CORREO_PROF
-            ]);
+        Profesional::create($request->all());
         return redirect('profesional');
     }
 
@@ -69,9 +58,7 @@ class ProfesionalController extends Controller
      */
     public function edit($id)
     {
-        $profesional = DB::table('profesional')
-        ->where('profesional.id',$id)
-        ->first();
+        $profesional = Profesional::findOrFail($id);
         return view('profesional.edit',[
             'profesional'=>$profesional
         ]);
@@ -86,19 +73,7 @@ class ProfesionalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $profesional = DB::table('profesional')
-        ->where('profesional.id',$id)
-        ->update([
-            'NOM_PROF'=> $request->NOM_PROF,
-            'AP_PAT_PROF'=>$request->AP_PAT_PROF,
-            'AP_MAT_PROF'=>$request->AP_MAT_PROF,
-            'TITULO_PROF'=>$request->TITULO_PROF,
-            'TELF_PROF'=>$request->TELF_PROF,
-            'CI_PROF'=>$request->CI_PROF,
-            'MON_CUENTA'=>$request->MON_CUENTA,
-            'Tipo'=>$request->Tipo,
-            'CORREO_PROF'=>$request->CORREO_PROF
-        ]);
+        Profesional::findOrFail($id)->update($request->all());
         return redirect('profesional');
     }
 

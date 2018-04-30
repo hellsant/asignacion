@@ -1,25 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Estudiante;
+
+use App\prueba;
 use Illuminate\Http\Request;
-use DB;
-class EstudianteController extends Controller
+
+class PruebaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if($request){
-            $query=trim($request->get('searchSIS'));
-            $data = DB::table('estudiantes') 
-            ->where('COD_SIS','LIKE','%'.$query.'%') 
-            ->orderBy('COD_SIS','desc');
-            return view('estudiante.lista',['estudiantes'=> $data, "searchSIS"=>$query ]);
-        }
+        //
     }
 
     /**
@@ -29,7 +24,7 @@ class EstudianteController extends Controller
      */
     public function create()
     {
-        return view('estudiante.registrar');
+        //
     }
 
     /**
@@ -40,17 +35,16 @@ class EstudianteController extends Controller
      */
     public function store(Request $request)
     {
-        Estudiante::create($request->all());
-        return redirect('estudiante');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\prueba  $prueba
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(prueba $prueba)
     {
         //
     }
@@ -58,37 +52,33 @@ class EstudianteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\prueba  $prueba
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(prueba $prueba)
     {
-       $estudiante = Estudiante::findOrFail($id);
-        return view('estudiante.edit',[
-            'estudiante'=>$estudiante
-        ]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\prueba  $prueba
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, prueba $prueba)
     {
-        Estudiante::findOrFail($id)->update($request->all());
-        return redirect('estudiante');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\prueba  $prueba
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(prueba $prueba)
     {
         //
     }

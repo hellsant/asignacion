@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\modalidades;
 use Illuminate\Http\Request;
 use DB;
 class ModalidadController extends Controller
@@ -13,7 +13,7 @@ class ModalidadController extends Controller
      */
     public function index()
     {
-        $data = DB::table('modalidades')->get();
+        $data = Modalidades::all();
         return view('modalidad.lista',['modalidades'=> $data ]);
     }
 
@@ -35,20 +35,17 @@ class ModalidadController extends Controller
      */
     public function store(Request $request)
     {
-        DB::table('MODALIDADES')->insertGetId([
-            'NOM'=>$request->NOM,
-            'DESC'=>$request->DESC
-        ]);
+        Modalidades::create($request->all());
         return redirect('modalidad');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $modalidades
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show( $id)
     {
         //
     }
@@ -56,14 +53,12 @@ class ModalidadController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $modalidades
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit( $id)
     {
-        $modalidad = DB::table('modalidades')
-        ->where('modalidades.id',$id)
-        ->first();
+        $modalidad = Modalidades::findOrFail($id);
         return view('modalidad.edit',[
             'modalidad'=>$modalidad
         ]);
@@ -73,28 +68,24 @@ class ModalidadController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $modalidades
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,  $id)
     {
-       $modalidad = DB::table('modalidades')
-        ->where('modalidades.id',$id)
-        ->update([
-            'NOM'=>$request->NOM,
-            'DESC'=>$request->DESC
-        ]);
+        Modalidades::findOrFail($id)->update($request->all());
         return redirect('modalidad');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $modalidades
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        Modalidades::findOrFail()->delete($id);
+        return redirect('modalidad');
     }
 }
