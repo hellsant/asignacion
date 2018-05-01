@@ -73,7 +73,7 @@
       @endforeach
     </tbody>
   </table>
-  {!!$estudiantes->render()!!}
+  {!!$estudiantes->render("pagination::bootstrap-4")!!}
 </div>
  
 @endsection
