@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Estudiante;
+use App\Proyecto;
+
 use Illuminate\Http\Request;
 use DB;
 class EstudianteController extends Controller
@@ -15,11 +17,10 @@ class EstudianteController extends Controller
     {
         if($request){
             $query=trim($request->get('searchSIS'));
-            $data = DB::table('estudiantes') 
+            $estudiantes = Estudiante::orderBy('COD_SIS','desc')
             ->where('COD_SIS','LIKE','%'.$query.'%') 
-            ->orderBy('COD_SIS','desc')
             ->paginate(10);
-            return view('estudiante.lista',['estudiantes'=> $data, "searchSIS"=>$query ]);
+            return view('estudiante.lista',["searchSIS"=>$query ])->with(compact('estudiantes'));
         }
     }
 
@@ -53,7 +54,7 @@ class EstudianteController extends Controller
      */
     public function show($id)
     {
-        //
+        //Estudiante::whitTrashed()->findOrFail($id)->restore();
     }
 
     /**
@@ -91,6 +92,7 @@ class EstudianteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Estudiante::findOrFail($id)->delete();
+        return redirect('estudiante');
     }
 }

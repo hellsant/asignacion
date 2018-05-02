@@ -19,11 +19,10 @@ class CreateEstudiantesTable extends Migration
 		    $table->string('NOM_EST', 30);
 		    $table->string('AP_PAT_EST', 30)->nullable()->default(null);
 		    $table->string('AP_MAT_EST', 30)->nullable()->default(null);
-		    $table->integer('CI');
-        $table->integer('TELF')->nullable()->default(null);
-
+            $table->integer('CI');
+            $table->integer('TELF')->nullable()->default(null);
 		    $table->string('CORRETO_EST', 30)->nullable()->default(null);
-
+            $table->softDeletes();
             $table->timestamps();
         });
     }

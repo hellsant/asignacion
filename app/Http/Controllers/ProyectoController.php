@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Proyecto;
+use App\Modalidades;
 use Illuminate\Http\Request;
 use DB;
 class ProyectoController extends Controller
@@ -13,10 +14,8 @@ class ProyectoController extends Controller
      */
     public function index()
     {
-        $data = DB::table('proyectos')
-        ->join('modalidades','proyectos.modalidad_id','=','modalidades.id')
-        ->get();
-        return view('proyecto.lista',['proyectos'=> $data ]);
+        $proyectos = Proyecto::all();
+        return view('proyecto.lista')->with(compact('proyectos'));
     }
 
     /**
@@ -26,12 +25,12 @@ class ProyectoController extends Controller
      */
     public function create()
     {
-        $mod=DB::table('modalidades')->get();
+        $mod=Modalidades::all();
         $listaMonbres=array();
         foreach ($mod as $modalidad){
             array_push($listaMonbres,$modalidad->NOM);
         }
-        return view('proyecto.registrar',['listaMonbres'=>$listaMonbres]);
+        return view('proyecto.registrar')->with(compact('listaMonbres'));
     }
 
     /**
@@ -42,22 +41,18 @@ class ProyectoController extends Controller
      */
     public function store(Request $request)
     {
-        $mod=DB::table('modalidades')
-        ->where('id',$request->MODALIDAD+1)
-        ->value('id');
-        $idP = DB::table('proyectos')
-        ->insertGetId([
-            'TITULO_PERFIL'=> $request->TITULO_PERFIL,
-            'FECHA_REGISTRO'=>$request->FECHA_REGISTRO,
-            'FECHA_LIMITE'=>$request->FECHA_LIMITE,
-            'OBJ_GRAL'=>$request->OBJ_GRAL,
-            'OBJ_ESP'=>$request->OBJ_ESP,
-            'DESCRIPCION'=>$request->DESCRIPCION,
-            'FECHA_INI'=>$request->FECHA_INI,
-            'FECHA_DEF'=>$request->FECHA_DEF,
-            'FECHA_PRORR'=>$request->FECHA_PRORR,
-            'modalidad_id'=>$mod
-            ]);
+        $proyecto = new Proyecto;
+        $proyecto->TITULO_PERFIL= $request->TITULO_PERFIL;
+        $proyecto->FECHA_REGISTRO=$request->FECHA_REGISTRO;
+        $proyecto->FECHA_LIMITE=$request->FECHA_LIMITE;
+        $proyecto->OBJ_GRAL=$request->OBJ_GRAL;
+        $proyecto->OBJ_ESP=$request->OBJ_ESP;
+        $proyecto->DESCRIPCION=$request->DESCRIPCION;
+        $proyecto->FECHA_INI=$request->FECHA_INI;
+        $proyecto->FECHA_DEF=$request->FECHA_DEF;
+        $proyecto->FECHA_PRORR=$request->FECHA_PRORR;
+        $proyecto->modalidad_id=$request->MODALIDAD+1;
+        $proyecto->save();
         return redirect('proyecto');
     }
 
@@ -80,11 +75,9 @@ class ProyectoController extends Controller
      */
     public function edit($id)
     {
-        $proyecto = DB::table('proyectos')
-        ->join('modalidades','proyectos.modalidad_id','=','modalidades.id')
-        ->where('proyectos.id',$id)
-        ->first();
-        return view('proyecto.edit',['proyecto'=>$proyecto]);
+        $proyecto = Proyecto::findOrFail($id);
+        $proyecto->modalidad;
+        return view('proyecto.edit')->with(compact('proyecto'));
     }
 
     /**
@@ -96,20 +89,7 @@ class ProyectoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $proyecto = DB::table('proyectos')
-        ->where('proyectos.id',$id)
-        ->update([
-            'TITULO_PERFIL'=> $request->TITULO_PERFIL,
-            'FECHA_REGISTRO'=>$request->FECHA_REGISTRO,
-            'FECHA_LIMITE'=>$request->FECHA_LIMITE,
-            'OBJ_GRAL'=>$request->OBJ_GRAL,
-            'OBJ_ESP'=>$request->OBJ_ESP,
-            'DESCRIPCION'=>$request->DESCRIPCION,
-            'FECHA_INI'=>$request->FECHA_INI,
-            'FECHA_DEF'=>$request->FECHA_DEF,
-            'FECHA_PRORR'=>$request->FECHA_PRORR,
-            'modalidad_id'=>$request->modalidad_id
-        ]);
+        Proyecto::findOrFail($id)->update($request->all());
         return redirect('proyecto');
     }
 
