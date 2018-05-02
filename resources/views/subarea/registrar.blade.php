@@ -30,6 +30,9 @@
             {!! Form::text('NOMBRE_AREA', $area, ['class'=>'form-control','readonly']) !!}
         </div>    
     </div>
+    <div class="form-group row">
+        {!! Form::hidden('area_id', $id) !!}
+    </div>
     {!! Form::submit('cancelar', ['route'=>'subarea','class'=>'btn btn-danger']) !!}
     {!! Form::submit('registrar', ['class'=>'btn btn-success']) !!}
     {!! Form::close() !!}

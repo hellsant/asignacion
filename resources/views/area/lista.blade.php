@@ -41,7 +41,7 @@
         <td>
             <div class="text-center">
               <h4>
-                <a href='{{ url('subarea/'.$area->NOMBRE_AREA.'/create') }}' data-toggle="tooltip" data-placement="right" title="Registar Subarea">
+                <a href='{{ url('subarea/'.$area->NOMBRE_AREA.'/'.$area->id.'/create') }}' data-toggle="tooltip" data-placement="right" title="Registar Subarea">
                   <i class="fas fa-plus-square" aria-hidden="true"></i>
                 </a>
               </h4>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\SubArea;
+use App\Area;
 class SubAreatoController extends Controller
 {
     /**
@@ -13,8 +15,8 @@ class SubAreatoController extends Controller
      */
     public function index()
     {
-        $data = DB::table('subareas')->get();
-        return view('subarea.lista',['subareas'=> $data]);
+        $subareas = SubArea::all();
+        return view('subarea.lista')->with(compact('subareas'));
     }
 
     /**
@@ -35,13 +37,7 @@ class SubAreatoController extends Controller
      */
     public function store(Request $request)
     {
-        $id = DB::table('subareas')->insertGetId([
-            'COD_SUBAREA'=>$request->COD_SUBAREA,
-            'NOM_SUBAREA'=>$request->NOM_SUBAREA,
-            'DESC_SUBAREA'=>$request->DESC_SUBAREA,
-            'NOMBRE_AREA'=>$request->NOMBRE_AREA,
-            'area_id'=>DB::table('areas')->where('NOMBRE_AREA',$request->NOMBRE_AREA)->value('id')
-        ]);
+        SubArea::create($request->all());
         return redirect('subarea'); 
     }
 
@@ -53,7 +49,7 @@ class SubAreatoController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -64,10 +60,8 @@ class SubAreatoController extends Controller
      */
     public function edit($id)
     {
-        $subarea = DB::table('subareas')
-        ->where('subareas.id',$id)
-        ->first();
-        return view('subarea.edit',['subarea'=>$subarea]);
+        $subarea = SubArea::findOrFail($id);
+        return view('subarea.edit')->with(compact('subarea'));
     }
 
     /**
@@ -79,15 +73,7 @@ class SubAreatoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $subarea = DB::table('subareas')
-        ->where('subareas.id',$id)
-        ->update([
-            'COD_SUBAREA'=> $request->COD_SUBAREA,
-            'NOM_SUBAREA'=> $request->NOM_SUBAREA,
-            'DESC_SUBAREA'=> $request->DESC_SUBAREA,
-            'NOMBRE_AREA'=>$request->NOMBRE_AREA,
-            'area_id'=>DB::table('areas')->where('NOMBRE_AREA',$request->NOMBRE_AREA)->value('id')
-        ]);
+        SubArea::findOrFail($id)->update($request->all());
         return redirect('subarea');
     }
 
@@ -102,8 +88,8 @@ class SubAreatoController extends Controller
         //
     }
 
-    public function recibe($area)
+    public function recibe($area,$id)
     {
-        return view('subarea.registrar',compact('area'));
+        return view('subarea.registrar')->with(compact('area','id'));
     }
 }
