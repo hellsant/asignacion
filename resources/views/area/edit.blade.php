@@ -35,7 +35,7 @@
                 {!! Form::text('DESC_AREA', $area->DESC_AREA, ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese la Descripcion del Area",'data-parsley-error-message'=>"Ingrese solo letras y espacios",'minlength'=>'3']) !!}
             </div>
         </div>
-    {!! Form::submit('cancelar', ['route'=>'area','class'=>'btn btn-danger']) !!}
+        <a href="{{ route('area.index') }}" class="btn btn-danger">Cancel</a>
     {!! Form::submit('actualizar', ['class'=>'btn btn-success']) !!}
     {!! Form::close() !!}
 </div>

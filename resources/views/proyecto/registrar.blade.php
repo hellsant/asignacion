@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="form-group row">
-        {!! Form::label('FECHA_LIMITE','fecha limite',['class'=>'col-sm-2 col-form-label']) !!}
+        {!! Form::label('FECHA_LIMITE','Fecha Limite',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
             {!! Form::date('FECHA_LIMITE', old('FECHA_LIMITE'), ['class'=>'form-control']) !!}
         </div>
@@ -37,7 +37,7 @@
             </div>
         </div>
     <div class="form-group row">
-        {!! Form::label('OBJ_ESP','Objetivos Espesificos',['class'=>'col-sm-2 col-form-label']) !!}
+        {!! Form::label('OBJ_ESP','Objetivos Especificos',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
             {!! Form::text('OBJ_ESP', old('OBJ_ESP'), ['class'=>'form-control']) !!}
         </div>
@@ -49,24 +49,18 @@
         </div>
     </div>
     <div class="form-group row">
-        {!! Form::label('FECHA_INI','Fecha inicio',['class'=>'col-sm-2 col-form-label']) !!}
+        {!! Form::label('FECHA_INI','Fecha Inicio',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::date('FECHA_INI', old('FECHA_INI'), ['class'=>'form-control','required' =>'true']) !!}
+            {!! Form::date('FECHA_INI', old('FECHA_INI'), ['class'=>'form-control']) !!}
         </div>
     </div>
     <div class="form-group row">
         {!! Form::label('FECHA_DEF','Fecha Defensa',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::date('FECHA_DEF', old('FECHA_DEF'), ['class'=>'form-control','required' =>'true']) !!}
+            {!! Form::date('FECHA_DEF', old('FECHA_DEF'), ['class'=>'form-control']) !!}
         </div>
     </div>
-    <div class="form-group row">
-        {!! Form::label('FECHA_PRORR','Fecha Prorroga',['class'=>'col-sm-2 col-form-label']) !!}
-        <div class="col-sm-10">
-            {!! Form::date('FECHA_PRORR', old('FECHA_PRORR'), ['class'=>'form-control','required' =>'true']) !!}
-        </div>
-    </div>
-    {!! Form::submit('cancelar', ['route'=>'proyecto','class'=>'btn btn-danger']) !!}
+    <a href="{{ route('proyecto.index') }}" class="btn btn-danger">Cancel</a>
     {!! Form::submit('registrar', ['class'=>'btn btn-success']) !!}
     {!! Form::close() !!}
 </div>

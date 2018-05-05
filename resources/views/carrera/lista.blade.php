@@ -8,6 +8,7 @@
       <tr>
           <th scope="col">Codigo Carrera</th>
           <th scope="col">Nombre</th>
+          <th></th>
           <th scope="col">
             <div class="text-center">
               <h3>
@@ -29,6 +30,14 @@
                 <h4>
                   <a href='{{ route('carrera.edit',$carrera->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">
                       <i class="fas fa-pencil-alt"aria-hidden="true"></i>
+                  </a>
+              </h4>
+            </div> 
+        </td>
+        <td>
+            <div class="text-center">
+                <h4>
+                  <a href='{{ route('carrera.destroy',$carrera->id)}}' onclick="return confirm('¿Esta seguro de eliminar esta Carrera?')" data-toggle="tooltip" data-placement="right" title="Eliminar">                      <i class="fas fa-trash-alt" aria-hidden="true"></i>
                   </a>
               </h4>
             </div> 

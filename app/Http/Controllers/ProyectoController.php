@@ -41,19 +41,40 @@ class ProyectoController extends Controller
      */
     public function store(Request $request)
     {
-        $proyecto = new Proyecto;
-        $proyecto->TITULO_PERFIL= $request->TITULO_PERFIL;
-        $proyecto->FECHA_REGISTRO=$request->FECHA_REGISTRO;
-        $proyecto->FECHA_LIMITE=$request->FECHA_LIMITE;
-        $proyecto->OBJ_GRAL=$request->OBJ_GRAL;
-        $proyecto->OBJ_ESP=$request->OBJ_ESP;
-        $proyecto->DESCRIPCION=$request->DESCRIPCION;
-        $proyecto->FECHA_INI=$request->FECHA_INI;
-        $proyecto->FECHA_DEF=$request->FECHA_DEF;
-        $proyecto->FECHA_PRORR=$request->FECHA_PRORR;
-        $proyecto->modalidad_id=$request->MODALIDAD+1;
-        $proyecto->save();
-        return redirect('proyecto');
+        if($request->FECHA_LIMITE>$request->FECHA_REGISTRO)
+        {
+            if(($request->FECHA_INI>$request->FECHA_REGISTRO)||($request->FECHA_INI==null))
+            {
+                if(($request->FECHA_DEF>$request->FECHA_LIMITE)||($request->FECHA_DEF==null))
+                {
+                    $proyecto = new Proyecto;
+                    $proyecto->TITULO_PERFIL= $request->TITULO_PERFIL;
+                    $proyecto->FECHA_REGISTRO=$request->FECHA_REGISTRO;
+                    $proyecto->FECHA_LIMITE=$request->FECHA_LIMITE;
+                    $proyecto->OBJ_GRAL=$request->OBJ_GRAL;
+                    $proyecto->OBJ_ESP=$request->OBJ_ESP;
+                    $proyecto->DESCRIPCION=$request->DESCRIPCION;
+                    $proyecto->FECHA_INI=$request->FECHA_INI;
+                    $proyecto->FECHA_DEF=$request->FECHA_DEF;
+                    $proyecto->FECHA_PRORR=$request->FECHA_PRORR;
+                    $proyecto->modalidad_id=$request->MODALIDAD+1;
+                    $proyecto->save();
+                    return redirect('proyecto');
+                }
+                else
+                {
+                    return redirect('proyecto');
+                }
+            }
+            else
+            {
+                return redirect('proyecto');
+            }
+        }
+        else
+        {
+            return redirect('proyecto');
+        }
     }
 
     /**
@@ -89,8 +110,15 @@ class ProyectoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Proyecto::findOrFail($id)->update($request->all());
-        return redirect('proyecto');
+        if($request->FECHA_PRORR>$request->FECHA_LIMITE)
+        {
+            Proyecto::findOrFail($id)->update($request->all());
+            return redirect('proyecto');
+        }
+        else
+        {
+            return redirect('proyecto');
+        }
     }
 
     /**
@@ -101,6 +129,7 @@ class ProyectoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Proyecto::findOrFail($id)->delete();
+        return redirect('proyecto');
     }
 }

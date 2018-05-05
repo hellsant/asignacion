@@ -21,10 +21,10 @@
     <div class="form-group row">
         {!! Form::label('DESC_AREA','Descripcion del area',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('DESC_AREA', old('DESC_AREA'), ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese la Descripcion del Area", 'required' =>'true','data-parsley-error-message'=>"Ingrese solo letras y espacios",'minlength'=>'3']) !!}
+            {!! Form::text('DESC_AREA', old('DESC_AREA'), ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese la Descripcion del Area",'data-parsley-error-message'=>"Ingrese solo letras y espacios",'minlength'=>'3']) !!}
         </div>
     </div>
-    {!! Form::submit('cancelar', ['route'=>'area','class'=>'btn btn-danger']) !!}
+    <a href="{{ route('area.index') }}" class="btn btn-danger">Cancel</a>
     {!! Form::submit('registrar', ['class'=>'btn btn-success']) !!}
     {!! Form::close() !!}
 </div>

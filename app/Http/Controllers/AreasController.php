@@ -36,8 +36,17 @@ class AreasController extends Controller
      */
     public function store(Request $request)
     {
-        Area::create($request->all());
-        return redirect('area');
+        $p=Area::where('COD_AREA','=',$request->COD_AREA)->first();
+        $q=Area::where('NOMBRE_AREA','=',$request->NOMBRE_AREA)->first();
+        if($p==null&&$q==null)
+        {
+            Area::create($request->all());
+            return redirect('area');
+        }
+        else
+        {
+            return redirect('area');
+        }
     }
 
     /**
@@ -84,6 +93,7 @@ class AreasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Area::findOrFail($id)->delete();
+        return redirect('area');
     }
 }

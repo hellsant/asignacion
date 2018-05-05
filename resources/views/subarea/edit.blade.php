@@ -39,7 +39,7 @@
             {!! Form::text('NOMBRE_AREA', $subarea->NOMBRE_AREA, ['class'=>'form-control','readonly']) !!}
         </div>
     </div>
-    {!! Form::submit('cancelar', ['route'=>'subarea','class'=>'btn btn-danger']) !!}
+    <a href="{{ route('subarea.index') }}" class="btn btn-danger">Cancel</a>
     {!! Form::submit('actualizar', ['class'=>'btn btn-success']) !!}
     {!! Form::close() !!}
 </div>

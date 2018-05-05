@@ -42,8 +42,17 @@ class EstudianteController extends Controller
      */
     public function store(Request $request)
     {
-        Estudiante::create($request->all());
-        return redirect('estudiante');
+        $p=Estudiante::where('COD_SIS','=',$request->COD_SIS)->first();
+        $q=Estudiante::where('CI','=',$request->NOM_CI)->first();
+        if($p==null&&$q==null)
+        {
+            Estudiante::create($request->all());
+            return redirect('estudiante');
+        }
+        else
+        {
+            return redirect('estudiante');
+        }
     }
 
     /**

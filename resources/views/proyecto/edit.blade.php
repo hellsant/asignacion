@@ -63,7 +63,7 @@
         </div>
         {!! Form::hidden('modalidad_id', $proyecto->modalidad_id) !!}
 
-    {!! Form::submit('cancelar', ['route'=>'proyecto','class'=>'btn btn-danger']) !!}
+    <a href="{{ route('proyecto.index') }}" class="btn btn-danger">Cancel</a>
     {!! Form::submit('actualizar', ['class'=>'btn btn-success']) !!}
     {!! Form::close() !!}
 </div>

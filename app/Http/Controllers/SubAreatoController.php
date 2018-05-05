@@ -85,7 +85,8 @@ class SubAreatoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        SubArea::findOrFail($id)->delete();
+        return redirect('subarea');
     }
 
     public function recibe($area,$id)

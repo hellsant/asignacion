@@ -10,8 +10,8 @@
           <th scope="col">Codigo</th>
           <th scope="col">Nombre</th>
           <th scope="col">Descripcion</th>
-          <th>
-          </th>
+          <th></th>
+          <th></th>
           <th scope="col">
             <div class="text-center">
               <h3>
@@ -44,6 +44,15 @@
                 <a href='{{ url('subarea/'.$area->NOMBRE_AREA.'/'.$area->id.'/create') }}' data-toggle="tooltip" data-placement="right" title="Registar Subarea">
                   <i class="fas fa-plus-square" aria-hidden="true"></i>
                 </a>
+              </h4>
+            </div> 
+        </td>
+        <td>
+            <div class="text-center">
+                <h4>
+                  <a href='{{ route('area.destroy',$area->id)}}' onclick="return confirm('¿Esta seguro de eliminar esta Area?')" data-toggle="tooltip" data-placement="right" title="Eliminar">
+                      <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                  </a>
               </h4>
             </div> 
         </td>
