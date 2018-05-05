@@ -22,7 +22,7 @@ class CreateCarreraEstudianteTable extends Migration
             $table->integer('estudiante_id')->unsigned();
 		    $table->foreign('estudiante_id')->references('id')->on('estudiantes')->onDelete('cascade');
             
-         
+            $table->softDeletes();
             $table->timestamps();
         });
     }

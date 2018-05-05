@@ -17,6 +17,7 @@ class CreateCarrerasTable extends Migration
             $table->increments('id');
             $table->integer('COD_CARRERA');
 		    $table->string('NOM_CARRERA', 30)->nullable()->default(null);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

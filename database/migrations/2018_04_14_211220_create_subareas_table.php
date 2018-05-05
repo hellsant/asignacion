@@ -23,6 +23,7 @@ class CreateSubareasTable extends Migration
 		    $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');	    
             
             $table->string('NOMBRE_AREA', 80)->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class profesional extends Model
 {
+    Use SoftDeletes;
+
     protected $table = 'profesional';
     protected $fillable=[
     'NOM_PROF',
@@ -17,5 +20,7 @@ class profesional extends Model
     'MON_CUENTA',
     'Tipo',
     'CORREO_PROF',
-];
+    ];
+
+    protected $dates=['delete_at'];
 }

@@ -27,6 +27,7 @@ class CreateProyectosTable extends Migration
             
 		    $table->integer('modalidad_id')->unsigned();
 		    $table->foreign('modalidad_id')->references('id')->on('modalidades')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

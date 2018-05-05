@@ -21,7 +21,7 @@ class CreateProfesionalSubareaTable extends Migration
             
             $table->integer('subarea_id')->unsigned();
 		    $table->foreign('subarea_id')->references('id')->on('subareas')->onDelete('cascade');
-            
+            $table->softDeletes();
             $table->timestamps();
         });
     }

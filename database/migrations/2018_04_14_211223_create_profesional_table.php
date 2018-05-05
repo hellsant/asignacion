@@ -24,6 +24,7 @@ class CreateprofesionalTable extends Migration
             $table->string('MON_CUENTA')->nullable()->default(null);
             $table->enum('Tipo', ['Interno', 'Externo']);
 		    $table->string('CORREO_PROF', 30)->nullable()->default(null);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
