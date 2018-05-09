@@ -11,7 +11,15 @@
           <th scope="col">Nombre</th>
           <th scope="col">Descripcion</th>
           <th scope="col">Nombre del Area al que pertenece</th>
+          <th></th>
           <th scope="col">
+            <div class="text-center">
+              <h3>
+                <a href='{{ route('subarea.create')}}' data-toggle="tooltip" data-placement="right" title="Registar">
+                  <i class="fas fa-plus-square" aria-hidden="true" ></i>
+                </a>
+              </h3>
+            </div>
           </th>
         </tr>
     </thead>
@@ -27,6 +35,15 @@
                 <h4>
                   <a href='{{ route('subarea.edit',$subarea->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">
                       <i class="fas fa-pencil-alt"aria-hidden="true"></i>
+                  </a>
+              </h4>
+            </div> 
+        </td>
+        <td>
+            <div class="text-center">
+                <h4>
+                  <a href='{{ url('subarea/ocultar',$subarea->id)}}' onclick="return confirm('¿Esta seguro de eliminar esta Subarea?')" data-toggle="tooltip" data-placement="right" title="Eliminar">
+                      <i class="fas fa-trash-alt" aria-hidden="true"></i>
                   </a>
               </h4>
             </div> 

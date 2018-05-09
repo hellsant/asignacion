@@ -36,8 +36,17 @@ class CarreraController extends Controller
      */
     public function store(Request $request)
     {
-        Carrera::create($request->all());
-        return redirect('carrera');
+        $p=Carrera::where('COD_CARRERA','=',$request->COD_CARRERA)->first();
+        $q=Carrera::where('NOM_CARRERA','=',$request->NOM_CARRERA)->first();
+        if($p==null&&$q==null)
+        {
+            Carrera::create($request->all());
+            return redirect('carrera');
+        }
+        else
+        {
+            return redirect('carrera');
+        }
     }
 
     /**
@@ -86,6 +95,13 @@ class CarreraController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Carrera::findOrFail($id)->delete();
+        return redirect('carrera');
+    }
+
+    public function ocultar($id)
+    {
+        Carrera::findOrFail($id)->delete();
+        return redirect('carrera');
     }
 }

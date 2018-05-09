@@ -19,8 +19,8 @@ class CreateEstudianteProfesionalsTable extends Migration
             $table->foreign('estudiante_id')->references('id')->on('estudiantes')->onDelete('cascade');
 
             $table->integer('profesional_id')->unsigned();
-        $table->foreign('profesional_id')->references('id')->on('profesional')->onDelete('cascade');
-
+            $table->foreign('profesional_id')->references('id')->on('profesional')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

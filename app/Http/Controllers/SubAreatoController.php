@@ -85,11 +85,18 @@ class SubAreatoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        SubArea::findOrFail($id)->delete();
+        return redirect('subarea');
     }
 
     public function recibe($area,$id)
     {
         return view('subarea.registrar')->with(compact('area','id'));
+    }
+
+    public function ocultar($id)
+    {
+        SubArea::findOrFail($id)->delete();
+        return redirect('subarea');
     }
 }

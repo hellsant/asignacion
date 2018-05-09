@@ -5,20 +5,20 @@
 
 <div>
 
-    {!! Form::open(['route'=>'modalidad.store','method'=>'POST']) !!}
+    {!! Form::open(['route'=>'modalidad.store','method'=>'POST','data-parsley-validate'=>""]) !!}
     <div class="form-group row">
         {!! Form::label('NOM','Modalidad',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('NOM', old('NOM'), ['class'=>'form-control','required' =>'true','minlength'=>'3']) !!}
+            {!! Form::text('NOM', old('NOM'), ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese el Nombre de la Modalidad",'data-parsley-error-message'=>"Ingrese solo letras y espacios",'required' =>'true','minlength'=>'3']) !!}
         </div>
     </div>
     <div class="form-group row">
         {!! Form::label('DESC','Descripcion',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('DESC', old('DESC'), ['class'=>'form-control']) !!}
+            {!! Form::text('DESC', old('DESC'), ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese descripcion de la Modalidad",'data-parsley-error-message'=>"Ingrese solo letras y espacios"]) !!}
         </div>
     </div>
-    {!! Form::submit('cancelar', ['route'=>'modalidad','class'=>'btn btn-danger']) !!}
+    <a href="{{ route('modalidad.index') }}" class="btn btn-danger">Cancel</a>
     {!! Form::submit('registrar', ['class'=>'btn btn-success']) !!}
     {!! Form::close() !!}
 </div>

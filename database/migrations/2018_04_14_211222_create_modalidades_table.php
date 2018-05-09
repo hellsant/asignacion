@@ -17,6 +17,7 @@ class CreateModalidadesTable extends Migration
             $table->increments('id');
 		    $table->string('NOM');
             $table->text('DESC')->nullable()->default(null);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -18,7 +18,7 @@ class CreateAreasTable extends Migration
             $table->integer('COD_AREA');
 		    $table->string('NOMBRE_AREA')->nullable()->default(null);
             $table->text('DESC_AREA')->nullable();	
-
+            $table->softDeletes();
             $table->timestamps();
         });
     }

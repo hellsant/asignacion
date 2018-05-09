@@ -20,7 +20,7 @@ class CreateAreaprofesionalTable extends Migration
            
             $table->integer('profesional_id')->unsigned();
             $table->foreign('profesional_id')->references('id')->on('profesional')->onDelete('cascade');
-		 		
+            $table->softDeletes();	
             $table->timestamps();
         });
     }

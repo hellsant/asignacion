@@ -35,8 +35,16 @@ class ProfesionalController extends Controller
      */
     public function store(Request $request)
     {
-        Profesional::create($request->all());
-        return redirect('profesional');
+        $p=Profesional::where('CI_PROF','=',$request->CI_PROF)->first();
+        if($p==null)
+        {
+            Profesional::create($request->all());
+            return redirect('profesional');
+        }
+        else
+        {
+            return redirect('profesional');
+        }
     }
 
     /**
@@ -85,6 +93,13 @@ class ProfesionalController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Profesional::findOrFail($id)->delete();
+        return redirect('profesional');
+    }
+
+    public function ocultar($id)
+    {
+        Profesional::findOrFail($id)->delete();
+        return redirect('profesional');
     }
 }

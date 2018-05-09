@@ -21,7 +21,7 @@ class CreateAreaProyectoTable extends Migration
 		    
             $table->integer('proyecto_id')->unsigned();
 		    $table->foreign('proyecto_id')->references('id')->on('proyectos')->onDelete('cascade');
-		
+            $table->softDeletes();
             $table->timestamps();
         });
     }

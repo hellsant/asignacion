@@ -63,7 +63,7 @@
         <td>
             <div class="text-center">
                 <h4>
-                  <a href='{{ route('estudiante.destroy',$estudiante->id)}}' data-toggle="tooltip" data-placement="right" title="Eliminar">
+                  <a href='{{ url('estudiante/ocultar',$estudiante->id)}}' onclick="return confirm('¿Esta seguro de eliminar este Estudiante?')" data-toggle="tooltip" data-placement="right" title="Eliminar">
                       <i class="fas fa-trash-alt" aria-hidden="true"></i>
                   </a>
               </h4>

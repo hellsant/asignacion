@@ -20,12 +20,12 @@ class CreatemotivoprofesionalProyectoTable extends Migration
             $table->foreign('motivo_id')->references('id')->on('motivos')->onDelete('cascade');
 
             $table->integer('profesional_id')->unsigned();
-		        $table->foreign('profesional_id')->references('id')->on('profesional')->onDelete('cascade');
+		    $table->foreign('profesional_id')->references('id')->on('profesional')->onDelete('cascade');
 
             $table->integer('proyecto_id')->unsigned();
-		        $table->foreign('proyecto_id')->references('id')->on('proyectos')->onDelete('cascade');
-
-           $table->timestamps();
+		    $table->foreign('proyecto_id')->references('id')->on('proyectos')->onDelete('cascade');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

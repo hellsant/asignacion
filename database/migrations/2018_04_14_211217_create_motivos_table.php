@@ -17,6 +17,7 @@ class CreateMotivosTable extends Migration
             $table->increments('id');
             $table->string('NOM_MOT')->nullable()->default(null);
             $table->string('DESCRIP')->nullable()->default(null);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

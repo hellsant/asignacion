@@ -81,4 +81,9 @@ class CalendarioController extends Controller
     {
         //
     }
+
+    public function ocultar($id)
+    {
+        //
+    }
 }
