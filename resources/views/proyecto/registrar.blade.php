@@ -9,7 +9,7 @@
     <div class="form-group row">
         {!! Form::label('TITULO_PERFIL','Titulo Perfil',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('TITULO_PERFIL', old('TITULO_PERFIL'), ['class'=>'form-control','required' =>'true','minlength'=>'3']) !!}
+            {!! Form::text('TITULO_PERFIL', old('TITULO_PERFIL'), ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese el Titulo del Perfil",'data-parsley-error-message'=>"Ingrese solo letras y espacios",'required' =>'true','minlength'=>'3']) !!}
         </div>
     </div>
     <div class="form-group row">
@@ -27,7 +27,7 @@
     <div class="form-group row">
         {!! Form::label('OBJ_GRAL','Objetivo General',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('OBJ_GRAL', old('OBJ_GRAL'), ['class'=>'form-control','required' =>'true','minlength'=>'3']) !!}
+            {!! Form::text('OBJ_GRAL', old('OBJ_GRAL'), ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese el Objetivo General",'data-parsley-error-message'=>"Ingrese solo letras y espacios",'required' =>'true','minlength'=>'3']) !!}
         </div>
     </div>
     <div class="form-group row">
@@ -39,13 +39,13 @@
     <div class="form-group row">
         {!! Form::label('OBJ_ESP','Objetivos Especificos',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('OBJ_ESP', old('OBJ_ESP'), ['class'=>'form-control']) !!}
+            {!! Form::text('OBJ_ESP', old('OBJ_ESP'), ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese Objetivos Especificos",'data-parsley-error-message'=>"Ingrese solo letras y espacios"]) !!}
         </div>
     </div>
     <div class="form-group row">
         {!! Form::label('DESCRIPCION','Descripcion',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('DESCRIPCION', old('DESCRIPCION'), ['class'=>'form-control']) !!}
+            {!! Form::text('DESCRIPCION', old('DESCRIPCION'), ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese la Descripcion",'data-parsley-error-message'=>"Ingrese solo letras y espacios"]) !!}
         </div>
     </div>
     <div class="form-group row">

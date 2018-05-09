@@ -37,7 +37,7 @@
         <td>
             <div class="text-center">
                 <h4>
-                  <a href='{{ route('modalidad.destroy',$modalidad->id)}}' onclick="return confirm('¿Esta seguro de eliminar esta Modalidad?')" data-toggle="tooltip" data-placement="right" title="Eliminar">
+                  <a href='{{ url('modalidad/ocultar',$modalidad->id)}}' onclick="return confirm('¿Esta seguro de eliminar esta Modalidad?')" data-toggle="tooltip" data-placement="right" title="Eliminar">
                       <i class="fas fa-trash-alt" aria-hidden="true"></i>
                   </a>
               </h4>

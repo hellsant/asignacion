@@ -88,4 +88,10 @@ class ModalidadController extends Controller
         Modalidades::findOrFail()->delete($id);
         return redirect('modalidad');
     }
+
+    public function ocultar($id)
+    {
+        Modalidad::findOrFail($id)->delete();
+        return redirect('modalidad');
+    }
 }

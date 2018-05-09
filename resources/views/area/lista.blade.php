@@ -50,7 +50,7 @@
         <td>
             <div class="text-center">
                 <h4>
-                  <a href='{{ route('area.destroy',$area->id)}}' onclick="return confirm('¿Esta seguro de eliminar esta Area?')" data-toggle="tooltip" data-placement="right" title="Eliminar">
+                  <a href='{{ url('area/ocultar',$area->id)}}' onclick="return confirm('¿Esta seguro de eliminar esta Area?')" data-toggle="tooltip" data-placement="right" title="Eliminar">
                       <i class="fas fa-trash-alt" aria-hidden="true"></i>
                   </a>
               </h4>

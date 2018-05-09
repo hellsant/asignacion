@@ -42,7 +42,7 @@
         <td>
             <div class="text-center">
                 <h4>
-                  <a href='{{ route('subarea.destroy',$subarea->id)}}' onclick="return confirm('¿Esta seguro de eliminar esta Subarea?')" data-toggle="tooltip" data-placement="right" title="Eliminar">
+                  <a href='{{ url('subarea/ocultar',$subarea->id)}}' onclick="return confirm('¿Esta seguro de eliminar esta Subarea?')" data-toggle="tooltip" data-placement="right" title="Eliminar">
                       <i class="fas fa-trash-alt" aria-hidden="true"></i>
                   </a>
               </h4>

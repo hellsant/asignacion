@@ -96,4 +96,10 @@ class AreasController extends Controller
         Area::findOrFail($id)->delete();
         return redirect('area');
     }
+
+    public function ocultar($id)
+    {
+        Area::findOrFail($id)->delete();
+        return redirect('area');
+    }
 }

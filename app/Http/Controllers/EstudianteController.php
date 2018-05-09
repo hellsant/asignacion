@@ -104,4 +104,10 @@ class EstudianteController extends Controller
         Estudiante::findOrFail($id)->delete();
         return redirect('estudiante');
     }
+
+    public function ocultar($id)
+    {
+        Estudiante::findOrFail($id)->delete();
+        return redirect('estudiante');
+    }
 }

@@ -45,7 +45,7 @@
         <td>
             <div class="text-center">
                 <h4>
-                  <a href='{{ route('proyecto.destroy',$proyecto->id)}}' onclick="return confirm('¿Esta seguro de eliminar este Proyecto?')" data-toggle="tooltip" data-placement="right" title="Eliminar">
+                  <a href='{{ url('proyecto/ocultar',$proyecto->id)}}' onclick="return confirm('¿Esta seguro de eliminar este Proyecto?')" data-toggle="tooltip" data-placement="right" title="Eliminar">
                       <i class="fas fa-trash-alt" aria-hidden="true"></i>
                   </a>
               </h4>

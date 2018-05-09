@@ -98,4 +98,10 @@ class CarreraController extends Controller
         Carrera::findOrFail($id)->delete();
         return redirect('carrera');
     }
+
+    public function ocultar($id)
+    {
+        Carrera::findOrFail($id)->delete();
+        return redirect('carrera');
+    }
 }

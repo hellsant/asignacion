@@ -96,4 +96,10 @@ class ProfesionalController extends Controller
         Profesional::findOrFail($id)->delete();
         return redirect('profesional');
     }
+
+    public function ocultar($id)
+    {
+        Profesional::findOrFail($id)->delete();
+        return redirect('profesional');
+    }
 }

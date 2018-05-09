@@ -132,4 +132,10 @@ class ProyectoController extends Controller
         Proyecto::findOrFail($id)->delete();
         return redirect('proyecto');
     }
+
+    public function ocultar($id)
+    {
+        Proyecto::findOrFail($id)->delete();
+        return redirect('proyecto');
+    }
 }
