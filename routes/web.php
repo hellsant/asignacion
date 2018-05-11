@@ -30,3 +30,4 @@ Route::resource('carrera', 'CarreraController');
 Route::get('subarea/{area}/{id}/create', 'SubAreatoController@recibe');
 Route::get('subarea/ocultar/{id}', 'SubAreatoController@ocultar');
 Route::resource('subarea', 'SubAreatoController');
+Route::resource('tribunal', 'TribunalController');
