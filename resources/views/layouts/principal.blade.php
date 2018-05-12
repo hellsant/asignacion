@@ -46,6 +46,7 @@
                 <a class="dropdown-item" href="{{ route('carrera.create') }}">Registrar Carreras</a>
                 <a class="dropdown-item" href="{{ route('area.create') }}">Registrar Area</a>
                 <a class="dropdown-item" href="{{ route('subarea.create') }}">Registrar Subarea</a>
+                <a class="dropdown-item" href="{{ route('modalidad.create') }}">Registrar Modalidad</a>
               </div>
             </li>
             <li class="nav-item dropdown">
@@ -59,6 +60,7 @@
                 <a class="dropdown-item" href="{{ route('carrera.index') }} ">Lista de Carreras</a>
                 <a class="dropdown-item" href="{{ route('area.index') }} ">Lista de Areas</a>
                 <a class="dropdown-item" href="{{ route('subarea.index') }} ">Lista de Subareas</a>
+                <a class="dropdown-item" href="{{ route('modalidad.index') }} ">Lista de Modalidades</a>
               </div>
             </li>
             <li class="nav-item">

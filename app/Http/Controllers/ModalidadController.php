@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\modalidades;
+use App\Modalidades;
 use Illuminate\Http\Request;
 use DB;
 class ModalidadController extends Controller
@@ -91,7 +91,7 @@ class ModalidadController extends Controller
 
     public function ocultar($id)
     {
-        Modalidad::findOrFail($id)->delete();
+        Modalidades::findOrFail($id)->delete();
         return redirect('modalidad');
     }
 }
