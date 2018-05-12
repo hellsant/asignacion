@@ -15,7 +15,7 @@ class TribunalController extends Controller
     public function index()
     {
         $tribunales = [];
-        return view('tribunal.registro')->with(compact('tribunales'));;
+        return view('tribunal.lista')->with(compact('tribunales'));;
     }
 
     /**
