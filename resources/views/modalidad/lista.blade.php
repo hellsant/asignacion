@@ -1,6 +1,6 @@
 @extends('layouts.principal')
 @section('titulo1', 'LISTA')
-@section('titulo2', 'DE MODALIDAMES')
+@section('titulo2', 'DE MODALIDADES')
 @section('content')
 <div class="table-responsive">
 <table class="table">
