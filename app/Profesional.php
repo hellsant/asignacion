@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class profesional extends Model
+class Profesional extends Model
 {
     Use SoftDeletes;
 
@@ -23,4 +23,8 @@ class profesional extends Model
     ];
 
     protected $dates=['delete_at'];
+    public function proyecto()
+    {
+        return $this->belongsToMany(Proyecto::class,'motivo_profesional_proyecto','motivo_id');
+    }
 }
