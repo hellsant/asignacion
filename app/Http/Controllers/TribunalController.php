@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
-//use App\id;
+use App\Tribunal;
+use App\Proyecto;
+use App\Profesional;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class TribunalController extends Controller
 {
@@ -14,8 +16,14 @@ class TribunalController extends Controller
      */
     public function index()
     {
+        
         $tribunales = [];
-        return view('tribunal.lista')->with(compact('tribunales'));;
+        $tribunal = 15;
+        $now=Carbon::now();
+        
+        $proyectos=Proyecto::find(1)->profesional;
+       // return $proyectos;
+        return view('tribunal.asignacion')->with(compact('tribunales','tribunal','now'));
     }
 
     /**
@@ -27,7 +35,7 @@ class TribunalController extends Controller
     {
         //
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -36,9 +44,8 @@ class TribunalController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
-
+    
     /**
      * Display the specified resource.
      *
@@ -47,7 +54,7 @@ class TribunalController extends Controller
      */
     public function show($id)
     {
-        //
+        return vierw('tribunal.asignacion');
     }
 
     /**

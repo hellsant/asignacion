@@ -46,7 +46,7 @@
     <div class="form-group row">
         {!! Form::label('id','Fecha inicio',['class'=>'col-sm-2 col-form-label']) !!}
             <div class="form-group col-sm-4">
-                {!! Form::date('id', 'id', ['class'=>'form-control']) !!}
+                {!! Form::date('fecha_inicio', $now, ['class'=>'form-control']) !!}
             </div>
             {!! Form::label('id','gestion',['class'=>'col-sm-2 col-form-label']) !!}
             <div class="form-group col-sm-4">
@@ -56,7 +56,7 @@
     <div class="form-group row">
         {!! Form::label('id','Fecha limite',['class'=>'col-sm-2 col-form-label']) !!}
             <div class="form-group col-sm-4">
-                {!! Form::date('id', 'id', ['class'=>'form-control']) !!}
+                {!! Form::date('fecha_limite',$now->addYears(2) , ['class'=>'form-control','readonly']) !!}
             </div>
             {!! Form::label('id','Gestion fecha limite',['class'=>'col-sm-2 col-form-label']) !!}
             <div class="form-group col-sm-4">

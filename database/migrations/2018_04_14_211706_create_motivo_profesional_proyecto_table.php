@@ -13,7 +13,7 @@ class CreatemotivoprofesionalProyectoTable extends Migration
      */
     public function up()
     {
-        Schema::create('profesional_proyeto', function (Blueprint $table) {
+        Schema::create('motivo_profesional_proyecto', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('motivo_id')->unsigned();

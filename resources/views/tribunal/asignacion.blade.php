@@ -68,10 +68,11 @@
                 @endforeach
             </tbody>
         </table>
-        
+
         <div class="form-group ">
             <a href="{{ route('tribunal.index') }}" class="btn btn-danger">Cancel</a>
-            {!! Form::submit('Siguiente', ['type'=>"submit",'class'=>'btn btn-success', 'id'=>"btnreg"]) !!}
+            <a href='{{ route('tribunal.show',10)}}' class="btn btn-success">Siguiente</a>
+            //{!! Form::submit('Siguiente', ['type'=>"submit",'class'=>'btn btn-success', 'id'=>"btnreg"]) !!}
         </div>
         {!! Form::close() !!}
 </div>
