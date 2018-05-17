@@ -21,27 +21,49 @@
         </div>
     </div>
     <div class="form-group row">
-        {!! Form::label('id','Estudiante',['class'=>'col-sm-2 col-form-label']) !!}
+        {!! Form::label('Estudiante','Estudiante',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::number('id', 'id', ['class'=>'form-control','readonly']) !!}
+            {!! Form::number('Estudiante', 'id', ['class'=>'form-control','readonly']) !!}
         </div>
     </div>
     <div class="form-group row">
-        {!! Form::label('id','Nombre del perfil',['class'=>'col-sm-2 col-form-label']) !!}
+        {!! Form::label('nombre_perfil','Nombre del perfil',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::number('id', 'id', ['class'=>'form-control','readonly']) !!}
+            {!! Form::number('nombre_perfil', 'id', ['class'=>'form-control','readonly']) !!}
         </div>
     </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            {!! Form::label('id','Area',['class'=>'col-sm-2 col-form-label']) !!}
-                {!! Form::number('id', 'id', ['class'=>'form-control','readonly']) !!}
+
+    <div class="form-group row">
+            {!! Form::label('area','Area',['class'=>'col-sm-2 col-form-label']) !!}
+            <div class="form-group col-sm-4">
+                {!! Form::number('area', 'id', ['class'=>'form-control','readonly']) !!}
             </div>
-            <div class="form-group col-md-6">
-                {!! Form::label('id','Subarea',['class'=>'col-sm-2 col-form-label']) !!}
-                {!! Form::number('id', 'id', ['class'=>'form-control','readonly']) !!}
+            {!! Form::label('subArea','Subarea',['class'=>'col-sm-2 col-form-label']) !!}
+            <div class="form-group col-sm-4">
+                {!! Form::number('subArea', 'id', ['class'=>'form-control','readonly']) !!}
             </div>
         </div>
+        <div class="form-group row">
+            {!! Form::label('fecha_inicio','Fecha inicio',['class'=>'col-sm-2 col-form-label']) !!}
+                <div class="form-group col-sm-4">
+                    {!! Form::date('fecha_inicio', $now, ['class'=>'form-control']) !!}
+                </div>
+                {!! Form::label('gestion','gestion',['class'=>'col-sm-2 col-form-label']) !!}
+                <div class="form-group col-sm-4">
+                    {!! Form::select('gestion', $gestion,null, ['class'=>'form-control']) !!}
+                </div>
+        </div>
+        <div class="form-group row">
+            {!! Form::label('fecha_limite','Fecha limite',['class'=>'col-sm-2 col-form-label']) !!}
+                <div class="form-group col-sm-4">
+                    {!! Form::date('fecha_limite',$now->addYears(2) , ['class'=>'form-control','readonly']) !!}
+                </div>
+                {!! Form::label('gestion_fecha_limite','Gestion fecha limite',['class'=>'col-sm-2 col-form-label']) !!}
+                <div class="form-group col-sm-4">
+                    {!! Form::select('gestion_fecha_limite',$gestionLimite,null, ['class'=>'form-control']) !!}
+                </div>
+        </div>
+
         <table class="table">
             <thead class="thead-light">
                 <tr>
@@ -71,8 +93,7 @@
 
         <div class="form-group ">
             <a href="{{ route('tribunal.index') }}" class="btn btn-danger">Cancel</a>
-            <a href='{{ route('tribunal.show',10)}}' class="btn btn-success">Siguiente</a>
-            //{!! Form::submit('Siguiente', ['type'=>"submit",'class'=>'btn btn-success', 'id'=>"btnreg"]) !!}
+            {!! Form::submit('Siguiente', ['type'=>"submit",'class'=>'btn btn-success', 'id'=>"btnreg"]) !!}
         </div>
         {!! Form::close() !!}
 </div>

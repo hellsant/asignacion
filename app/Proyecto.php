@@ -32,4 +32,7 @@ class Proyecto extends Model
     {
         return $this->belongsToMany(Profesional::class,'motivo_profesional_proyecto','motivo_id');
     }
+    public function estudiante(){
+        return $this->belongsToMany(Estudiante::class);
+    }
 }

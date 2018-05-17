@@ -6,7 +6,8 @@ use App\Proyecto;
 use App\Profesional;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-
+use App\Gestion;
+use App\Estudiante;
 class TribunalController extends Controller
 {
     /**
@@ -16,14 +17,17 @@ class TribunalController extends Controller
      */
     public function index()
     {
-        
         $tribunales = [];
-        $tribunal = 15;
         $now=Carbon::now();
-        
+        $gestion = $this->calcularGestion($now);
+        $gestionLimite= $this->calcularGestionLimite($now);
+        $estudiante = Proyecto::find(1)->estudiante;
+        $proyecto = Estudiante::find(800)->proyectos;
+        echo($estudiante);
+        echo($proyecto);
         $proyectos=Proyecto::find(1)->profesional;
-       // return $proyectos;
-        return view('tribunal.asignacion')->with(compact('tribunales','tribunal','now'));
+        echo($proyectos);
+        return view('tribunal.asignacion')->with(compact('tribunales','now','gestion','gestionLimite'));  
     }
 
     /**
@@ -44,6 +48,7 @@ class TribunalController extends Controller
      */
     public function store(Request $request)
     {
+        
     }
     
     /**
@@ -54,7 +59,7 @@ class TribunalController extends Controller
      */
     public function show($id)
     {
-        return vierw('tribunal.asignacion');
+        //
     }
 
     /**
@@ -90,4 +95,49 @@ class TribunalController extends Controller
     {
         //
     }
+
+    /**
+     * registra los tribuinales a los cuales pueden ser elegidos.
+     */
+    public function registrar($id)
+    {
+        $tribunales = [];
+        $now=Carbon::now();
+        $gestion = $this->calcularGestion($now);
+        $gestionLimite= $this->calcularGestionLimite($now);
+        $estudiante = Proyecto::find($id)->estudiante;
+        $proyecto = Estudiante::find(800)->proyectos;
+        echo($estudiante);
+        echo($proyecto);
+        $proyectos=Proyecto::find($id)->profesional;
+        echo($proyectos);
+        return view('tribunal.asignacion')->with(compact('tribunales','now','gestion','gestionLimite'));  
+    }
+
+    public function calcularGestion($now)
+    {
+        $seleccionado = Gestion::whereYear('FECHA_INI',$now)->get();
+        $gestiones=array();
+        foreach ($seleccionado as $value) {
+            $periodo=$value->PERIODO;
+            $año=$value->FECHA_INI + 0;
+            $str="$periodo - $año";
+            array_push($gestiones,$str);            
+        }
+        return $gestiones;
+    }
+   
+    public function calcularGestionLimite($now)
+    {
+        $seleccionado = Gestion::whereYear('FECHA_INI',$now)->get();
+        $gestiones=array();
+        foreach ($seleccionado as $value) {
+            $periodo=$value->PERIODO;
+            $año=$value->FECHA_INI + 2;
+            $str="$periodo - $año";
+            array_push($gestiones,$str);            
+        }
+        return $gestiones;
+    }
+
 }

@@ -11,4 +11,6 @@ class Tribunal extends Model
         $trubunal = Proyecto::profesional;
         return $trubunal;
     }
+
+    
 }
