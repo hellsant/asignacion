@@ -1,7 +1,6 @@
 <?php
 
 namespace App;
-use App\Modalidades;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -27,5 +26,13 @@ class Proyecto extends Model
     public function modalidad()
     {
         return $this->belongsTo(Modalidades::class);
+    }
+    
+    public function profesional()
+    {
+        return $this->belongsToMany(Profesional::class,'motivo_profesional_proyecto','motivo_id');
+    }
+    public function estudiante(){
+        return $this->belongsToMany(Estudiante::class);
     }
 }
