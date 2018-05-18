@@ -28,11 +28,8 @@ class CreateProyectosTable extends Migration
             
 		    $table->integer('modalidad_id')->unsigned();
             $table->foreign('modalidad_id')->references('id')->on('modalidades')->onDelete('cascade');
-           
-            $table->integer('gestion_id')->unsigned();
-		    $table->foreign('gestion_id')->references('id')->on('gestions')->onDelete('cascade');
+
             $table->softDeletes();
-           
             $table->timestamps();
         });
     }
