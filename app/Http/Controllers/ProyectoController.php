@@ -148,7 +148,7 @@ class ProyectoController extends Controller
    
     public function calcularGestionLimite($now)
     {
-        $seleccionado = Gestion::whereYear('FECHA_INI',2015)->get();
+        $seleccionado = Gestion::whereYear('FECHA_INI',$now)->get();
         $gestiones=array();
         foreach ($seleccionado as $value) {
             $periodo=$value->PERIODO;
