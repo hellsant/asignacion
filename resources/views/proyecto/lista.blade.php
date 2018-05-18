@@ -8,10 +8,10 @@
       <tr>
           <th scope="col">Titulo</th>
           <th scope="col">Fecha Registro</th>
-          <th scope="col">Fecha Limite</th>
-          <th scope="col">Fecha Inicio</th>
+          <th scope="col">Gestion Limite</th>
+          <th scope="col">Fecha Asignacion de Tribunal</th>
           <th scope="col">Fecha Defensa</th>
-          <th scope="col">Fecha Prorroga</th>
+          <th scope="col">Gestion Prorroga</th>
           <th></th>
           <th scope="col">
             <div class="text-center">
@@ -29,10 +29,10 @@
       <tr>
         <td>{{ $proyecto -> TITULO_PERFIL}} </td>
         <td>{{ $proyecto -> FECHA_REGISTRO}} </td>
-        <td>{{ $proyecto -> FECHA_LIMITE}} </td>
+        <td>{{ $proyecto -> GESTION_LIMITE}} </td>
         <td>{{ $proyecto -> FECHA_INI}} </td>
         <td>{{ $proyecto -> FECHA_DEF}} </td>
-        <td>{{ $proyecto -> FECHA_PRORR}} </td>
+        <td>{{ $proyecto -> GESTION_PRORROGA}} </td>
         <td>
             <div class="text-center">
                 <h4>

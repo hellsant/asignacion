@@ -21,7 +21,7 @@ class CreateGestionsTable extends Migration
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      *

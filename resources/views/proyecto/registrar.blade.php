@@ -14,14 +14,24 @@
     </div>
     <div class="form-group row">
         {!! Form::label('FECHA_REGISTRO','Fecha de registro',['class'=>'col-sm-2 col-form-label']) !!}
-        <div class="col-sm-10">
-            {!! Form::date('FECHA_REGISTRO', old('FECHA_REGISTRO'), ['class'=>'form-control','required' =>'true','minlength'=>'3']) !!}
+        <div class="form-group col-sm-4">
+            {!! Form::date('FECHA_REGISTRO', $now, ['class'=>'form-control']) !!}
         </div>
-    </div>
+    
+            {!! Form::label('MODALIDAD','Modalidad',['class'=>'col-sm-2 col-form-label']) !!}
+            <div class="form-group col-sm-4">
+                {!! Form::select('MODALIDAD',$listaMonbres, $listaMonbres ,['class'=>'form-control']) !!}
+            </div>
+        </div>
     <div class="form-group row">
-        {!! Form::label('FECHA_LIMITE','Fecha Limite',['class'=>'col-sm-2 col-form-label']) !!}
-        <div class="col-sm-10">
-            {!! Form::date('FECHA_LIMITE', old('FECHA_LIMITE'), ['class'=>'form-control']) !!}
+        {!! Form::label('GESTION_REGISTRO','Gestión Registro',['class'=>'col-sm-2 col-form-label']) !!}
+        <div class="form-group col-sm-4">
+            {!! Form::select('GESTION_REGISTRO', $gestionRegistro,$gestionRegistro, ['class'=>'form-control']) !!}
+        </div>
+    
+        {!! Form::label('GESTION_LIMITE','Gestión Limite',['class'=>'col-sm-2 col-form-label']) !!}
+        <div class="form-group col-sm-4">
+            {!! Form::select( 'GESTION_LIMITE', $gestionLimite,  $gestionLimite, ['class'=>'form-control']) !!}
         </div>
     </div>
     <div class="form-group row">
@@ -30,12 +40,7 @@
             {!! Form::text('OBJ_GRAL', old('OBJ_GRAL'), ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese el Objetivo General",'data-parsley-error-message'=>"Ingrese solo letras y espacios",'required' =>'true','minlength'=>'3']) !!}
         </div>
     </div>
-    <div class="form-group row">
-            {!! Form::label('MODALIDAD','Modalidad',['class'=>'col-sm-2 col-form-label']) !!}
-            <div class="col-sm-10">
-                {!! Form::select('MODALIDAD',$listaMonbres,null,['class'=>'form-control']) !!}
-            </div>
-        </div>
+   
     <div class="form-group row">
         {!! Form::label('OBJ_ESP','Objetivos Especificos',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
@@ -48,18 +53,7 @@
             {!! Form::text('DESCRIPCION', old('DESCRIPCION'), ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese la Descripcion",'data-parsley-error-message'=>"Ingrese solo letras y espacios"]) !!}
         </div>
     </div>
-    <div class="form-group row">
-        {!! Form::label('FECHA_INI','Fecha Inicio',['class'=>'col-sm-2 col-form-label']) !!}
-        <div class="col-sm-10">
-            {!! Form::date('FECHA_INI', old('FECHA_INI'), ['class'=>'form-control']) !!}
-        </div>
-    </div>
-    <div class="form-group row">
-        {!! Form::label('FECHA_DEF','Fecha Defensa',['class'=>'col-sm-2 col-form-label']) !!}
-        <div class="col-sm-10">
-            {!! Form::date('FECHA_DEF', old('FECHA_DEF'), ['class'=>'form-control']) !!}
-        </div>
-    </div>
+   
     <a href="{{ route('proyecto.index') }}" class="btn btn-danger">Cancel</a>
     {!! Form::submit('registrar', ['class'=>'btn btn-success']) !!}
     {!! Form::close() !!}

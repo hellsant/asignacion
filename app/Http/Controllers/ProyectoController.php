@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Proyecto;
 use App\Modalidades;
+use App\Gestion;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use DB;
 class ProyectoController extends Controller
@@ -25,12 +27,11 @@ class ProyectoController extends Controller
      */
     public function create()
     {
-        $mod=Modalidades::all();
-        $listaMonbres=array();
-        foreach ($mod as $modalidad){
-            array_push($listaMonbres,$modalidad->NOM);
-        }
-        return view('proyecto.registrar')->with(compact('listaMonbres'));
+        $now = Carbon::now();
+        $gestionRegistro=$this->calcularGestion($now);
+        $gestionLimite=$this->calcularGestionLimite($now);
+        $listaMonbres=Modalidades::pluck('NOM','id');
+        return view('proyecto.registrar')->with(compact('listaMonbres','now','gestionRegistro','gestionLimite'));
     }
 
     /**
@@ -41,30 +42,23 @@ class ProyectoController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->FECHA_LIMITE>$request->FECHA_REGISTRO)
+        if(($request->FECHA_INI>$request->FECHA_REGISTRO)||($request->FECHA_INI==null))
         {
-            if(($request->FECHA_INI>$request->FECHA_REGISTRO)||($request->FECHA_INI==null))
+            if(($request->FECHA_DEF>$request->FECHA_LIMITE)||($request->FECHA_DEF==null))
             {
-                if(($request->FECHA_DEF>$request->FECHA_LIMITE)||($request->FECHA_DEF==null))
-                {
-                    $proyecto = new Proyecto;
-                    $proyecto->TITULO_PERFIL= $request->TITULO_PERFIL;
-                    $proyecto->FECHA_REGISTRO=$request->FECHA_REGISTRO;
-                    $proyecto->FECHA_LIMITE=$request->FECHA_LIMITE;
-                    $proyecto->OBJ_GRAL=$request->OBJ_GRAL;
-                    $proyecto->OBJ_ESP=$request->OBJ_ESP;
-                    $proyecto->DESCRIPCION=$request->DESCRIPCION;
-                    $proyecto->FECHA_INI=$request->FECHA_INI;
-                    $proyecto->FECHA_DEF=$request->FECHA_DEF;
-                    $proyecto->FECHA_PRORR=$request->FECHA_PRORR;
-                    $proyecto->modalidad_id=$request->MODALIDAD+1;
-                    $proyecto->save();
-                    return redirect('proyecto');
-                }
-                else
-                {
-                    return redirect('proyecto');
-                }
+                $proyecto = new Proyecto;
+                $proyecto->TITULO_PERFIL= $request->TITULO_PERFIL;
+                $proyecto->FECHA_REGISTRO=$request->FECHA_REGISTRO;
+                $proyecto->GESTION_REGISTRO=$request->GESTION_REGISTRO;
+                $proyecto->GESTION_LIMITE=$request->GESTION_LIMITE;
+                $proyecto->OBJ_GRAL=$request->OBJ_GRAL;
+                $proyecto->OBJ_ESP=$request->OBJ_ESP;
+                $proyecto->DESCRIPCION=$request->DESCRIPCION;
+                $proyecto->FECHA_INI=$request->FECHA_INI;
+                $proyecto->FECHA_DEF=$request->FECHA_DEF;
+                $proyecto->modalidad_id=$request->MODALIDAD;
+                $proyecto->save();
+                return redirect('proyecto');
             }
             else
             {
@@ -138,4 +132,34 @@ class ProyectoController extends Controller
         Proyecto::findOrFail($id)->delete();
         return redirect('proyecto');
     }
+    
+    public function calcularGestion($now)
+    {
+        $seleccionado = Gestion::whereYear('FECHA_INI',$now)->get();
+        $gestiones=array();
+        foreach ($seleccionado as $value) {
+            $periodo=$value->PERIODO;
+            $año=$value->FECHA_INI + 0;
+            $str="$periodo - $año";
+            $gestiones = $this->array_push_assoc($gestiones, $str, $str);            
+        }
+        return $gestiones;
+    }
+   
+    public function calcularGestionLimite($now)
+    {
+        $seleccionado = Gestion::whereYear('FECHA_INI',2015)->get();
+        $gestiones=array();
+        foreach ($seleccionado as $value) {
+            $periodo=$value->PERIODO;
+            $año = $value->FECHA_INI + 2;
+            $str = "$periodo - $año";
+            $gestiones = $this->array_push_assoc($gestiones, $str, $str); 
+        }
+        return $gestiones;
+    }
+    function array_push_assoc($array, $key, $value){
+        $array[$key] = $value;
+        return $array;
+        }
 }

@@ -17,16 +17,18 @@ class CreateProyectosTable extends Migration
             $table->increments('id');
 		    $table->text('TITULO_PERFIL')->nullable()->default(null);
 		    $table->date('FECHA_REGISTRO')->nullable()->default(null);
-		    $table->date('FECHA_LIMITE')->nullable()->default(null);
+		    $table->text('GESTION_REGISTRO')->nullable()->default(null);
+		    $table->text('GESTION_LIMITE')->nullable()->default(null);
 		    $table->text('OBJ_GRAL')->nullable();
 		    $table->text('OBJ_ESP')->nullable();
 		    $table->text('DESCRIPCION')->nullable();
 		    $table->date('FECHA_INI')->nullable()->default(null);
 		    $table->date('FECHA_DEF')->nullable()->default(null);
-		    $table->date('FECHA_PRORR')->nullable()->default(null);
+		    $table->text('GESTION_PRORROGA')->nullable()->default(null);
             
 		    $table->integer('modalidad_id')->unsigned();
-		    $table->foreign('modalidad_id')->references('id')->on('modalidades')->onDelete('cascade');
+            $table->foreign('modalidad_id')->references('id')->on('modalidades')->onDelete('cascade');
+
             $table->softDeletes();
             $table->timestamps();
         });
