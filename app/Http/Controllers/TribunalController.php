@@ -123,7 +123,10 @@ class TribunalController extends Controller
     {
         $now=Carbon::now();
         $proyectos = Estudiante::findOrFail($estudianteId)->proyectos;
-        $estudiante = Estudiante::findOrFail($estudianteId)->NOM_EST;
+        $nom = Estudiante::findOrFail($estudianteId)->NOM_EST;
+        $apest = Estudiante::findOrFail($estudianteId)->AP_PAT_EST;
+        $maest = Estudiante::findOrFail($estudianteId)->AP_MAT_EST;
+        $estudiante = "$nom $apest $maest";
         $tribunales =Profesional::paginate(10);
         $nombreArea="";
         $nombreSubarea=[];
