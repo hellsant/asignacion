@@ -19,6 +19,10 @@ class Estudiante extends Model
    ];
    public function proyectos()
    {
-       return $this->belongsToMany(Proyecto::class);
+       return $this->belongsToMany(Proyecto::class)->withTimestamps();
+   }
+   public function profesional()
+   {
+       return $this->belongsToMany(Profesional::class,'estudiante_profesionals')->withTimestamps();
    }
 }
