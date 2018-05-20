@@ -11,13 +11,14 @@ class Proyecto extends Model
     protected $fillable=[ 
             'TITULO_PERFIL',
             'FECHA_REGISTRO',
-            'FECHA_LIMITE',
+            'GESTION_REGISTRO',
+            'GESTION_LIMITE',
             'OBJ_GRAL',
             'OBJ_ESP',
             'DESCRIPCION',
             'FECHA_INI',
             'FECHA_DEF',
-            'FECHA_PRORR',
+            'GESTION_PRORROGA',
             'modalidad_id'
     ];
 
@@ -25,14 +26,22 @@ class Proyecto extends Model
     
     public function modalidad()
     {
-        return $this->belongsTo(Modalidades::class);
+        return $this->belongsTo(Modalidades::class)->withTimestamps();
     }
     
     public function profesional()
     {
-        return $this->belongsToMany(Profesional::class,'motivo_profesional_proyecto','motivo_id');
+        return $this->belongsToMany(Profesional::class,'motivo_profesional_proyecto','motivo_id','profesional_id','proyecto_id')->withTimestamps();
     }
     public function estudiante(){
-        return $this->belongsToMany(Estudiante::class);
+        return $this->belongsToMany(Estudiante::class)->withTimestamps();
+    }
+    public function area()
+    {
+        return $this->belongsToMany(Area::class)->withTimestamps();
+    }
+    public function subarea()
+    {
+        return $this->belongsToMany(Subarea::class)->withTimestamps();
     }
 }

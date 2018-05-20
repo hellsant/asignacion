@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-use App\SubArea;
+use App\Subarea;
 use App\Area;
 class SubAreatoController extends Controller
 {
@@ -15,7 +15,7 @@ class SubAreatoController extends Controller
      */
     public function index()
     {
-        $subareas = SubArea::all();
+        $subareas = Subarea::all();
         return view('subarea.lista')->with(compact('subareas'));
     }
 
@@ -60,7 +60,7 @@ class SubAreatoController extends Controller
      */
     public function edit($id)
     {
-        $subarea = SubArea::findOrFail($id);
+        $subarea = Subarea::findOrFail($id);
         return view('subarea.edit')->with(compact('subarea'));
     }
 
@@ -73,7 +73,7 @@ class SubAreatoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        SubArea::findOrFail($id)->update($request->all());
+        Subarea::findOrFail($id)->update($request->all());
         return redirect('subarea');
     }
 
@@ -85,7 +85,7 @@ class SubAreatoController extends Controller
      */
     public function destroy($id)
     {
-        SubArea::findOrFail($id)->delete();
+        Subarea::findOrFail($id)->delete();
         return redirect('subarea');
     }
 
@@ -96,7 +96,7 @@ class SubAreatoController extends Controller
 
     public function ocultar($id)
     {
-        SubArea::findOrFail($id)->delete();
+        Subarea::findOrFail($id)->delete();
         return redirect('subarea');
     }
 }

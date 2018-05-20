@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-use App\Area;
 class Subarea extends Model
 {
     Use SoftDeletes;
@@ -22,6 +21,10 @@ class Subarea extends Model
     
     public function subareas()
     {
-        return $this->hasMany(Area::class);
+        return $this->hasMany(Area::class)->withTimestamps();
+    }
+    public function proyecto()
+    {
+        return $this->belongsToMany(Proyectos::class)->withTimestamps();
     }
 }

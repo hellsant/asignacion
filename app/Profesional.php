@@ -25,6 +25,14 @@ class Profesional extends Model
     protected $dates=['delete_at'];
     public function proyecto()
     {
-        return $this->belongsToMany(Proyecto::class,'motivo_profesional_proyecto','motivo_id');
+        return $this->belongsToMany(Proyecto::class,'motivo_profesional_proyecto','motivo_id','profesional_id','proyecto_id')->withTimestamps();
+    }
+    public function estudiante()
+    {
+        return $this->belongsToMany(Estudiante::class,'estudiante_profesionals')->withTimestamps();
+    }
+    public function area()
+    {
+        return $this->belongsToMany(Area::class,'estudiante_profesionals')->withTimestamps();
     }
 }

@@ -17,6 +17,14 @@ class Area extends Model
     
     public function subareas()
     {
-        return $this->belongsTo(SubArea::class);
+        return $this->belongsTo(SubArea::class)->withTimestamps();
+    }
+    public function proyecto()
+    {
+        return $this->belongsTo(Proyecto::class)->withTimestamps();
+    }
+    public function profesional()
+    {
+        return $this->belongsTo(Profesional::class)->withTimestamps();
     }
 }

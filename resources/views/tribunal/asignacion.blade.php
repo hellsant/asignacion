@@ -13,56 +13,49 @@
 @endif
 
 <div>
-    {!! Form::open(['route'=>['tribunal.store',''],'method'=>'patch','data-parsley-validate'=>""]) !!}
+    {!! Form::open(['route'=>'tribunal.store','method'=>'POST']) !!}
+    @foreach ($proyectos as $proyecto)
     <div class="form-group row">
-        {!! Form::label('id','Codigo del perfil',['class'=>'col-sm-2 col-form-label']) !!}
+        {!! Form::label('id_perfil','Codigo del perfil',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::number('id', 'id', ['class'=>'form-control','readonly']) !!}
+            {!! Form::number('id_perfil', $proyecto->id, ['class'=>'form-control','readonly']) !!}
         </div>
     </div>
     <div class="form-group row">
         {!! Form::label('Estudiante','Estudiante',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::number('Estudiante', 'id', ['class'=>'form-control','readonly']) !!}
+            {!! Form::text('Estudiante',  $estudiante , ['class'=>'form-control','readonly']) !!}
         </div>
     </div>
     <div class="form-group row">
         {!! Form::label('nombre_perfil','Nombre del perfil',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::number('nombre_perfil', 'id', ['class'=>'form-control','readonly']) !!}
+            {!! Form::text('nombre_perfil', $proyecto -> TITULO_PERFIL, ['class'=>'form-control','readonly']) !!}
         </div>
     </div>
+    @endforeach
 
     <div class="form-group row">
             {!! Form::label('area','Area',['class'=>'col-sm-2 col-form-label']) !!}
             <div class="form-group col-sm-4">
-                {!! Form::number('area', 'id', ['class'=>'form-control','readonly']) !!}
+                {!! Form::text('area', $nombreArea, ['class'=>'form-control','readonly']) !!}
             </div>
             {!! Form::label('subArea','Subarea',['class'=>'col-sm-2 col-form-label']) !!}
             <div class="form-group col-sm-4">
-                {!! Form::number('subArea', 'id', ['class'=>'form-control','readonly']) !!}
+                {!! Form::select('subArea',$nombreSubarea,$nombreSubarea, ['class'=>'form-control','readonly']) !!}
             </div>
+    </div>
+    <div class="form-group row">
+        {!! Form::label('FECHA_INI','Fecha Registro Tribunal',['class'=>'col-sm-2 col-form-label']) !!}
+            <div class="form-group col-sm-4">
+                {!! Form::date('FECHA_INI', $now, ['class'=>'form-control']) !!}
+            </div>
+            
+        {!! Form::label('FECHA_DEF','Fecha de Defensa',['class'=>'col-sm-2 col-form-label']) !!}
+        <div class="form-group col-sm-4">
+            {!! Form::date('FECHA_DEF',$now, ['class'=>'form-control']) !!}
         </div>
-        <div class="form-group row">
-            {!! Form::label('fecha_inicio','Fecha inicio',['class'=>'col-sm-2 col-form-label']) !!}
-                <div class="form-group col-sm-4">
-                    {!! Form::date('fecha_inicio', $now, ['class'=>'form-control']) !!}
-                </div>
-                {!! Form::label('gestion','gestion',['class'=>'col-sm-2 col-form-label']) !!}
-                <div class="form-group col-sm-4">
-                    {!! Form::select('gestion', $gestion,null, ['class'=>'form-control']) !!}
-                </div>
-        </div>
-        <div class="form-group row">
-            {!! Form::label('fecha_limite','Fecha limite',['class'=>'col-sm-2 col-form-label']) !!}
-                <div class="form-group col-sm-4">
-                    {!! Form::date('fecha_limite',$now->addYears(2) , ['class'=>'form-control','readonly']) !!}
-                </div>
-                {!! Form::label('gestion_fecha_limite','Gestion fecha limite',['class'=>'col-sm-2 col-form-label']) !!}
-                <div class="form-group col-sm-4">
-                    {!! Form::select('gestion_fecha_limite',$gestionLimite,null, ['class'=>'form-control']) !!}
-                </div>
-        </div>
+    </div>
 
         <table class="table">
             <thead class="thead-light">
@@ -78,24 +71,26 @@
                 @foreach ($tribunales as $tribunal )
                 <tr>
                     <td>{{ $tribunal -> id}} </td>
-                    <td>{{ $tribunal -> NOMBRE}}</td>
+                    <td>{{ $tribunal -> NOM_PROF}} {{ $tribunal -> AP_PAT_PROF }}</td>
                     <td>{{ $tribunal -> TUTOR}} </td>
                     <td>{{ $tribunal -> TRIBUNAL}}</td>
                     <td>
                         <div class="text-center">
-                            {!! Form::checkbox('prueba', 'value') !!}
+                            {!! Form::checkbox('docenteTrinunal[]', $tribunal -> id) !!}
                         </div> 
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
-
+        
+        {!!$tribunales->render("pagination::bootstrap-4")!!}
         <div class="form-group ">
-            <a href="{{ route('tribunal.index') }}" class="btn btn-danger">Cancel</a>
+        <a href="{{ route('tribunal.index') }}" class="btn btn-danger">Cancel</a>
             {!! Form::submit('Siguiente', ['type'=>"submit",'class'=>'btn btn-success', 'id'=>"btnreg"]) !!}
         </div>
         {!! Form::close() !!}
+
 </div>
                 
 @endsection
