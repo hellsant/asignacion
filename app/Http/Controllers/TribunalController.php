@@ -12,6 +12,7 @@ use App\Area;
 use App\SubArea;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Collection;
+use DB;
 class TribunalController extends Controller
 {
     /**
@@ -140,7 +141,19 @@ class TribunalController extends Controller
                 array_push($nombreSubarea, $subArea->NOM_SUBAREA);
             }
         }
-        return view('tribunal.asignacion')->with(compact('tribunales','now','proyectos','estudiante','nombreArea','nombreSubarea'));  
+        $querytutor=DB::select( 
+        'SELECT profesional.id, profesional.NOM_PROF nombre, profesional.AP_PAT_PROF apellidoP, profesional.AP_MAT_PROF apellidoM, COUNT(estudiante_profesionals.id) tutor 
+         FROM profesional 
+         INNER JOIN estudiante_profesionals ON estudiante_profesionals.profesional_id=profesional.id 
+         GROUP BY profesional.id');
+        $querytribunal=DB::select(
+        'SELECT profesional.id, profesional.NOM_PROF nombre, profesional.AP_PAT_PROF apellidoP, profesional.AP_MAT_PROF apellidoM, COUNT(motivo_profesional_proyecto.profesional_id) tribunal 
+        FROM profesional 
+        INNER JOIN motivo_profesional_proyecto ON motivo_profesional_proyecto.profesional_id=profesional.id 
+        GROUP BY profesional.id');
+        $tutores = Collection::make($querytutor);
+        $tribunalesN = Collection::make($querytribunal);
+        return view('tribunal.asignacion')->with(compact('tribunales','now','proyectos','estudiante','nombreArea','nombreSubarea','tutores','tribunalesN'));  
     }
     
 }

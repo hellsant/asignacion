@@ -72,8 +72,20 @@
                 <tr>
                     <td>{{ $tribunal -> id}} </td>
                     <td>{{ $tribunal -> NOM_PROF}} {{ $tribunal -> AP_PAT_PROF }}</td>
-                    <td>{{ $tribunal -> TUTOR}} </td>
-                    <td>{{ $tribunal -> TRIBUNAL}}</td>
+                    <td>
+                        @foreach ($tutores as $tutor)
+                            @if ($tribunal -> id === $tutor->id )
+                                {{ $tutor -> tutor}}
+                            @endif
+                        @endforeach
+                    </td>
+                    <td>
+                        @foreach ($tribunalesN as $t )
+                            @if ($t->id === $tribunal->id)
+                                {{ $t -> tribunal}} 
+                            @endif
+                        @endforeach
+                    </td>
                     <td>
                         <div class="text-center">
                             {!! Form::checkbox('docenteTrinunal[]', $tribunal -> id) !!}
