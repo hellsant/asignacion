@@ -12,7 +12,7 @@
     </div><br />
 @endif
 
-<div>
+<div class="form-group">
     {!! Form::open(['route'=>'tribunal.store','method'=>'POST']) !!}
     @foreach ($proyectos as $proyecto)
     <div class="form-group row">
@@ -33,29 +33,29 @@
             {!! Form::text('nombre_perfil', $proyecto -> TITULO_PERFIL, ['class'=>'form-control','readonly']) !!}
         </div>
     </div>
-    @endforeach
-
+    
     <div class="form-group row">
-            {!! Form::label('area','Area',['class'=>'col-sm-2 col-form-label']) !!}
-            <div class="form-group col-sm-4">
-                {!! Form::text('area', $nombreArea, ['class'=>'form-control','readonly']) !!}
-            </div>
-            {!! Form::label('subArea','Subarea',['class'=>'col-sm-2 col-form-label']) !!}
-            <div class="form-group col-sm-4">
-                {!! Form::select('subArea',$nombreSubarea,$nombreSubarea, ['class'=>'form-control','readonly']) !!}
-            </div>
+        {!! Form::label('area','Area',['class'=>'col-sm-2 col-form-label']) !!}
+        <div class="form-group col-sm-4">
+            {!! Form::text('area', $nombreArea, ['class'=>'form-control','readonly']) !!}
+        </div>
+        {!! Form::label('subArea','Subarea',['class'=>'col-sm-2 col-form-label']) !!}
+        <div class="form-group col-sm-4">
+            {!! Form::select('subArea',$nombreSubarea,$nombreSubarea, ['class'=>'form-control','readonly']) !!}
+        </div>
     </div>
     <div class="form-group row">
         {!! Form::label('FECHA_INI','Fecha Registro Tribunal',['class'=>'col-sm-2 col-form-label']) !!}
-            <div class="form-group col-sm-4">
-                {!! Form::date('FECHA_INI', $now, ['class'=>'form-control']) !!}
-            </div>
-            
-        {!! Form::label('FECHA_DEF','Fecha de Defensa',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="form-group col-sm-4">
-            {!! Form::date('FECHA_DEF',$now, ['class'=>'form-control']) !!}
+            {!! Form::date('FECHA_INI', $now, ['class'=>'form-control']) !!}
+        </div>
+        
+        {!! Form::label('Modalidad','Modalidad',['class'=>'col-sm-2 col-form-label']) !!}
+        <div class="form-group col-sm-4">
+            {!! Form::text('Modalidad',$nombreModalidad, ['class'=>'form-control','readonly']) !!}
         </div>
     </div>
+    @endforeach
 
         <table class="table">
             <thead class="thead-light">

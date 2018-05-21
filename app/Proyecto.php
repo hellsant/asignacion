@@ -26,7 +26,7 @@ class Proyecto extends Model
     
     public function modalidad()
     {
-        return $this->belongsTo(Modalidades::class)->withTimestamps();
+        return $this->belongsTo(Modalidades::class);
     }
     
     public function profesional()
