@@ -22,26 +22,6 @@ class TribunalController extends Controller
      */
     public function index()
     {
-        //$modelo = collect();   
-        //$proyectos= Proyecto::all();
-        //$estudianteArray= array();
-        //$proyectoArray= array();
-        //$tribunalArray=array();
-        //foreach ($proyectos as $p => $proyecto) {
-        //    array_push($proyectoArray,$proyecto);
-        //    $estudiantes = $proyecto->estudiante;
-        //    foreach($estudiantes as $estudiante){
-        //        array_push($estudianteArray,$estudiante);
-        //    }
-        //    $tribunales = Proyecto::findOrFail($proyecto->id)->profesional;
-        //    foreach($tribunales as $tribual){
-        //        array_push($tribunalArray,$tribual);
-        //    }
-        //   
-        //}     
-        //$ultimo =array_merge($estudianteArray,$proyectoArray, $tribunalArray);
-        //$tribunales = Collection::make($modelo);
-
         $tesis=DB::select(
             'SELECT estudiantes.id, estudiantes.NOM_EST nombre, estudiantes.AP_PAT_EST apellidoP, estudiantes.AP_MAT_EST apellidoM, proyectos.TITULO_PERFIL, proyectos.FECHA_REGISTRO, proyectos.FECHA_INI, proyectos.FECHA_DEF, proyectos.GESTION_PRORROGA 
             FROM estudiantes 
@@ -60,7 +40,7 @@ class TribunalController extends Controller
             $tribunales = Collection::make($tribunal);
             $proyectos = Collection::make($tesis);
         return view('tribunal.lista')->with(compact('tribunales','proyectos'));  
-        //return view('tribunal.lista')->with(compact('estudianteArray','proyectoArray','tribunalArray','ultimo'));  
+        
     }
 
     /**

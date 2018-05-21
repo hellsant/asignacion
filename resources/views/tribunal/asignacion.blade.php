@@ -16,7 +16,7 @@
     {!! Form::open(['route'=>'tribunal.store','method'=>'POST']) !!}
     @foreach ($proyectos as $proyecto)
     <div class="form-group row">
-        {!! Form::label('id_perfil','Codigo del perfil',['class'=>'col-sm-2 col-form-label']) !!}
+        {!! Form::label('id_perfil','Codigo del Proyecto',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
             {!! Form::number('id_perfil', $proyecto->id, ['class'=>'form-control','readonly']) !!}
         </div>
@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="form-group row">
-        {!! Form::label('nombre_perfil','Nombre del perfil',['class'=>'col-sm-2 col-form-label']) !!}
+        {!! Form::label('nombre_perfil','Nombre del Proyecto',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
             {!! Form::text('nombre_perfil', $proyecto -> TITULO_PERFIL, ['class'=>'form-control','readonly']) !!}
         </div>
@@ -50,9 +50,9 @@
             {!! Form::date('FECHA_INI', $now, ['class'=>'form-control']) !!}
         </div>
         
-        {!! Form::label('Modalidad','Modalidad',['class'=>'col-sm-2 col-form-label']) !!}
+        {!! Form::label('fecha_registro','Fecha Registro Proyecto',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="form-group col-sm-4">
-            {!! Form::text('Modalidad',$nombreModalidad, ['class'=>'form-control','readonly']) !!}
+            {!! Form::date('fecha_registro',$proyecto -> FECHA_REGISTRO, ['class'=>'form-control','readonly']) !!}
         </div>
     </div>
     @endforeach
