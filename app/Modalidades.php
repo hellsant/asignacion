@@ -19,6 +19,6 @@ class Modalidades extends Model
 
     public function proyectos()
     {
-        return $this->hasMany(Proyecto::class)->withTimestamps();
+        return $this->hasMany(Proyecto::class);
     }
 }
