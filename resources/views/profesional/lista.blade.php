@@ -27,7 +27,14 @@
     <tbody>
         @foreach($profesionales as $profesional)
       <tr>
-        <td>{{ $profesional -> TITULO_PROF}} </td>
+        <td>
+          @foreach($titulos as $titulo)
+          @if($titulo->id == $profesional->titulo_id)
+          {{ $titulo->nombre}}
+
+          @endif
+          @endforeach
+        </td>
         <td>{{ $profesional -> NOM_PROF}} </td>
         <td>{{ $profesional -> AP_PAT_PROF}} </td>
         <td>{{ $profesional -> AP_MAT_PROF}} </td>
@@ -40,7 +47,7 @@
                       <i class="fas fa-pencil-alt"aria-hidden="true"></i>
                   </a>
               </h4>
-            </div> 
+            </div>
         </td>
         <td>
             <div class="text-center">
@@ -49,12 +56,12 @@
                       <i class="fas fa-trash-alt" aria-hidden="true"></i>
                   </a>
               </h4>
-            </div> 
+            </div>
         </td>
       </tr>
       @endforeach
     </tbody>
   </table>
 </div>
-  
+
 @endsection

@@ -15,15 +15,15 @@ class CreateprofesionalTable extends Migration
     {
         Schema::create('profesional', function (Blueprint $table) {
             $table->increments('id');
-		    $table->string('NOM_PROF', 30)->nullable()->default(null);
-		    $table->string('AP_PAT_PROF', 30)->nullable()->default(null);
-		    $table->string('AP_MAT_PROF', 30)->nullable()->default(null);
-		    $table->string('TITULO_PROF', 30)->nullable()->default(null);
-		    $table->integer('TELF_PROF')->nullable()->defauxefault(null);
-		    $table->integer('CI_PROF')->nullable()->default(null);
-            $table->string('MON_CUENTA')->nullable()->default(null);
+    		    $table->string('NOM_PROF', 30)->nullable()->default(null);
+    		    $table->string('AP_PAT_PROF', 30)->nullable()->default(null);
+    		    $table->string('AP_MAT_PROF', 30)->nullable()->default(null);
+            $table->integer('titulo_id')->unsigned();
+            $table->foreign('titulo_id')->references('id')->on('titulos')->onDelete('cascade');
+    		    $table->integer('TELF_PROF')->nullable()->defauxefault(null);
+    		    $table->integer('CI_PROF')->nullable()->default(null);
             $table->enum('Tipo', ['Interno', 'Externo']);
-		    $table->string('CORREO_PROF', 30)->nullable()->default(null);
+		        $table->string('CORREO_PROF', 30)->nullable()->default(null);
             $table->softDeletes();
             $table->timestamps();
         });

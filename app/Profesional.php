@@ -14,10 +14,10 @@ class Profesional extends Model
     'NOM_PROF',
     'AP_PAT_PROF',
     'AP_MAT_PROF',
-    'TITULO_PROF',
+    'titulo_id',
     'TELF_PROF',
     'CI_PROF',
-    'MON_CUENTA',
+    'NOM_CUENTA',
     'Tipo',
     'CORREO_PROF',
     ];
@@ -34,5 +34,10 @@ class Profesional extends Model
     public function area()
     {
         return $this->belongsToMany(Area::class,'estudiante_profesionals')->withTimestamps();
+    }
+
+    public function titulo()
+    {
+        return $this->belongsTo(Titulo::class);
     }
 }
