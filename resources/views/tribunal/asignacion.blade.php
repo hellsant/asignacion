@@ -33,7 +33,7 @@
             {!! Form::text('nombre_perfil', $proyecto -> TITULO_PERFIL, ['class'=>'form-control','readonly']) !!}
         </div>
     </div>
-    
+
     <div class="form-group row">
         {!! Form::label('area','Area',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="form-group col-sm-4">
@@ -49,7 +49,7 @@
         <div class="form-group col-sm-4">
             {!! Form::date('FECHA_INI', $now, ['class'=>'form-control']) !!}
         </div>
-        
+
         {!! Form::label('fecha_registro','Fecha Registro Proyecto',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="form-group col-sm-4">
             {!! Form::date('fecha_registro',$proyecto -> FECHA_REGISTRO, ['class'=>'form-control','readonly']) !!}
@@ -82,20 +82,20 @@
                     <td>
                         @foreach ($tribunalesN as $t )
                             @if ($t->id == $tribunal->id)
-                                {{ $t -> tribunal}} 
+                                {{ $t -> tribunal}}
                             @endif
                         @endforeach
                     </td>
                     <td>
                         <div class="text-center">
                             {!! Form::checkbox('docenteTrinunal[]', $tribunal -> id) !!}
-                        </div> 
+                        </div>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
-        
+
         {!!$tribunales->render("pagination::bootstrap-4")!!}
         <div class="form-group ">
         <a href="{{ route('tribunal.index') }}" class="btn btn-danger">Cancel</a>
@@ -104,5 +104,5 @@
         {!! Form::close() !!}
 
 </div>
-                
+
 @endsection

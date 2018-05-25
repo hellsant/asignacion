@@ -27,7 +27,7 @@
     <div class="form-group row">
         {!! Form::label('TITULO_PROF','Titulo Profesional',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('TITULO_PROF', old('TITULO_PROF'), ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese el Titulo del Profesional",'data-parsley-error-message'=>"Ingrese solo letras y espacios",'required' =>'true','minlength'=>'3']) !!}
+            {!! Form::select('TITULO_PROF', $titulo,$titulo, ['class'=>'form-control']) !!}
         </div>
     </div>
     <div class="form-group row">
@@ -42,12 +42,7 @@
             {!! Form::text('CI_PROF', old('CI_PROF'), ['class'=>'form-control', 'data-parsley-type'=>"number",'placeholder'=>"Ingrese el CI",'data-parsley-error-message'=>"Ingrese solo numeros",'required' =>'true']) !!}
         </div>
     </div>
-    <div class="form-group row">
-        {!! Form::label('MON_CUENTA','Cuenta',['class'=>'col-sm-2 col-form-label']) !!}
-        <div class="col-sm-10">
-            {!! Form::text('MON_CUENTA', old('MON_CUENTA'), ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese el Nombre de Cuenta",'data-parsley-error-message'=>"Ingrese solo letras y espacios",'required' =>'true','minlength'=>'3']) !!}
-        </div>
-    </div>
+
     <div class="form-group row">
         {!! Form::label('Tipo','Tipo',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
