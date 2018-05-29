@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
+use App\Titulo;
 
 class Profesional extends Model
 {
@@ -17,7 +19,7 @@ class Profesional extends Model
     'titulo_id',
     'TELF_PROF',
     'CI_PROF',
-    'NOM_CUENTA',
+    //'NOM_CUENTA',
     'Tipo',
     'CORREO_PROF',
     ];
@@ -39,5 +41,16 @@ class Profesional extends Model
     public function titulo()
     {
         return $this->belongsTo(Titulo::class);
+    }
+    public function scopeNombre($query, $nombre){
+      return $query->where(DB::raw("CONCAT(NOM_PROF, ' ', AP_PAT_PROF, ' ', AP_MAT_PROF)"),"LIKE", "%$nombre%");
+    }
+
+    public function scopeTitulo($query, $titulo){
+      $t= Titulo::pluck('nombre');
+      if($titulo= $t->get('nombre')){
+       $query->where(titulo_id,'=', $t->get('id'));
+     }
+     dd($t);
     }
 }

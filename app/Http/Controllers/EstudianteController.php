@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 use App\Estudiante;
 use App\Proyecto;
-
+use App\Http\Requests\EstudianteFormRequest;
+use App\Http\Requests\EstudianteFormEditRequest;
 use Illuminate\Http\Request;
 use DB;
 class EstudianteController extends Controller
@@ -13,16 +14,30 @@ class EstudianteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    // public function index(Request $request)
+    // {
+    //     if($request){
+    //         $query=trim($request->get('searchSIS'));
+    //         $estudiantes = Estudiante::orderBy('AP_PAT_EST','ASC')->paginate(10);
+    //         ->where('COD_SIS','LIKE','%'.$query.'%')
+    //
+    //         return view('estudiante.lista',["searchSIS"=>$query ])->with(compact('estudiantes'));
+    //     }
+    // }
     public function index(Request $request)
     {
-        if($request){
-            $query=trim($request->get('searchSIS'));
-            $estudiantes = Estudiante::orderBy('COD_SIS','desc')
-            ->where('COD_SIS','LIKE','%'.$query.'%') 
-            ->paginate(10);
-            return view('estudiante.lista',["searchSIS"=>$query ])->with(compact('estudiantes'));
+            $estudiantes = Estudiante::Buscar($request->nombre)->orderBy('AP_PAT_EST','ASC')->paginate(10);
+            
+
+            return view('estudiante.lista')->with(compact('estudiantes'));
         }
-    }
+
+
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -40,19 +55,21 @@ class EstudianteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EstudianteFormRequest $request)
     {
-        $p=Estudiante::where('COD_SIS','=',$request->COD_SIS)->first();
-        $q=Estudiante::where('CI','=',$request->NOM_CI)->first();
-        if($p==null&&$q==null)
-        {
-            Estudiante::create($request->all());
+      $estudiante= new Estudiante;
+      $estudiante->COD_SIS=$request->cod_sis;
+      $estudiante->NOM_EST=$request->nombre;
+      $estudiante->AP_PAT_EST=$request->apellido_paterno;
+      $estudiante->AP_MAT_EST=$request->apellido_materno;
+      $estudiante->CI=$request->ci;
+      $estudiante->TELF=$request->telefono;
+      $estudiante->CORRETO_EST=$request->correo;
+      $estudiante->save();
+
+
             return redirect('estudiante');
-        }
-        else
-        {
-            return redirect('estudiante');
-        }
+
     }
 
     /**
@@ -87,10 +104,21 @@ class EstudianteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EstudianteFormEditRequest $request, $id)
     {
-        Estudiante::findOrFail($id)->update($request->all());
-        return redirect('estudiante');
+
+      $estudiante=Estudiante::find($id);
+
+      $estudiante->COD_SIS=$request->cod_sis;
+      $estudiante->NOM_EST=$request->nombre;
+      $estudiante->AP_PAT_EST=$request->apellido_paterno;
+      $estudiante->AP_MAT_EST=$request->apellido_materno;
+      $estudiante->CI=$request->ci;
+      $estudiante->TELF=$request->telefono;
+      $estudiante->CORRETO_EST=$request->correo;
+      $estudiante->save();
+        // Estudiante::findOrFail($id)->update($request->all());
+      return redirect('estudiante');
     }
 
     /**

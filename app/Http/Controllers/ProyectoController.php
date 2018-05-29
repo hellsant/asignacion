@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Proyecto;
 use App\Modalidades;
 use App\Gestion;
+use App\Estudiante;
+use App\Profesional;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use DB;
@@ -14,9 +16,9 @@ class ProyectoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $proyectos = Proyecto::all();
+        $proyectos = Proyecto::Nombre($request->nombre)->orderBy('GESTION_LIMITE', 'DESC')->paginate(20);
         return view('proyecto.lista')->with(compact('proyectos'));
     }
 
@@ -28,10 +30,12 @@ class ProyectoController extends Controller
     public function create()
     {
         $now = Carbon::now();
-        $gestionRegistro=$this->calcularGestion($now);
-        $gestionLimite=$this->calcularGestionLimite($now);
-        $listaMonbres=Modalidades::pluck('NOM','id');
-        return view('proyecto.registrar')->with(compact('listaMonbres','now','gestionRegistro','gestionLimite'));
+        $gestiones= Gestion::pluck('FECHA_INI', 'PERIODO', 'id');
+        $estudiantes= Estudiante::pluck('COD_SIS', 'id');
+        $tutores= Profesional::pluck('NOM_PROF', 'AP_PAT_PROF', 'AP_MAT_PROF', 'id');
+        //$gestionRegistro=$this->calcularGestion($now);
+        $modalidades=Modalidades::pluck('NOM','id');
+        return view('proyecto.registrar')->with(compact('modalidades','now','gestiones','estudiantes', 'tutores'));
     }
 
     /**
@@ -132,7 +136,7 @@ class ProyectoController extends Controller
         Proyecto::findOrFail($id)->delete();
         return redirect('proyecto');
     }
-    
+
     public function calcularGestion($now)
     {
         $seleccionado = Gestion::whereYear('FECHA_INI',$now)->get();
@@ -141,11 +145,11 @@ class ProyectoController extends Controller
             $periodo=$value->PERIODO;
             $año=$value->FECHA_INI + 0;
             $str="$periodo - $año";
-            $gestiones = $this->array_push_assoc($gestiones, $str, $str);            
+            $gestiones = $this->array_push_assoc($gestiones, $str, $str);
         }
         return $gestiones;
     }
-   
+
     public function calcularGestionLimite($now)
     {
         $seleccionado = Gestion::whereYear('FECHA_INI',$now)->get();
@@ -154,7 +158,7 @@ class ProyectoController extends Controller
             $periodo=$value->PERIODO;
             $año = $value->FECHA_INI + 2;
             $str = "$periodo - $año";
-            $gestiones = $this->array_push_assoc($gestiones, $str, $str); 
+            $gestiones = $this->array_push_assoc($gestiones, $str, $str);
         }
         return $gestiones;
     }

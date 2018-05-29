@@ -5,6 +5,9 @@ use App\Profesional;
 use App\Titulo;
 use Illuminate\Http\Request;
 use DB;
+use App\Http\Requests\ProfesionalFormRequest;
+use App\Http\Requests\ProfesionalFormEditRequest;
+
 class ProfesionalController extends Controller
 {
     /**
@@ -12,15 +15,28 @@ class ProfesionalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $profesionales = Profesional::all();
-        $titulos= Titulo::all();
+      $titulos = Titulo::pluck('nombre', 'id');
+      $profesionales = Profesional::Nombre($request->nombre)
+
+      //->Titulo($request->titulo)
+      ->orderBy('AP_PAT_PROF','ASC')
+      ->paginate(10);
+      $profesionales->each(function($profesionales){
+        $profesionales->titulo;
+
+      });
+
+
+        //// $profesionales = Profesional::all();
+        //// $titulos= Titulo::all();
         //foreach ($data as $key) {
         //   $titulo = Titulo::findOrFail($key->titulo_id)->profesional();
         //  dd($titulo);
         //}
-        return view('profesional.lista')->with(compact('profesionales','titulos'));
+        ////return view('profesional.lista')->with(compact('profesionales','titulos'));
+        return view('profesional.lista')->with(compact('profesionales', 'titulos'));
     }
 
     /**
@@ -40,29 +56,29 @@ class ProfesionalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProfesionalFormRequest $request)
     {
 
-        $p=Profesional::where('CI_PROF','=',$request->CI_PROF)->first();
-        if($p==null)
-        {
+//        $p=Profesional::where('CI_PROF','=',$request->CI_PROF)->first();
+//        if($p==null)
+//        {
             $profesional= new Profesional;
-            $profesional-> NOM_PROF=$request->NOM_PROF;
-            $profesional-> AP_PAT_PROF=$request->AP_PAT_PROF;
-            $profesional-> AP_MAT_PROF=$request->AP_MAT_PROF;
-            $profesional-> titulo_id=$request->TITULO_PROF;
-            $profesional-> TELF_PROF=$request->TELF_PROF;
-            $profesional-> CI_PROF=$request->CI_PROF;
-            $profesional-> Tipo=$request->Tipo;
-            $profesional-> CORREO_PROF=$request->CORREO_PROF;
-        //    dd($profesional);
-        $profesional->save();
+            $profesional->NOM_PROF=$request->nombre;
+            $profesional->AP_PAT_PROF=$request->apellido_paterno;
+            $profesional->AP_MAT_PROF=$request->apellido_materno;
+            $profesional->titulo_id=$request->titulo;
+            $profesional->TELF_PROF=$request->telefono;
+            $profesional->CI_PROF=$request->ci;
+            $profesional->Tipo=$request->Tipo;
+            $profesional->CORREO_PROF=$request->correo;
+            $profesional->save();
+
             return redirect('profesional');
-        }
-        else
-        {
-            return redirect('profesional');
-        }
+//        }
+        // else
+        // {
+        //     return redirect('profesional');
+        // }
     }
 
     /**
@@ -86,9 +102,14 @@ class ProfesionalController extends Controller
     {
 
         $profesional = Profesional::findOrFail($id);
-        $tituloNombre = Titulo::findOrFail($profesional->titulo_id)->nombre;
+        // $tituloNombre = Titulo::findOrFail($profesional->titulo_id)->nombre;
         $titulo= Titulo::pluck('nombre','id');
-        return view('profesional.edit')->with(compact('profesional','tituloNombre','titulo'));
+
+
+
+
+        // return view('profesional.edit')->with(compact('profesional','tituloNombre','titulo'));
+        return view('profesional.edit')->with(compact('profesional','titulo'));
     }
 
     /**
@@ -98,19 +119,19 @@ class ProfesionalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProfesionalFormEditRequest $request, $id)
     {
       $profesional=Profesional::find($id);
-      $profesional->NOM_PROF=$request->NOM_PROF;
-      $profesional->AP_PAT_PROF=$request->AP_PAT_PROF;
-      $profesional->AP_MAT_PROF=$request->AP_MAT_PROF;
-      $profesional->titulo_id=$request->TITULO_PROF;
-      $profesional->TELF_PROF=$request->TELF_PROF;
-      $profesional->CI_PROF=$request->CI_PROF;
+      $profesional->NOM_PROF=$request->nombre;
+      $profesional->AP_PAT_PROF=$request->apellido_paterno;
+      $profesional->AP_MAT_PROF=$request->apellido_materno;
+      $profesional->titulo_id=$request->titulo;
+      $profesional->TELF_PROF=$request->telefono;
+      $profesional->CI_PROF=$request->ci;
       $profesional->Tipo=$request->Tipo;
-      $profesional->CORREO_PROF=$request->CORREO_PROF;
+      $profesional->CORREO_PROF=$request->correo;
       $profesional->save();
-        return redirect('profesional');
+      return redirect('profesional');
     }
 
     /**

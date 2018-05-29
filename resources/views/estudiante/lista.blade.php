@@ -3,31 +3,34 @@
 @section('titulo2', 'DE ESTUDIANTES')
 @section('content')
 <div>
-  {!! Form::open(array('url'=>'estudiante','method'=>'GET','autocomplete'=>'off','role'=>'search')) !!}
-  <div class="form-group">
+  {!! Form::open(array('url'=>'estudiante','method'=>'GET','class' => 'navbar-form pull-right')) !!}
+
     <div class="input-group">
-      <input type="number" class="form-control" name="searchSIS" placeholder="Buscar por Codigo SIS..." value="{{$searchSIS}}">
+
+      {!! Form::text('nombre', null, ['class'=> 'form-control','placeholder'=>'Buscar estudiante', 'aria-describedby'=>'buscar']) !!}
+
+
       <span class="input-group-btn">
         <button type="submit" class="btn btn-primary">Buscar</button>
       </span>
     </div>
-  </div>
+    {!! Form::close() !!}
+
 
 {{Form::close()}}
 </div>
-<div class="table-responsive">
+<div class="table-responsive table-striped">
 <table class="table">
     <thead class="thead-light">
       <tr>
-          <th scope="col">CodigoSis</th>
-          <th scope="col">Nombre</th>
-          <th scope="col">Apellido Paterno</th>
-          <th scope="col">Apellido Materno</th>
-          <th scope="col">CI</th>
-          <th scope="col">Telefono</th>
-          <th scope="col">Correo</th>
-          <th scope="col"></th>
-          <th scope="col"></th>
+          <th >CódigoSis</th>
+          <th >Nombre</th>
+          <th >Apellido Paterno</th>
+          <th >Apellido Materno</th>
+          <th >Teléfono</th>
+          <th >Correo</th>
+          <th ></th>
+          <th ></th>
 
           <th scope="col">
             <div class="text-center">
@@ -47,7 +50,6 @@
         <td>{{ $estudiante -> NOM_EST}} </td>
         <td>{{ $estudiante -> AP_PAT_EST}} </td>
         <td>{{ $estudiante -> AP_MAT_EST}} </td>
-        <td>{{ $estudiante -> CI}} </td>
         <td>{{ $estudiante -> TELF}} </td>
         <td>{{ $estudiante -> CORRETO_EST}} </td>
         <td></td>
@@ -58,22 +60,22 @@
                       <i class="fas fa-pencil-alt"aria-hidden="true"></i>
                   </a>
               </h4>
-            </div> 
+            </div>
         </td>
         <td>
             <div class="text-center">
                 <h4>
-                  <a href='{{ url('estudiante/ocultar',$estudiante->id)}}' onclick="return confirm('¿Esta seguro de eliminar este Estudiante?')" data-toggle="tooltip" data-placement="right" title="Eliminar">
+                  <a href='{{ url('estudiante.ocultar',$estudiante->id)}}' onclick="return confirm('¿Esta seguro de eliminar este Estudiante?')" data-toggle="tooltip" data-placement="right" title="Eliminar">
                       <i class="fas fa-trash-alt" aria-hidden="true"></i>
                   </a>
               </h4>
-            </div> 
+            </div>
         </td>
       </tr>
       @endforeach
     </tbody>
   </table>
-  {!!$estudiantes->render("pagination::bootstrap-4")!!}
+{!!$estudiantes->appends(Request::only(['nombre']))->render("pagination::bootstrap-4")!!}
 </div>
- 
+
 @endsection

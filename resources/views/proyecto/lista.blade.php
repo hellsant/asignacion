@@ -2,14 +2,29 @@
 @section('titulo1', 'LISTA')
 @section('titulo2', 'DE PERFILES')
 @section('content')
+
+
+{!! Form::open(array('url'=>'proyecto','method'=>'GET','class' => 'navbar-form pull-right')) !!}
+<div class="input-group">
+
+  {!! Form::text('nombre', null, ['class'=> 'form-control','placeholder'=>'Buscar perfil', 'aria-describedby'=>'buscar']) !!}
+
+
+  <span class="input-group-btn">
+    <button type="submit" class="btn btn-primary">Buscar</button>
+  </span>
+</div>
+{!! Form::close() !!}
+
+
 <div class="table-responsive">
 <table class="table">
     <thead class="thead-light">
       <tr>
-          <th scope="col">Titulo</th>
-          <th scope="col">Fecha Registro</th>
-          <th scope="col">Gestion Limite</th>
-          <th scope="col">Fecha Asignacion de Tribunal</th>
+          <th scope="col">Título</th>
+          <th scope="col">Gestión Registro</th>
+          <th scope="col">Gestión Limite</th>
+          <th scope="col">Fecha Asignación de Tribunal</th>
           <th scope="col">Fecha Defensa</th>
           <th scope="col">Gestion Prorroga</th>
           <th></th>
@@ -28,7 +43,7 @@
         @foreach($proyectos as $proyecto)
       <tr>
         <td>{{ $proyecto -> TITULO_PERFIL}} </td>
-        <td>{{ $proyecto -> FECHA_REGISTRO}} </td>
+        <td>{{ $proyecto -> GESTION_REGISTRO}} </td>
         <td>{{ $proyecto -> GESTION_LIMITE}} </td>
         <td>{{ $proyecto -> FECHA_INI}} </td>
         <td>{{ $proyecto -> FECHA_DEF}} </td>
@@ -40,7 +55,7 @@
                       <i class="fas fa-pencil-alt"aria-hidden="true"></i>
                   </a>
               </h4>
-            </div> 
+            </div>
         </td>
         <td>
             <div class="text-center">
@@ -49,12 +64,14 @@
                       <i class="fas fa-trash-alt" aria-hidden="true"></i>
                   </a>
               </h4>
-            </div> 
+            </div>
         </td>
       </tr>
       @endforeach
     </tbody>
   </table>
+{!!$proyectos->appends(Request::only(['nombre']))->render("pagination::bootstrap-4")!!}
+
 </div>
-  
+
 @endsection
