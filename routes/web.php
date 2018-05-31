@@ -19,6 +19,18 @@ Route::get('profesional/ocultar/{id}', 'ProfesionalController@ocultar');
 Route::resource('profesional', 'ProfesionalController');
 Route::get('proyecto/ocultar/{id}', 'ProyectoController@ocultar');
 Route::resource('proyecto', 'ProyectoController');
+
+//Route::resource('tutor', 'TutorController');
+// Route::resource('tutor', 'TutorController', ['names' => [
+//     'tutor/{id}' => 'tutor.index',
+//     'tutor/store/{id}' => 'tutor.store'
+// ]]);
+Route::any('tutor/{id}', 'TutorController@index')->name('tutor.index');
+// Route::post('tutor/{id}', 'TutorController@index')->name('tutor.index');
+Route::any('tutor/store/{id}', 'TutorController@store')->name('tutor.store');
+// Route::post('tutor/store/{id}', 'TutorController@store')->name('tutor.store');
+
+
 Route::get('area/ocultar/{id}', 'AreasController@ocultar');
 Route::resource('area', 'AreasController');
 Route::get('estudiante/ocultar/{id}', 'EstudianteController@ocultar');

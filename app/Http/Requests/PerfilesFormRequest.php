@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Carbon\Carbon;
 
 class PerfilesFormRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class PerfilesFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +24,15 @@ class PerfilesFormRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
-            //
+            'titulo'=> 'required',
+            'objetivo_general'=> 'required',
+            'objetivos_especificos'=> 'required',
+            'descripcion'=> 'required',
+            'fecha_registro'=> 'required|date|before_or_equal:today',
+            'gestion_registro'=> 'required|',
+            'gestion_limite'=> 'required',
         ];
     }
 }

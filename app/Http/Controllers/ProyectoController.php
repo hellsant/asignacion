@@ -6,8 +6,11 @@ use App\Modalidades;
 use App\Gestion;
 use App\Estudiante;
 use App\Profesional;
+use App\Area;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Requests\PerfilesFormRequest;
+
 use DB;
 class ProyectoController extends Controller
 {
@@ -19,6 +22,7 @@ class ProyectoController extends Controller
     public function index(Request $request)
     {
         $proyectos = Proyecto::Nombre($request->nombre)->orderBy('GESTION_LIMITE', 'DESC')->paginate(20);
+
         return view('proyecto.lista')->with(compact('proyectos'));
     }
 
@@ -29,13 +33,20 @@ class ProyectoController extends Controller
      */
     public function create()
     {
+
         $now = Carbon::now();
-        $gestiones= Gestion::pluck('FECHA_INI', 'PERIODO', 'id');
-        $estudiantes= Estudiante::pluck('COD_SIS', 'id');
-        $tutores= Profesional::pluck('NOM_PROF', 'AP_PAT_PROF', 'AP_MAT_PROF', 'id');
-        //$gestionRegistro=$this->calcularGestion($now);
+        $gestiones= Gestion::select(DB::raw('CONCAT(PERIODO,"-",YEAR(FECHA_INI)) as periodo_fecha'))
+        ->pluck('periodo_fecha', 'periodo_fecha');
         $modalidades=Modalidades::pluck('NOM','id');
-        return view('proyecto.registrar')->with(compact('modalidades','now','gestiones','estudiantes', 'tutores'));
+        $estudiantes= Estudiante::select(DB::raw('CONCAT(AP_PAT_EST, " ", AP_MAT_EST, " ", NOM_EST) as nombre_completo'), 'id')
+        ->orderBy('AP_PAT_EST')
+        ->pluck('nombre_completo', 'id');
+
+        $tutores= Profesional::select(DB::raw('CONCAT(AP_PAT_PROF, " ", AP_MAT_PROF, " ", NOM_PROF) as nombre_completo'), 'id')
+        ->orderBy('AP_PAT_PROF')
+        ->pluck('nombre_completo', 'id');
+        $areas= Area::pluck('NOMBRE_AREA', 'id');
+        return view('proyecto.registrar')->with(compact('modalidades','now','gestiones', 'estudiantes', 'tutores', 'areas'));
     }
 
     /**
@@ -44,35 +55,33 @@ class ProyectoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PerfilesFormRequest $request)
     {
-        if(($request->FECHA_INI>$request->FECHA_REGISTRO)||($request->FECHA_INI==null))
-        {
-            if(($request->FECHA_DEF>$request->FECHA_LIMITE)||($request->FECHA_DEF==null))
-            {
-                $proyecto = new Proyecto;
-                $proyecto->TITULO_PERFIL= $request->TITULO_PERFIL;
-                $proyecto->FECHA_REGISTRO=$request->FECHA_REGISTRO;
-                $proyecto->GESTION_REGISTRO=$request->GESTION_REGISTRO;
-                $proyecto->GESTION_LIMITE=$request->GESTION_LIMITE;
-                $proyecto->OBJ_GRAL=$request->OBJ_GRAL;
-                $proyecto->OBJ_ESP=$request->OBJ_ESP;
-                $proyecto->DESCRIPCION=$request->DESCRIPCION;
-                $proyecto->FECHA_INI=$request->FECHA_INI;
-                $proyecto->FECHA_DEF=$request->FECHA_DEF;
-                $proyecto->modalidad_id=$request->MODALIDAD;
-                $proyecto->save();
-                return redirect('proyecto');
-            }
-            else
-            {
-                return redirect('proyecto');
-            }
-        }
-        else
-        {
-            return redirect('proyecto');
-        }
+
+        $proyecto = new Proyecto;
+        $proyecto->TITULO_PERFIL= $request->titulo;
+        $proyecto->FECHA_REGISTRO=$request->fecha_registro;
+        $proyecto->GESTION_REGISTRO=$request->gestion_registro;
+        $proyecto->GESTION_LIMITE=$request->gestion_limite;
+        $proyecto->OBJ_GRAL=$request->objetivo_general;
+        $proyecto->OBJ_ESP=$request->objetivos_especificos;
+        $proyecto->DESCRIPCION=$request->descripcion;
+        $proyecto->FECHA_INI=$request->fecha_inicio;
+        $proyecto->FECHA_DEF=$request->fecha_defensa;
+        $proyecto->modalidad_id=$request->modalidad;
+        $proyecto->save();
+
+
+        $estudiante= Estudiante::find($request->estudiante);
+        $estudiante->profesional()->attach($request->tutor);
+
+        $perfil= Proyecto::all()->last();
+        $perfil->estudiante()->attach($request->estudiante);
+        $perfil->area()->attach($request->area);
+
+
+        return redirect('proyecto');
+
     }
 
     /**
@@ -95,8 +104,11 @@ class ProyectoController extends Controller
     public function edit($id)
     {
         $proyecto = Proyecto::findOrFail($id);
-        $proyecto->modalidad;
-        return view('proyecto.edit')->with(compact('proyecto'));
+        $now = Carbon::now();
+        $gestiones= Gestion::select(DB::raw('CONCAT(PERIODO,"-",YEAR(FECHA_INI)) as periodo_fecha'))
+        ->pluck('periodo_fecha', 'periodo_fecha');
+        $modalidades=Modalidades::pluck('NOM','id');
+        return view('proyecto.edit')->with(compact('proyecto','now','gestiones', 'modalidades'));
     }
 
     /**
@@ -108,15 +120,24 @@ class ProyectoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if($request->FECHA_PRORR>$request->FECHA_LIMITE)
-        {
-            Proyecto::findOrFail($id)->update($request->all());
+
+            $proyecto=Proyecto::find($id);
+
+              $proyecto->TITULO_PERFIL= $request->titulo;
+              $proyecto->FECHA_REGISTRO=$request->fecha_registro;
+              $proyecto->GESTION_REGISTRO=$request->gestion_registro;
+              $proyecto->GESTION_LIMITE=$request->gestion_limite;
+              $proyecto->OBJ_GRAL=$request->objetivo_general;
+              $proyecto->OBJ_ESP=$request->objetivos_especificos;
+              $proyecto->DESCRIPCION=$request->descripcion;
+              $proyecto->FECHA_INI=$request->fecha_inicio;
+              $proyecto->FECHA_DEF=$request->fecha_defensa;
+              $proyecto->modalidad_id=$request->modalidad;
+
+            $proyecto->save();
             return redirect('proyecto');
-        }
-        else
-        {
-            return redirect('proyecto');
-        }
+
+
     }
 
     /**
@@ -137,33 +158,20 @@ class ProyectoController extends Controller
         return redirect('proyecto');
     }
 
-    public function calcularGestion($now)
-    {
-        $seleccionado = Gestion::whereYear('FECHA_INI',$now)->get();
-        $gestiones=array();
-        foreach ($seleccionado as $value) {
-            $periodo=$value->PERIODO;
-            $año=$value->FECHA_INI + 0;
-            $str="$periodo - $año";
-            $gestiones = $this->array_push_assoc($gestiones, $str, $str);
-        }
-        return $gestiones;
-    }
+    public function tutor($id){
 
-    public function calcularGestionLimite($now)
-    {
-        $seleccionado = Gestion::whereYear('FECHA_INI',$now)->get();
-        $gestiones=array();
-        foreach ($seleccionado as $value) {
-            $periodo=$value->PERIODO;
-            $año = $value->FECHA_INI + 2;
-            $str = "$periodo - $año";
-            $gestiones = $this->array_push_assoc($gestiones, $str, $str);
-        }
-        return $gestiones;
+      $estudiantes= Estudiante::select(DB::raw('CONCAT(AP_PAT_EST, " ", AP_MAT_EST, " ", NOM_EST) as nombre_completo'), 'id')
+      ->orderBy('AP_PAT_EST')
+      ->pluck('nombre_completo', 'id');
+
+      $tutores= Profesional::select(DB::raw('CONCAT(AP_PAT_PROF, " ", AP_MAT_PROF, " ", NOM_PROF) as nombre_completo'), 'id')
+      ->orderBy('AP_PAT_PROF')
+      ->pluck('nombre_completo', 'id');
+
+      $proyecto= Proyecto::findOrFail($id);
+
+      return view('tutor.registrar')->with(compact('estudiantes', 'tutores', 'proyecto'));
+
+
     }
-    function array_push_assoc($array, $key, $value){
-        $array[$key] = $value;
-        return $array;
-        }
 }

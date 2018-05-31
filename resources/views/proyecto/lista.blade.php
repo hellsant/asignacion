@@ -51,8 +51,8 @@
         <td>
             <div class="text-center">
                 <h4>
-                  <a href='{{ route('proyecto.edit',$proyecto->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">
-                      <i class="fas fa-pencil-alt"aria-hidden="true"></i>
+                  <a href='{{ route('proyecto.edit',$proyecto->id)}}' >
+
                   </a>
               </h4>
             </div>
@@ -66,6 +66,15 @@
               </h4>
             </div>
         </td>
+        <td>
+          <div class="text-center">
+            <h4>
+              <a href='{{ route('tutor.index',$proyecto->id)}}' data-toggle="tooltip" data-placement="right" title="asignar Estudiante y Tutor">
+                <i class="fas fa-trash-alt"aria-hidden="true"></i>
+              </a>
+            </h4>
+          </div>
+      </td>
       </tr>
       @endforeach
     </tbody>

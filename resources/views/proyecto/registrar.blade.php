@@ -4,6 +4,11 @@
 @section('content')
 
 <div>
+  <!-- Para mostrar error en las validaciones-->
+      @foreach ($errors->all() as $error)
+      <p class="alert alert-danger"> {{ $error }}</p>
+      @endforeach
+
 
     {!! Form::open(['route'=>'proyecto.store','method'=>'POST']) !!}
     <div class="form-group row">
@@ -60,38 +65,35 @@
       </div>
     </div>
 
-    <div class="form-group row">
-      {!! Form::label('TUTOR','Tutor',['class'=>'col-sm-2 col-form-label']) !!}
-      <div class="form-group col-sm-4">
-        {!! Form::select('tutor',$tutores, $tutores ,['class'=>'form-control']) !!}
-      </div>
+
+
+
       <div class="form-group row">
-        <div class="text-center">
-          <h3>
-            <a href='{{ route('profesional.create')}}' data-toggle="tooltip" data-placement="right" title="Registar">
-              <i class="fas fa-plus-square" aria-hidden="true" ></i>
-            </a>
-          </h3>
+
+        {!! Form::label('ESTUDIANTE','Estudiante',['class'=>'col-sm-2 col-form-label']) !!}
+        <div class="form-group col-sm-4">
+          {!! Form::select('estudiante',$estudiantes, $estudiantes ,['class'=>'form-control']) !!}
+        </div>
+
+        {!! Form::label('TUTOR','Tutor',['class'=>'col-sm-2 col-form-label']) !!}
+        <div class="form-group col-sm-4">
+          {!! Form::select( 'tutor', $tutores,  $tutores, ['class'=>'form-control']) !!}
         </div>
       </div>
 
-    </div>
-
-    <div class="form-group row">
-      {!! Form::label('ESTUDIANTE','Estudiante',['class'=>'col-sm-2 col-form-label']) !!}
-      <div class="form-group col-sm-4">
-        {!! Form::select('Estudiante',$estudiantes, $estudiantes ,['class'=>'form-control']) !!}
-      </div>
       <div class="form-group row">
-        <div class="text-center">
-          <h3>
-            <a href='{{ route('estudiante.create')}}' data-toggle="tooltip" data-placement="right" title="Registar">
-              <i class="fas fa-plus-square" aria-hidden="true" ></i>
-            </a>
-          </h3>
+
+        {!! Form::label('AREA','Area',['class'=>'col-sm-2 col-form-label']) !!}
+        <div class="form-group col-sm-12">
+          {!! Form::select('area',$areas, $areas ,['class'=>'form-control']) !!}
         </div>
+
+
       </div>
-    </div>
+
+
+
+
 
     <a href="{{ route('proyecto.index') }}" class="btn btn-danger">Cancel</a>
     {!! Form::submit('registrar', ['class'=>'btn btn-success']) !!}
