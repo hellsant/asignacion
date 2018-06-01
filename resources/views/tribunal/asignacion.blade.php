@@ -37,11 +37,11 @@
     <div class="form-group row">
         {!! Form::label('area','Area',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="form-group col-sm-4">
-            {!! Form::text('area', $nombreArea, ['class'=>'form-control','readonly']) !!}
+            {!! Form::text('area', $proyecto->area->NOMBRE_AREA, ['class'=>'form-control','readonly']) !!}
         </div>
         {!! Form::label('subArea','Subarea',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="form-group col-sm-4">
-            {!! Form::select('subArea',$nombreSubarea,$nombreSubarea, ['class'=>'form-control','readonly']) !!}
+            {!! Form::select('subArea',$proyecto->subarea,$proyecto->subarea[0]->NOM_SUBAREA, ['class'=>'form-control','readonly']) !!}
         </div>
     </div>
     <div class="form-group row">

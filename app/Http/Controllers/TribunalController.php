@@ -121,31 +121,38 @@ class TribunalController extends Controller
     public function registrar($estudianteId)
     {
         $now=Carbon::now();
+       
         $proyectos = Estudiante::findOrFail($estudianteId)->proyectos;
         
-        $nom = Estudiante::findOrFail($estudianteId)->NOM_EST;
-        $apest = Estudiante::findOrFail($estudianteId)->AP_PAT_EST;
-        $maest = Estudiante::findOrFail($estudianteId)->AP_MAT_EST;
-        $estudiante = "$nom $apest $maest";
+        $nombreEstudiante = Estudiante::findOrFail($estudianteId);
+        $estudiante = "$nombreEstudiante->NOM_EST $nombreEstudiante->AP_PAT_EST $nombreEstudiante->AP_MAT_EST";
 
-        $tribunales =Profesional::paginate(10);
+        $tribunales = Profesional::paginate(10);
        
-        $nombreArea="";
-        $nombreSubarea=[];
-        $nombreModalidad="";
-        foreach ($proyectos as $proyecto) {
-            $areas = Proyecto::findOrFail($proyecto->id)->area;
-            $subAreas = Proyecto::findOrFail($proyecto->id)->subarea;
-            $nombreModalidad = Proyecto::findOrFail($proyecto->id)->modalidad->NOM;
-               
-            foreach ($areas as $area) {
-                $nombreArea=$area->NOMBRE_AREA;
-            }
-            foreach ($subAreas as $subArea) {
-                array_push($nombreSubarea, $subArea->NOM_SUBAREA);
-            }
-        }
-        
+        $proyectos->each(function($proyectos){
+            $areas=$proyectos->area;
+            $areas->each(function($areas){
+                $profecionales=$areas->profesional;
+            });
+            $subareas=$proyectos->subarea;
+            $subareas->each(function($subareas){
+                $profecionales=$subareas->profesional;
+            });
+        });
+       // foreach ($proyectos as $proyecto) {
+         //   $areas = Proyecto::findOrFail($proyecto->id)->area;
+          //  $subAreas = Proyecto::findOrFail($proyecto->id)->subarea;
+            
+            // foreach ($areas as $area) {
+           //     $nombreArea=$area->NOMBRE_AREA;
+           //     $idArea=$area->id;
+           // }
+           // foreach ($subAreas as $subArea) {
+           //     array_push($nombreSubarea, $subArea->NOM_SUBAREA);
+           //     array_push($idSubarea, $subArea->id);
+           //     dd($idSubarea);
+           // }
+        //}
         $querytutor=DB::select( 
         'SELECT profesional.id, profesional.NOM_PROF nombre, profesional.AP_PAT_PROF apellidoP, profesional.AP_MAT_PROF apellidoM, COUNT(estudiante_profesionals.id) tutor 
          FROM profesional 
@@ -161,7 +168,7 @@ class TribunalController extends Controller
         $tutores = Collection::make($querytutor);
         $tribunalesN = Collection::make($querytribunal);
         
-        return view('tribunal.asignacion')->with(compact('nombreModalidad','tribunales','now','proyectos','estudiante','nombreArea','nombreSubarea','tutores','tribunalesN'));  
+        return view('tribunal.asignacion')->with(compact('tribunales','now','proyectos','estudiante','tutores','tribunalesN'));  
     }
     
 }
