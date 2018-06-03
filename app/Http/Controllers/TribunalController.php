@@ -22,25 +22,6 @@ class TribunalController extends Controller
      */
     public function index()
     {
-        $tesis=DB::select(
-            'SELECT estudiantes.id, estudiantes.NOM_EST nombre, estudiantes.AP_PAT_EST apellidoP, estudiantes.AP_MAT_EST apellidoM, proyectos.TITULO_PERFIL, proyectos.FECHA_REGISTRO, proyectos.FECHA_INI, proyectos.FECHA_DEF, proyectos.GESTION_PRORROGA
-            FROM estudiantes
-            INNER JOIN estudiante_proyecto ON estudiantes.id=estudiante_proyecto.estudiante_id
-            INNER JOIN proyectos ON proyectos.id=estudiante_proyecto.proyecto_id
-            ORDER BY estudiantes.id');
-
-        $tribunal=DB::select(
-            'SELECT estudiantes.id id_est, profesional.NOM_PROF, profesional.AP_PAT_PROF, profesional.AP_MAT_PROF
-            FROM proyectos
-            INNER JOIN motivo_profesional_proyecto ON proyectos.id=motivo_profesional_proyecto.proyecto_id
-            INNER JOIN profesional ON motivo_profesional_proyecto.profesional_id=profesional.id
-            INNER JOIN estudiante_proyecto ON proyectos.id=estudiante_proyecto.proyecto_id
-            INNER JOIN estudiantes ON estudiante_proyecto.estudiante_id=estudiantes.id
-            ORDER BY estudiantes.id');
-            $tribunales = Collection::make($tribunal);
-            $proyectos = Collection::make($tesis);
-        return view('tribunal.lista')->with(compact('tribunales','proyectos'));
-
     }
 
     /**
@@ -66,7 +47,7 @@ class TribunalController extends Controller
         foreach ($request->input("docenteTrinunal") as $tribunal){
             $proyecto->profesional()->attach($tribunal,['motivo_id' => 1,'proyecto_id'=>$request->id_perfil]);
         }
-        return redirect('tribunal');
+        return redirect('proyecto');
 
     }
 
@@ -118,7 +99,7 @@ class TribunalController extends Controller
     /**
      * registra los tribuinales a los cuales pueden ser elegidos.
      */
-    public function registrar($id)
+    public function registrar($estudianteId)
     {
         $now=Carbon::now();
        

@@ -104,7 +104,7 @@
             </tbody>
         </table>
         <div class="form-group ">
-            <a href="{{ route('tribunal.index') }}" class="btn btn-danger">Cancel</a>
+            <a href="{{ route('proyecto.index') }}" class="btn btn-danger">Cancel</a>
             {!! Form::submit('Siguiente', ['type'=>"submit",'class'=>'btn btn-success', 'id'=>"btnreg"]) !!}
         </div>
         {!! Form::close() !!}
