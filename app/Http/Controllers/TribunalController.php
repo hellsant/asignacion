@@ -122,45 +122,29 @@ class TribunalController extends Controller
     {
         $now=Carbon::now();
        
-        $proyectos = Estudiante::findOrFail($estudianteId)->proyectos;
         
         $nombreEstudiante = Estudiante::findOrFail($estudianteId);
         $estudiante = "$nombreEstudiante->NOM_EST $nombreEstudiante->AP_PAT_EST $nombreEstudiante->AP_MAT_EST";
 
-        $tribunales = Profesional::paginate(10);
-       
-        $proyectos->each(function($proyectos){
-            $areas=$proyectos->area;
-            $areas->each(function($areas){
-                $profecionales=$areas->profesional;
+        $proyectos = Estudiante::findOrFail($estudianteId)->proyectos->each(function($proyectos){
+           
+            $proyecto=$proyectos->area->each(function($areas){
+                $areas->profesional;
             });
-            $subareas=$proyectos->subarea;
-            $subareas->each(function($subareas){
-                $profecionales=$subareas->profesional;
+            
+            $proyectos->subarea->each(function($subareas){
+                $subareas->profesional;
             });
         });
-       // foreach ($proyectos as $proyecto) {
-         //   $areas = Proyecto::findOrFail($proyecto->id)->area;
-          //  $subAreas = Proyecto::findOrFail($proyecto->id)->subarea;
-            
-            // foreach ($areas as $area) {
-           //     $nombreArea=$area->NOMBRE_AREA;
-           //     $idArea=$area->id;
-           // }
-           // foreach ($subAreas as $subArea) {
-           //     array_push($nombreSubarea, $subArea->NOM_SUBAREA);
-           //     array_push($idSubarea, $subArea->id);
-           //     dd($idSubarea);
-           // }
-        //}
+
         $querytutor=DB::select( 
-        'SELECT profesional.id, profesional.NOM_PROF nombre, profesional.AP_PAT_PROF apellidoP, profesional.AP_MAT_PROF apellidoM, COUNT(estudiante_profesionals.id) tutor 
+        'SELECT profesional.id,COUNT(estudiante_profesionals.id) tutor 
          FROM profesional 
          INNER JOIN estudiante_profesionals ON estudiante_profesionals.profesional_id=profesional.id 
          GROUP BY profesional.id');
         
         $querytribunal=DB::select(
-        'SELECT profesional.id, profesional.NOM_PROF nombre, profesional.AP_PAT_PROF apellidoP, profesional.AP_MAT_PROF apellidoM, COUNT(motivo_profesional_proyecto.profesional_id) tribunal 
+        'SELECT profesional.id, COUNT(motivo_profesional_proyecto.profesional_id) tribunal 
         FROM profesional 
         INNER JOIN motivo_profesional_proyecto ON motivo_profesional_proyecto.profesional_id=profesional.id 
         GROUP BY profesional.id');

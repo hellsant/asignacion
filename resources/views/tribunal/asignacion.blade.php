@@ -37,11 +37,15 @@
     <div class="form-group row">
         {!! Form::label('area','Area',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="form-group col-sm-4">
-            {!! Form::text('area', $proyecto->area->NOMBRE_AREA, ['class'=>'form-control','readonly']) !!}
+            @foreach ($proyecto->area as $area)
+            {!! Form::text('area', $area->NOMBRE_AREA, ['class'=>'form-control','readonly']) !!}
+            @endforeach
         </div>
         {!! Form::label('subArea','Subarea',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="form-group col-sm-4">
-            {!! Form::select('subArea',$proyecto->subarea,$proyecto->subarea[0]->NOM_SUBAREA, ['class'=>'form-control','readonly']) !!}
+                @foreach ($proyecto->subarea as $subarea)
+                {!! Form::text('area', $subarea->NOM_SUBAREA, ['class'=>'form-control','readonly']) !!}
+                @endforeach
         </div>
     </div>
     <div class="form-group row">
@@ -57,7 +61,7 @@
     </div>
     @endforeach
 
-        <table class="table">
+        <table class="table" id="asignar">
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Codigo</th>
@@ -68,10 +72,12 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($tribunales as $tribunal )
+                @foreach ($proyectos as $proyecto )
+                @foreach ($proyecto->area as $area)
+                @foreach ($area->profesional as $tribunal)
                 <tr>
-                    <td>{{ $tribunal -> id}} </td>
-                    <td>{{ $tribunal -> NOM_PROF}} {{ $tribunal -> AP_PAT_PROF }}</td>
+                    <td>{{ $tribunal->id }}</td>
+                    <td>{{ $tribunal->NOM_PROF }} {{ $tribunal->AP_PAT_PROF }} {{ $tribunal->AP_MAT_PROF }}</td>
                     <td>
                         @foreach ($tutores as $tutor)
                             @if ($tribunal -> id == $tutor->id )
@@ -93,16 +99,15 @@
                     </td>
                 </tr>
                 @endforeach
+                @endforeach
+                @endforeach
             </tbody>
         </table>
-
-        {!!$tribunales->render("pagination::bootstrap-4")!!}
         <div class="form-group ">
-        <a href="{{ route('tribunal.index') }}" class="btn btn-danger">Cancel</a>
+            <a href="{{ route('tribunal.index') }}" class="btn btn-danger">Cancel</a>
             {!! Form::submit('Siguiente', ['type'=>"submit",'class'=>'btn btn-success', 'id'=>"btnreg"]) !!}
         </div>
         {!! Form::close() !!}
-
-</div>
-
+        
+    </div>
 @endsection
