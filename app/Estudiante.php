@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Estudiante extends Model
 {
@@ -24,5 +25,13 @@ class Estudiante extends Model
    public function profesional()
    {
        return $this->belongsToMany(Profesional::class,'estudiante_profesionals')->withTimestamps();
+   }
+   public function getFullNameAttribute(){
+     return $this->NOM_EST.' '.$this->AP_PAT_EST.' '.$this->AP_MAT_EST;
+   }
+
+
+   public function scopeBuscar($query, $cadena){
+     return $query->where(DB::raw("CONCAT(NOM_EST, ' ', AP_PAT_EST, ' ', AP_MAT_EST, ' ',CI, ' ', COD_SIS )"), "LIKE", "%$cadena%");
    }
 }

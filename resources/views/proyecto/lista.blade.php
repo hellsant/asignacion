@@ -2,16 +2,32 @@
 @section('titulo1', 'LISTA')
 @section('titulo2', 'DE PERFILES')
 @section('content')
+
+
+{!! Form::open(array('url'=>'proyecto','method'=>'GET','class' => 'navbar-form pull-right')) !!}
+<div class="input-group">
+
+  {!! Form::text('busqueda', null, ['class'=> 'form-control','placeholder'=>'Buscar perfil', 'aria-describedby'=>'buscar']) !!}
+
+
+  <span class="input-group-btn">
+    <button type="submit" class="btn btn-primary">Buscar</button>
+  </span>
+</div>
+{!! Form::close() !!}
+
+
 <div class="table-responsive">
 <table class="table">
     <thead class="thead-light">
       <tr>
-          <th scope="col">Titulo</th>
-          <th scope="col">Fecha Registro</th>
-          <th scope="col">Gestion Limite</th>
-          <th scope="col">Fecha Asignacion de Tribunal</th>
-          <th scope="col">Fecha Defensa</th>
-          <th scope="col">Gestion Prorroga</th>
+          <th scope="col">Código</th>
+          <th scope="col">Título</th>
+          <th scope="col">Estudiante</th>
+          <th scope="col">Tutor</th>
+          <th scope="col">Tribunal</th>
+          <th scope="col">Opciones</th>
+
           <th></th>
           <th scope="col">
             <div class="text-center">
@@ -27,12 +43,21 @@
     <tbody>
         @foreach($proyectos as $proyecto)
       <tr>
+        <td>{{ $proyecto -> id}} </td>
         <td>{{ $proyecto -> TITULO_PERFIL}} </td>
-        <td>{{ $proyecto -> FECHA_REGISTRO}} </td>
-        <td>{{ $proyecto -> GESTION_LIMITE}} </td>
-        <td>{{ $proyecto -> FECHA_INI}} </td>
-        <td>{{ $proyecto -> FECHA_DEF}} </td>
-        <td>{{ $proyecto -> GESTION_PRORROGA}} </td>
+        <td>{{ $proyecto -> estudiante->pluck('full_name', 'id')->implode(' ')}} </td>
+        @foreach ($proyecto->estudiante as $e)
+        <td>
+          @foreach ($e->profesional as $p)
+
+              {{ $p->NOM_PROF.' '.$p->AP_PAT_PROF.' '.$p->AP_MAT_PROF.',' }}
+
+          @endforeach
+        </td>
+
+
+        @endforeach
+        <td>{{ $proyecto -> profesional->pluck('full_name', 'id')->implode(',')}} </td>
         <td>
             <div class="text-center">
                 <h4>
@@ -40,8 +65,9 @@
                       <i class="fas fa-pencil-alt"aria-hidden="true"></i>
                   </a>
               </h4>
-            </div> 
+            </div>
         </td>
+
         <td>
             <div class="text-center">
                 <h4>
@@ -49,12 +75,24 @@
                       <i class="fas fa-trash-alt" aria-hidden="true"></i>
                   </a>
               </h4>
-            </div> 
+            </div>
+        </td>
+
+        <td>
+            <div class="text-center">
+                <h4>
+                  <a href='{{ route('tribunal.asignar',$e->id) }}' data-toggle="tooltip" data-placement="right" title="Asignar tribunales">
+                      <i class="fas fa-gavel" aria-hidden="true"></i>
+                  </a>
+              </h4>
+            </div>
         </td>
       </tr>
       @endforeach
     </tbody>
   </table>
+{!!$proyectos->appends(Request::only(['nombre']))->render("pagination::bootstrap-4")!!}
+
 </div>
-  
+
 @endsection
