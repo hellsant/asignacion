@@ -1,46 +1,52 @@
 @extends('layouts.principal')
 @section('titulo1', 'ACTUALIZAR')
-@section('titulo2', 'INFORMACION DEL PROFISIONAL')
+@section('titulo2', 'INFORMACION DEL PROFESIONAL')
 @section('content')
 
 <div>
 
     {!! Form::open(['route'=>['profesional.update', $profesional->id],'method'=>'patch','data-parsley-validate'=>""]) !!}
 
+<!-- Para mostrar error en las validaciones-->
+    @foreach ($errors->all() as $error)
+    <p class="alert alert-danger"> {{ $error }}</p>
+    @endforeach
+
     <div class="form-group row">
-        {!! Form::label('NOM_PROF','Nombre',['class'=>'col-sm-2 col-form-label']) !!}
+        {!! Form::label('NOM_P','Nombre',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('NOM_PROF',$profesional->NOM_PROF, ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese el Nombre del Profesional",'data-parsley-error-message'=>"Ingrese solo letras y espacios",'required' =>'true','minlength'=>'3']) !!}
+<!--            {!! Form::text('NOM_PROF',$profesional->NOM_PROF, ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese el Nombre del Profesional",'data-parsley-error-message'=>"Ingrese solo letras y espacios",'required' =>'true','minlength'=>'3']) !!} -->
+            {!! Form::text('nombre',$profesional->NOM_PROF, ['class'=>'form-control', 'placeholder'=>"Ingrese el Nombre del Profesional"]) !!}
         </div>
     </div>
     <div class="form-group row">
-        {!! Form::label('AP_PAT_PROF','Apellido Paterno',['class'=>'col-sm-2 col-form-label']) !!}
+        {!! Form::label('AP_P','Apellido Paterno',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('AP_PAT_PROF',$profesional->AP_PAT_PROF, ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese el Apellido Paterno",'data-parsley-error-message'=>"Ingrese solo letras y espacios",'required' =>'true','minlength'=>'3']) !!}
+            {!! Form::text('apellido_paterno',$profesional->AP_PAT_PROF, ['class'=>'form-control','placeholder'=>"Ingrese el Apellido Paterno"]) !!}
         </div>
     </div>
     <div class="form-group row">
-        {!! Form::label('AP_MAT_PROF','Apellido Materno',['class'=>'col-sm-2 col-form-label']) !!}
+        {!! Form::label('AP_M','Apellido Materno',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('AP_MAT_PROF', $profesional->AP_MAT_PROF, ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese el Apellido Materno",'data-parsley-error-message'=>"Ingrese solo letras y espacios",'required' =>'true','minlength'=>'3']) !!}
+            {!! Form::text('apellido_materno', $profesional->AP_MAT_PROF, ['class'=>'form-control','placeholder'=>"Ingrese el Apellido Materno"]) !!}
         </div>
     </div>
     <div class="form-group row">
-        {!! Form::label('TITULO_PROF','Titulo Profesional',['class'=>'col-sm-2 col-form-label']) !!}
+        {!! Form::label('T','Titulo Profesional',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::select('TITULO_PROF', $titulo,$tituloNombre, ['class'=>'form-control']) !!}
+            {!! Form::select('titulo', $titulo, $titulo ,['class'=>'form-control']) !!}
         </div>
     </div>
     <div class="form-group row">
         {!! Form::label('TELF_PROF','Telefono',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('TELF_PROF',$profesional->TELF_PROF, ['class'=>'form-control', 'data-parsley-type'=>"number",'placeholder'=>"Ingrese el Telefono",'data-parsley-error-message'=>"Ingrese solo numeros"]) !!}
+            {!! Form::text('telefono',$profesional->TELF_PROF, ['class'=>'form-control','placeholder'=>"Ingrese el Telefono"]) !!}
         </div>
     </div>
     <div class="form-group row">
         {!! Form::label('CI_PROF','CI',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('CI_PROF', $profesional->CI_PROF, ['class'=>'form-control', 'data-parsley-type'=>"number",'placeholder'=>"Ingrese el CI",'data-parsley-error-message'=>"Ingrese solo numeros",'required' =>'true']) !!}
+            {!! Form::text('ci', $profesional->CI_PROF, ['class'=>'form-control','placeholder'=>"Ingrese el CI"]) !!}
         </div>
     </div>
 
@@ -53,7 +59,7 @@
     <div class="form-group row">
         {!! Form::label('CORREO_PROF','Correo',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::email('CORREO_PROF', $profesional->CORREO_PROF, ['class'=>'form-control', 'data-parsley-type'=>"email",'placeholder'=>"Ingrese un correo",'data-parsley-error-message'=>"null",'required' =>'true']) !!}
+            {!! Form::email('correo', $profesional->CORREO_PROF, ['class'=>'form-control','placeholder'=>"Ingrese un correo"]) !!}
         </div>
     </div>
     <a href="{{ route('profesional.index') }}" class="btn btn-danger">Cancel</a>

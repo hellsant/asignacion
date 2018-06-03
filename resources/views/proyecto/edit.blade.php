@@ -6,42 +6,67 @@
 <div>
 
     {!! Form::open(['route'=>['proyecto.update', $proyecto->id],'method'=>'patch']) !!}
-   
+
     <div class="form-group row">
-            {!! Form::label('TITULO_PERFIL','Titulo Perfil',['class'=>'col-sm-2 col-form-label']) !!}
-            <div class="col-sm-10">
-            {!! Form::text('TITULO_PERFIL', $proyecto->TITULO_PERFIL, ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese el Titulo del Proyecto",'data-parsley-error-message'=>"Ingrese solo letras y espacios",'required' =>'true','minlength'=>'3']) !!}
-            </div>
+        {!! Form::label('TITULO_PERFIL','Titulo Perfil',['class'=>'col-sm-2 col-form-label']) !!}
+        <div class="col-sm-10">
+            {!! Form::text('titulo', $proyecto->TITULO_PERFIL, ['class'=>'form-control','placeholder'=>"Ingrese el Titulo del Perfil"]) !!}
         </div>
-        <div class="form-group row">
-            {!! Form::label('FECHA_REGISTRO','Fecha de registro',['class'=>'col-sm-2 col-form-label']) !!}
-            <div class="col-sm-10">
-            {!! Form::date('FECHA_REGISTRO', $proyecto->FECHA_REGISTRO, ['class'=>'form-control','required' =>'true','minlength'=>'3']) !!}
-            </div>
+    </div>
+
+
+    <div class="form-group row">
+        {!! Form::label('OBJ_GRAL','Objetivo General',['class'=>'col-sm-2 col-form-label']) !!}
+        <div class="col-sm-10">
+            {!! Form::text('objetivo_general', $proyecto->OBJ_GRAL, ['class'=>'form-control','placeholder'=>"Ingrese el Objetivo General"]) !!}
         </div>
-        <div class="form-group row">
-            {!! Form::label('OBJ_GRAL','Objetivo General',['class'=>'col-sm-2 col-form-label']) !!}
-            <div class="col-sm-10">
-            {!! Form::text('OBJ_GRAL', $proyecto->OBJ_GRAL, ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese el Objetivo General",'data-parsley-error-message'=>"Ingrese solo letras y espacios",'required' =>'true','minlength'=>'3']) !!}
-            </div>
+    </div>
+
+    <div class="form-group row">
+        {!! Form::label('OBJ_ESP','Objetivos Especificos',['class'=>'col-sm-2 col-form-label']) !!}
+        <div class="col-sm-10">
+            {!! Form::text('objetivos_especificos',$proyecto->OBJ_ESP, ['class'=>'form-control','placeholder'=>"Ingrese Objetivos Especificos"]) !!}
         </div>
-        <div class="form-group row">
-            {!! Form::label('OBJ_ESP','Objetivos Espesificos',['class'=>'col-sm-2 col-form-label']) !!}
-            <div class="col-sm-10">
-            {!! Form::text('OBJ_ESP', $proyecto->OBJ_ESP, ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese Objetivos Especificos",'data-parsley-error-message'=>"Ingrese solo letras y espacios"]) !!}
-            </div>
+    </div>
+
+    <div class="form-group row">
+        {!! Form::label('DESCRIPCION','Descripcion',['class'=>'col-sm-2 col-form-label']) !!}
+        <div class="col-sm-10">
+            {!! Form::text('descripcion', $proyecto->DESC, ['class'=>'form-control','placeholder'=>"Ingrese la Descripcion"]) !!}
         </div>
-        <div class="form-group row">
-            {!! Form::label('DESCRIPCION','Descripcion',['class'=>'col-sm-2 col-form-label']) !!}
-            <div class="col-sm-10">
-            {!! Form::text('DESCRIPCION', $proyecto->DESCRIPCION, ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese la Descripcion del Proyecto",'data-parsley-error-message'=>"Ingrese solo letras y espacios"]) !!}
-            </div>
-        </div>
+    </div>
+
+    <div class="form-group row">
+      {!! Form::label('FECHA_REGISTRO','Fecha de registro',['class'=>'col-sm-2 col-form-label']) !!}
+      <div class="form-group col-sm-4">
+        {!! Form::date('fecha_registro', $now, ['class'=>'form-control']) !!}
+      </div>
+
+      {!! Form::label('GESTION_REGISTRO','Gestión Registro',['class'=>'col-sm-2 col-form-label']) !!}
+      <div class="form-group col-sm-4">
+        {!! Form::select('gestion_registro', $gestiones,$proyecto->GESTION_REGISTRO, ['class'=>'form-control']) !!}
+      </div>
+    </div>
+
+    <div class="form-group row">
+
+      {!! Form::label('MODALIDAD','Modalidad',['class'=>'col-sm-2 col-form-label']) !!}
+      <div class="form-group col-sm-4">
+        {!! Form::select('modalidad',$modalidades, $proyecto->modalidad_id ,['class'=>'form-control']) !!}
+      </div>
+
+      {!! Form::label('GESTION_LIMITE','Gestión Limite',['class'=>'col-sm-2 col-form-label']) !!}
+      <div class="form-group col-sm-4">
+        {!! Form::select( 'gestion_limite', $gestiones,  $proyecto->gestion_limite, ['class'=>'form-control']) !!}
+      </div>
+    </div>
+
+
         {!! Form::hidden('modalidad_id', $proyecto->modalidad_id) !!}
 
     <a href="{{ route('proyecto.index') }}" class="btn btn-danger">Cancel</a>
     {!! Form::submit('actualizar', ['class'=>'btn btn-success']) !!}
     {!! Form::close() !!}
 </div>
-    
+
 @endsection
