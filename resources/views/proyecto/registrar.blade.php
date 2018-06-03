@@ -80,6 +80,18 @@
           {!! Form::select( 'tutor', $tutores,  $tutores, ['class'=>'form-control']) !!}
         </div>
       </div>
+      <div class="form-group row">
+
+        {!! Form::label('ESTUDIANTE','Estudiante',['class'=>'col-sm-2 col-form-label']) !!}
+        <div class="form-group col-sm-4">
+          {!! Form::text('estudiante',$estudiantes, $estudiantes ,['class'=>'form-control autocom']) !!}
+        </div>
+
+        {!! Form::label('TUTOR','Tutor',['class'=>'col-sm-2 col-form-label']) !!}
+        <div class="form-group col-sm-4">
+          {!! Form::select( 'tutor', $tutores,  $tutores, ['class'=>'form-control']) !!}
+        </div>
+      </div>
 
       <div class="form-group row">
 

@@ -21,7 +21,30 @@ class ProyectoController extends Controller
      */
     public function index(Request $request)
     {
-        $proyectos = Proyecto::Nombre($request->nombre)->orderBy('GESTION_LIMITE', 'DESC')->paginate(20);
+        // $proyectos = Proyecto::Nombre($request->nombre)->orderBy('GESTION_LIMITE', 'DESC')->paginate(20);
+        // $proyectos->each(function($proyectos){
+        //
+        //
+        //   //El campo full_name no existe en la base de datos, más está declarado en el proveedor estudiante como un ACCESOR
+        //   //Este accesor se llama getFullNameAttribute . se usa full_name .el accesor debe tener getAttribute!
+        //   //$proyectos->estudiante->pluck('full_name', 'id');
+        //
+        //
+        //   $proyectos->estudiante;
+        //   $proyectos->profesional;
+        //
+        // });
+
+        $proyectos = Proyecto::nombre($request->busqueda)->orderBy('GESTION_LIMITE', 'DESC')->paginate(20);
+        $tutores=[];
+        $tut=Estudiante::make($tutores);
+        foreach ($proyectos as $proyecto) {
+          $t= Estudiante::find($proyecto->estudiante);
+        //  array_Push($tut,$t);
+          //dd($t);
+        }
+
+      //  dd($tut);
 
         return view('proyecto.lista')->with(compact('proyectos'));
     }

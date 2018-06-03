@@ -19,7 +19,6 @@ class Profesional extends Model
     'titulo_id',
     'TELF_PROF',
     'CI_PROF',
-    //'NOM_CUENTA',
     'Tipo',
     'CORREO_PROF',
     ];
@@ -42,6 +41,10 @@ class Profesional extends Model
     {
         return $this->belongsTo(Titulo::class);
     }
+    public function getFullNameAttribute(){
+      return $this->NOM_PROF.' '.$this->AP_PAT_PROF.' '.$this->AP_MAT_EST;
+    }
+
     public function scopeNombre($query, $nombre){
       return $query->where(DB::raw("CONCAT(NOM_PROF, ' ', AP_PAT_PROF, ' ', AP_MAT_PROF)"),"LIKE", "%$nombre%");
     }

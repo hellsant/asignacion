@@ -15,21 +15,10 @@ class EstudianteController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-
-    // public function index(Request $request)
-    // {
-    //     if($request){
-    //         $query=trim($request->get('searchSIS'));
-    //         $estudiantes = Estudiante::orderBy('AP_PAT_EST','ASC')->paginate(10);
-    //         ->where('COD_SIS','LIKE','%'.$query.'%')
-    //
-    //         return view('estudiante.lista',["searchSIS"=>$query ])->with(compact('estudiantes'));
-    //     }
-    // }
     public function index(Request $request)
     {
             $estudiantes = Estudiante::Buscar($request->nombre)->orderBy('AP_PAT_EST','ASC')->paginate(10);
-            
+
 
             return view('estudiante.lista')->with(compact('estudiantes'));
         }

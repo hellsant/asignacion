@@ -52,15 +52,14 @@
         <td>{{ $profesional -> TELF_PROF}} </td>
         <td>{{ $profesional -> CORREO_PROF}} </td>
         <td>
-            <div class="text-center">
-                <h4>
-                  <a href='{{ route('profesional.edit',$profesional->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">
-                      <i class="fas fa-pencil-alt"aria-hidden="true"></i>
-                  </a>
-              </h4>
-            </div>
-        </td>
-        <td>
+          <div class="text-center">
+              <h4>
+                <a href='{{ route('profesional.edit',$profesional->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">
+                    <i class="fas fa-pencil-alt"aria-hidden="true"></i>
+                </a>
+            </h4>
+          </div>
+      </td>
             <div class="text-center">
                 <h4>
                   <a href='{{ url('profesional.ocultar',$profesional->id)}}' onclick="return confirm('¿Esta seguro de eliminar este Profesional?')" data-toggle="tooltip" data-placement="right" title="Eliminar">

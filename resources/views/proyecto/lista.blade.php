@@ -7,7 +7,7 @@
 {!! Form::open(array('url'=>'proyecto','method'=>'GET','class' => 'navbar-form pull-right')) !!}
 <div class="input-group">
 
-  {!! Form::text('nombre', null, ['class'=> 'form-control','placeholder'=>'Buscar perfil', 'aria-describedby'=>'buscar']) !!}
+  {!! Form::text('busqueda', null, ['class'=> 'form-control','placeholder'=>'Buscar perfil', 'aria-describedby'=>'buscar']) !!}
 
 
   <span class="input-group-btn">
@@ -21,12 +21,13 @@
 <table class="table">
     <thead class="thead-light">
       <tr>
+          <th scope="col">Código</th>
           <th scope="col">Título</th>
-          <th scope="col">Gestión Registro</th>
-          <th scope="col">Gestión Limite</th>
-          <th scope="col">Fecha Asignación de Tribunal</th>
-          <th scope="col">Fecha Defensa</th>
-          <th scope="col">Gestion Prorroga</th>
+          <th scope="col">Estudiante</th>
+          <th scope="col">Tutor</th>
+          <th scope="col">Tribunal</th>
+          <th scope="col">Opciones</th>
+
           <th></th>
           <th scope="col">
             <div class="text-center">
@@ -42,21 +43,31 @@
     <tbody>
         @foreach($proyectos as $proyecto)
       <tr>
+        <td>{{ $proyecto -> id}} </td>
         <td>{{ $proyecto -> TITULO_PERFIL}} </td>
-        <td>{{ $proyecto -> GESTION_REGISTRO}} </td>
-        <td>{{ $proyecto -> GESTION_LIMITE}} </td>
-        <td>{{ $proyecto -> FECHA_INI}} </td>
-        <td>{{ $proyecto -> FECHA_DEF}} </td>
-        <td>{{ $proyecto -> GESTION_PRORROGA}} </td>
+        <td>{{ $proyecto -> estudiante->pluck('full_name', 'id')->implode(' ')}} </td>
+        @foreach ($proyecto->estudiante as $e)
+        <td>
+          @foreach ($e->profesional as $p)
+
+              {{ $p->NOM_PROF.' '.$p->AP_PAT_PROF.' '.$p->AP_MAT_PROF.',' }}
+
+          @endforeach
+        </td>
+
+
+        @endforeach
+        <td>{{ $proyecto -> profesional->pluck('full_name', 'id')->implode(',')}} </td>
         <td>
             <div class="text-center">
                 <h4>
-                  <a href='{{ route('proyecto.edit',$proyecto->id)}}' >
-
+                  <a href='{{ route('proyecto.edit',$proyecto->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">
+                      <i class="fas fa-pencil-alt"aria-hidden="true"></i>
                   </a>
               </h4>
             </div>
         </td>
+
         <td>
             <div class="text-center">
                 <h4>
@@ -66,15 +77,16 @@
               </h4>
             </div>
         </td>
+
         <td>
-          <div class="text-center">
-            <h4>
-              <a href='{{ route('tutor.index',$proyecto->id)}}' data-toggle="tooltip" data-placement="right" title="asignar Estudiante y Tutor">
-                <i class="fas fa-trash-alt"aria-hidden="true"></i>
-              </a>
-            </h4>
-          </div>
-      </td>
+            <div class="text-center">
+                <h4>
+                  <a href='{{ route('tribunal.asignar',$proyecto->id) }}' data-toggle="tooltip" data-placement="right" title="Asignar tribunales">
+                      <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                  </a>
+              </h4>
+            </div>
+        </td>
       </tr>
       @endforeach
     </tbody>
