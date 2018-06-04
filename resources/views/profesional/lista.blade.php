@@ -8,11 +8,6 @@
   <div class="input-group">
 
     {!! Form::text('nombre', null, ['class'=> 'form-control','placeholder'=>'Buscar profesional', 'aria-describedby'=>'buscar']) !!}
-
-<!--    {!! Form::select('titulo',$titulos,$titulos,['class'=>'form-control']) !!} -->
-
-
-
     <span class="input-group-btn">
       <button type="submit" class="btn btn-primary">Buscar</button>
     </span>
@@ -60,6 +55,7 @@
             </h4>
           </div>
       </td>
+      <td>
             <div class="text-center">
                 <h4>
                   <a href='{{ url('profesional.ocultar',$profesional->id)}}' onclick="return confirm('¿Esta seguro de eliminar este Profesional?')" data-toggle="tooltip" data-placement="right" title="Eliminar">
