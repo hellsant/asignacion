@@ -6,7 +6,6 @@ use App\Proyecto;
 use App\Profesional;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Gestion;
 use App\Estudiante;
 use App\Area;
 use App\SubArea;
@@ -99,25 +98,24 @@ class TribunalController extends Controller
     /**
      * registra los tribuinales a los cuales pueden ser elegidos.
      */
-    public function registrar($estudianteId)
+    public function registrar($proyectoid)
     {
         $now=Carbon::now();
        
-        
-        $nombreEstudiante = Estudiante::findOrFail($estudianteId);
-        $estudiante = "$nombreEstudiante->NOM_EST $nombreEstudiante->AP_PAT_EST $nombreEstudiante->AP_MAT_EST";
+        $proyectos = Proyecto::findOrFail($proyectoid);
 
-        $proyectos = Estudiante::findOrFail($estudianteId)->proyectos->each(function($proyectos){
-           
-            $proyecto=$proyectos->area->each(function($areas){
-                $areas->profesional;
-            });
-            
-            $proyectos->subarea->each(function($subareas){
-                $subareas->profesional;
+        $estudiantes = $proyectos->estudiante->each(function($estudiante){
+            $estudiante->estudiante;
+        });
+        $areas = $proyectos->area->each(function($area){
+            $area->profesional->each(function($area){
+                $area->profesional;
             });
         });
-
+        $subareas=$proyectos->subarea->each(function($subarea){
+            $subarea->profesional;
+        });
+        
         $querytutor=DB::select( 
         'SELECT profesional.id,COUNT(estudiante_profesionals.id) tutor 
          FROM profesional 
@@ -133,7 +131,7 @@ class TribunalController extends Controller
         $tutores = Collection::make($querytutor);
         $tribunalesN = Collection::make($querytribunal);
         
-        return view('tribunal.asignacion')->with(compact('tribunales','now','proyectos','estudiante','tutores','tribunalesN'));  
+        return view('tribunal.asignacion')->with(compact('tribunales','subareas','areas','now','proyectos','estudiantes','tutores','tribunalesN'));  
     }
 
 }

@@ -14,36 +14,37 @@
 
 <div class="form-group">
     {!! Form::open(['route'=>'tribunal.store','method'=>'POST']) !!}
-    @foreach ($proyectos as $proyecto)
     <div class="form-group row">
         {!! Form::label('id_perfil','Codigo del Proyecto',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::number('id_perfil', $proyecto->id, ['class'=>'form-control','readonly']) !!}
+            {!! Form::number('id_perfil', $proyectos->id, ['class'=>'form-control','readonly']) !!}
         </div>
     </div>
     <div class="form-group row">
         {!! Form::label('Estudiante','Estudiante',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('Estudiante',  $estudiante , ['class'=>'form-control','readonly']) !!}
+            @foreach ( $estudiantes as $estudiante )
+            {!! Form::text('Estudiante', "$estudiante->NOM_EST $estudiante->AP_PAT_EST $estudiante->AP_MAT_EST" , ['class'=>'form-control','readonly']) !!}
+            @endforeach
         </div>
     </div>
     <div class="form-group row">
         {!! Form::label('nombre_perfil','Nombre del Proyecto',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('nombre_perfil', $proyecto -> TITULO_PERFIL, ['class'=>'form-control','readonly']) !!}
+            {!! Form::text('nombre_perfil', $proyectos -> TITULO_PERFIL, ['class'=>'form-control','readonly']) !!}
         </div>
     </div>
 
     <div class="form-group row">
         {!! Form::label('area','Area',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="form-group col-sm-4">
-            @foreach ($proyecto->area as $area)
+            @foreach ($areas as $area)
             {!! Form::text('area', $area->NOMBRE_AREA, ['class'=>'form-control','readonly']) !!}
             @endforeach
         </div>
         {!! Form::label('subArea','Subarea',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="form-group col-sm-4">
-                @foreach ($proyecto->subarea as $subarea)
+                @foreach ($subareas as $subarea)
                 {!! Form::text('area', $subarea->NOM_SUBAREA, ['class'=>'form-control','readonly']) !!}
                 @endforeach
         </div>
@@ -56,10 +57,9 @@
 
         {!! Form::label('fecha_registro','Fecha Registro Proyecto',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="form-group col-sm-4">
-            {!! Form::date('fecha_registro',$proyecto -> FECHA_REGISTRO, ['class'=>'form-control','readonly']) !!}
+            {!! Form::date('fecha_registro',$proyectos -> FECHA_REGISTRO, ['class'=>'form-control','readonly']) !!}
         </div>
     </div>
-    @endforeach
 
         <table class="table" id="asignar">
             <thead class="thead-light">
@@ -72,8 +72,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($proyectos as $proyecto )
-                @foreach ($proyecto->area as $area)
+                @foreach ($areas as $area)
                 @foreach ($area->profesional as $tribunal)
                 <tr>
                     <td>{{ $tribunal->id }}</td>
@@ -98,7 +97,6 @@
                         </div>
                     </td>
                 </tr>
-                @endforeach
                 @endforeach
                 @endforeach
             </tbody>

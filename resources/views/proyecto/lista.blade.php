@@ -81,7 +81,7 @@
         <td>
             <div class="text-center">
                 <h4>
-                  <a href='{{ route('tribunal.asignar',$e->id) }}' data-toggle="tooltip" data-placement="right" title="Asignar tribunales">
+                  <a href='{{ route('tribunal.asignar',$proyecto->id) }}' data-toggle="tooltip" data-placement="right" title="Asignar tribunales">
                       <i class="fas fa-gavel" aria-hidden="true"></i>
                   </a>
               </h4>
