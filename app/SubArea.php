@@ -27,4 +27,8 @@ class Subarea extends Model
     {
         return $this->belongsToMany(Proyectos::class)->withTimestamps();
     }
+    public function profesional()
+    {
+        return $this->belongsToMany(Profesional::class,'profesional_subarea')->withTimestamps();
+    }
 }

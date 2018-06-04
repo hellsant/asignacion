@@ -6,7 +6,6 @@ use App\Proyecto;
 use App\Profesional;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Gestion;
 use App\Estudiante;
 use App\Area;
 use App\SubArea;
@@ -22,25 +21,6 @@ class TribunalController extends Controller
      */
     public function index()
     {
-        $tesis=DB::select(
-            'SELECT estudiantes.id, estudiantes.NOM_EST nombre, estudiantes.AP_PAT_EST apellidoP, estudiantes.AP_MAT_EST apellidoM, proyectos.TITULO_PERFIL, proyectos.FECHA_REGISTRO, proyectos.FECHA_INI, proyectos.FECHA_DEF, proyectos.GESTION_PRORROGA
-            FROM estudiantes
-            INNER JOIN estudiante_proyecto ON estudiantes.id=estudiante_proyecto.estudiante_id
-            INNER JOIN proyectos ON proyectos.id=estudiante_proyecto.proyecto_id
-            ORDER BY estudiantes.id');
-
-        $tribunal=DB::select(
-            'SELECT estudiantes.id id_est, profesional.NOM_PROF, profesional.AP_PAT_PROF, profesional.AP_MAT_PROF
-            FROM proyectos
-            INNER JOIN motivo_profesional_proyecto ON proyectos.id=motivo_profesional_proyecto.proyecto_id
-            INNER JOIN profesional ON motivo_profesional_proyecto.profesional_id=profesional.id
-            INNER JOIN estudiante_proyecto ON proyectos.id=estudiante_proyecto.proyecto_id
-            INNER JOIN estudiantes ON estudiante_proyecto.estudiante_id=estudiantes.id
-            ORDER BY estudiantes.id');
-            $tribunales = Collection::make($tribunal);
-            $proyectos = Collection::make($tesis);
-        return view('tribunal.lista')->with(compact('tribunales','proyectos'));
-
     }
 
     /**
@@ -66,7 +46,7 @@ class TribunalController extends Controller
         foreach ($request->input("docenteTrinunal") as $tribunal){
             $proyecto->profesional()->attach($tribunal,['motivo_id' => 1,'proyecto_id'=>$request->id_perfil]);
         }
-        return redirect('tribunal');
+        return redirect('proyecto');
 
     }
 
@@ -118,69 +98,40 @@ class TribunalController extends Controller
     /**
      * registra los tribuinales a los cuales pueden ser elegidos.
      */
-    public function registrar($id)
+    public function registrar($proyectoid)
     {
         $now=Carbon::now();
+       
+        $proyectos = Proyecto::findOrFail($proyectoid);
 
-
-        $proyecto = Proyecto::findOrFail($id);
-
-        $proyecto->estudiante;
-        $proyecto->area;
-
-        //dd($proyecto);
-        $id= $proyecto->estudiante;
-        dd($id);
-
-        $estudiante= Estudiante::findOrFail($proyecto->estudiante)->select(DB::raw('CONCAT(AP_PAT_EST, " ", AP_MAT_EST, " ", NOM_EST) as nombre_completo'), 'id')
-        ->orderBy('AP_PAT_EST')
-        ->pluck('nombre_completo', 'id')
-        ->profesional();
-
-        dd($proyecto);
-
-        // $nom = Estudiante::findOrFail($estudianteId)->NOM_EST;
-        // $apest = Estudiante::findOrFail($estudianteId)->AP_PAT_EST;
-        // $maest = Estudiante::findOrFail($estudianteId)->AP_MAT_EST;
-        // $estudiante = "$nom $apest $maest";
-
-        $tribunales =Profesional::paginate(10);
-
-
-
-        $nombreArea="";
-        $nombreSubarea=[];
-        $nombreModalidad="";
-        foreach ($proyectos as $proyecto) {
-            $areas = Proyecto::findOrFail($proyecto->id)->area;
-            $subAreas = Proyecto::findOrFail($proyecto->id)->subarea;
-            $nombreModalidad = Proyecto::findOrFail($proyecto->id)->modalidad->NOM;
-
-            foreach ($areas as $area) {
-                $nombreArea=$area->NOMBRE_AREA;
-            }
-            foreach ($subAreas as $subArea) {
-                array_push($nombreSubarea, $subArea->NOM_SUBAREA);
-            }
-        }
-
-        $querytutor=DB::select(
-        'SELECT profesional.id, profesional.NOM_PROF nombre, profesional.AP_PAT_PROF apellidoP, profesional.AP_MAT_PROF apellidoM, COUNT(estudiante_profesionals.id) tutor
-         FROM profesional
-         INNER JOIN estudiante_profesionals ON estudiante_profesionals.profesional_id=profesional.id
+        $estudiantes = $proyectos->estudiante->each(function($estudiante){
+            $estudiante->estudiante;
+        });
+        $areas = $proyectos->area->each(function($area){
+            $area->profesional->each(function($area){
+                $area->profesional;
+            });
+        });
+        $subareas=$proyectos->subarea->each(function($subarea){
+            $subarea->profesional;
+        });
+        
+        $querytutor=DB::select( 
+        'SELECT profesional.id,COUNT(estudiante_profesionals.id) tutor 
+         FROM profesional 
+         INNER JOIN estudiante_profesionals ON estudiante_profesionals.profesional_id=profesional.id 
          GROUP BY profesional.id');
 
         $querytribunal=DB::select(
-        'SELECT profesional.id, profesional.NOM_PROF nombre, profesional.AP_PAT_PROF apellidoP, profesional.AP_MAT_PROF apellidoM, COUNT(motivo_profesional_proyecto.profesional_id) tribunal
-        FROM profesional
-        INNER JOIN motivo_profesional_proyecto ON motivo_profesional_proyecto.profesional_id=profesional.id
+        'SELECT profesional.id, COUNT(motivo_profesional_proyecto.profesional_id) tribunal 
+        FROM profesional 
+        INNER JOIN motivo_profesional_proyecto ON motivo_profesional_proyecto.profesional_id=profesional.id 
         GROUP BY profesional.id');
 
         $tutores = Collection::make($querytutor);
         $tribunalesN = Collection::make($querytribunal);
-
-        // return view('tribunal.asignacion')->with(compact('nombreModalidad','tribunales','now','proyectos','estudiante','nombreArea','nombreSubarea','tutores','tribunalesN'));
-        return view('tribunal.asignacion')->with(compact('now','proyecto','estudiante'));
+        
+        return view('tribunal.asignacion')->with(compact('tribunales','subareas','areas','now','proyectos','estudiantes','tutores','tribunalesN'));  
     }
 
 }

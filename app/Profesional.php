@@ -34,12 +34,16 @@ class Profesional extends Model
     }
     public function area()
     {
-        return $this->belongsToMany(Area::class,'estudiante_profesionals')->withTimestamps();
+        return $this->belongsToMany(Area::class,'area_profesional')->withTimestamps();
     }
 
     public function titulo()
     {
         return $this->belongsTo(Titulo::class);
+    }
+    public function subarea()
+    {
+        return $this->belongsToMany(Subarea::class,'profesional_subarea')->withTimestamps();
     }
     public function getFullNameAttribute(){
       return $this->NOM_PROF.' '.$this->AP_PAT_PROF.' '.$this->AP_MAT_EST;
@@ -54,6 +58,5 @@ class Profesional extends Model
       if($titulo= $t->get('nombre')){
        $query->where(titulo_id,'=', $t->get('id'));
      }
-     dd($t);
     }
 }
