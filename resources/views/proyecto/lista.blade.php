@@ -77,6 +77,7 @@
                       <i class="fas fa-trash-alt" aria-hidden="true"></i>
                   </a>
 
+<<<<<<< HEAD
 
 
 
@@ -84,6 +85,12 @@
 
 
                   <a href='{{ route('tribunal.asignar',$proyecto) }}' data-toggle="tooltip" data-placement="right" title="Asignar tribunales">
+=======
+        <td>
+            <div class="text-center">
+                <h4>
+                  <a href='{{ route('tribunal.asignar',$proyecto->id) }}' data-toggle="tooltip" data-placement="right" title="Asignar tribunales">
+>>>>>>> fbb489114a3cbe019b839740b1744a433bd7139b
                       <i class="fas fa-gavel" aria-hidden="true"></i>
                   </a>
               </h4>

@@ -10,21 +10,26 @@ class Subarea extends Model
 {
   Use SoftDeletes;
 
-  protected $fillable=[
-      'COD_SUBAREA',
-      'NOM_SUBAREA',
-      'DESC_SUBAREA',
-      'area_id',
+    protected $fillable=[
+        'COD_SUBAREA',
+        'NOM_SUBAREA',
+        'DESC_SUBAREA',
+        'area_id',
+        'NOMBRE_AREA'
+    ];
 
-  ];
-  protected $dates=['delete_at'];
+    protected $dates=['delete_at'];
 
-  public function area()
-  {
-      return $this->belongsTo(Area::class);
-  }
-  public function proyecto()
-  {
-      return $this->belongsToMany(Proyecto::class)->withTimestamps();
-  }
+    public function subareas()
+    {
+        return $this->hasMany(Area::class)->withTimestamps();
+    }
+    public function proyecto()
+    {
+        return $this->belongsToMany(Proyectos::class)->withTimestamps();
+    }
+    public function profesional()
+    {
+        return $this->belongsToMany(Profesional::class,'profesional_subarea')->withTimestamps();
+    }
 }

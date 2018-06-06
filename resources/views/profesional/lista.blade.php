@@ -8,11 +8,6 @@
   <div class="input-group">
 
     {!! Form::text('nombre', null, ['class'=> 'form-control','placeholder'=>'Buscar profesional', 'aria-describedby'=>'buscar']) !!}
-
-<!--    {!! Form::select('titulo',$titulos,$titulos,['class'=>'form-control']) !!} -->
-
-
-
     <span class="input-group-btn">
       <button type="submit" class="btn btn-primary">Buscar</button>
     </span>

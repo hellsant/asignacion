@@ -45,7 +45,7 @@ class Proyecto extends Model
     }
     public function area()
     {
-        return $this->belongsToMany(Area::class)->withTimestamps();
+        return $this->belongsToMany(Area::class,'area_proyecto')->withTimestamps();
     }
     public function subarea()
     {

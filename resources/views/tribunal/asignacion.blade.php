@@ -14,34 +14,39 @@
 
 <div class="form-group">
     {!! Form::open(['route'=>'tribunal.store','method'=>'POST']) !!}
-    @foreach ($proyectos as $proyecto)
     <div class="form-group row">
         {!! Form::label('id_perfil','Codigo del Proyecto',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::number('id_perfil', $proyecto->id, ['class'=>'form-control','readonly']) !!}
+            {!! Form::number('id_perfil', $proyectos->id, ['class'=>'form-control','readonly']) !!}
         </div>
     </div>
     <div class="form-group row">
         {!! Form::label('Estudiante','Estudiante',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('Estudiante',  $estudiante , ['class'=>'form-control','readonly']) !!}
+            @foreach ( $estudiantes as $estudiante )
+            {!! Form::text('Estudiante', "$estudiante->NOM_EST $estudiante->AP_PAT_EST $estudiante->AP_MAT_EST" , ['class'=>'form-control','readonly']) !!}
+            @endforeach
         </div>
     </div>
     <div class="form-group row">
         {!! Form::label('nombre_perfil','Nombre del Proyecto',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('nombre_perfil', $proyecto -> TITULO_PERFIL, ['class'=>'form-control','readonly']) !!}
+            {!! Form::text('nombre_perfil', $proyectos -> TITULO_PERFIL, ['class'=>'form-control','readonly']) !!}
         </div>
     </div>
 
     <div class="form-group row">
         {!! Form::label('area','Area',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="form-group col-sm-4">
-            {!! Form::text('area', $nombreArea, ['class'=>'form-control','readonly']) !!}
+            @foreach ($areas as $area)
+            {!! Form::text('area', $area->NOMBRE_AREA, ['class'=>'form-control','readonly']) !!}
+            @endforeach
         </div>
         {!! Form::label('subArea','Subarea',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="form-group col-sm-4">
-            {!! Form::select('subArea',$nombreSubarea,$nombreSubarea, ['class'=>'form-control','readonly']) !!}
+                @foreach ($subareas as $subarea)
+                {!! Form::text('area', $subarea->NOM_SUBAREA, ['class'=>'form-control','readonly']) !!}
+                @endforeach
         </div>
     </div>
     <div class="form-group row">
@@ -52,12 +57,11 @@
 
         {!! Form::label('fecha_registro','Fecha Registro Proyecto',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="form-group col-sm-4">
-            {!! Form::date('fecha_registro',$proyecto -> FECHA_REGISTRO, ['class'=>'form-control','readonly']) !!}
+            {!! Form::date('fecha_registro',$proyectos -> FECHA_REGISTRO, ['class'=>'form-control','readonly']) !!}
         </div>
     </div>
-    @endforeach
 
-        <table class="table">
+        <table class="table" id="asignar">
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Codigo</th>
@@ -68,10 +72,11 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($tribunales as $tribunal )
+                @foreach ($areas as $area)
+                @foreach ($area->profesional as $tribunal)
                 <tr>
-                    <td>{{ $tribunal -> id}} </td>
-                    <td>{{ $tribunal -> NOM_PROF}} {{ $tribunal -> AP_PAT_PROF }}</td>
+                    <td>{{ $tribunal->id }}</td>
+                    <td>{{ $tribunal->NOM_PROF }} {{ $tribunal->AP_PAT_PROF }} {{ $tribunal->AP_MAT_PROF }}</td>
                     <td>
                         @foreach ($tutores as $tutor)
                             @if ($tribunal -> id == $tutor->id )
@@ -93,16 +98,14 @@
                     </td>
                 </tr>
                 @endforeach
+                @endforeach
             </tbody>
         </table>
-
-        {!!$tribunales->render("pagination::bootstrap-4")!!}
         <div class="form-group ">
-        <a href="{{ route('tribunal.index') }}" class="btn btn-danger">Cancel</a>
+            <a href="{{ route('proyecto.index') }}" class="btn btn-danger">Cancel</a>
             {!! Form::submit('Siguiente', ['type'=>"submit",'class'=>'btn btn-success', 'id'=>"btnreg"]) !!}
         </div>
         {!! Form::close() !!}
-
-</div>
-
+        
+    </div>
 @endsection
