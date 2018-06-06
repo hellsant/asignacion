@@ -26,12 +26,12 @@ class Profesional extends Model
     protected $dates=['delete_at'];
     public function proyecto()
     {
-       return $this->belongsToMany(Proyecto::class,'motivo_profesional_proyecto')->withPivot('proyecto_id')->withTimestamps();
-+    }
-+    public function motivo()
-+    {
-+        return $this->belongsToMany(Motivo::class,'motivo_profesional_proyecto')->withPivot('motivo_id')->withTimestamps();
-      }
+     return $this->belongsToMany(Proyecto::class,'motivo_profesional_proyecto')->withPivot('proyecto_id')->withTimestamps();
+++    }
+++    public function motivo()
+++    {
+++        return $this->belongsToMany(Motivo::class,'motivo_profesional_proyecto')->withPivot('motivo_id')->withTimestamps();
++      }
     public function estudiante()
     {
         return $this->belongsToMany(Estudiante::class,'estudiante_profesionals')->withTimestamps();
