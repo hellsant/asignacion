@@ -22,7 +22,7 @@
         <td>{{ $subarea -> COD_SUBAREA}} </td>
         <td>{{ $subarea -> NOMBRE_SUBAREA}} </td>
         <td>{{ $subarea -> DESC_SUBAREA}} </td>
-        <td>{{ $subarea->area->NOMBRE_AREA}}</td>
+        <td>{{ $subarea->area->NOMBRE_AREA}}</<td>
         <td>
             <div class="text-center">
                 <h4>

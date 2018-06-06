@@ -20,9 +20,9 @@ class Subarea extends Model
 
     protected $dates=['delete_at'];
 
-    public function subareas()
+    public function area()
     {
-        return $this->hasMany(Area::class)->withTimestamps();
+        return $this->belongsTo(Area::class);
     }
     public function proyecto()
     {

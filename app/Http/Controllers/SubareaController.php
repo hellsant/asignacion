@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Subarea;
 use App\Area;
-class SubAreaController extends Controller
+class SubareaController extends Controller
 {
     /**
      * Display a listing of the resource.
