@@ -6,10 +6,7 @@
 
 {!! Form::open(array('url'=>'proyecto','method'=>'GET','class' => 'navbar-form pull-right')) !!}
 <div class="input-group">
-
   {!! Form::text('busqueda', null, ['class'=> 'form-control','placeholder'=>'Buscar perfil', 'aria-describedby'=>'buscar']) !!}
-
-
   <span class="input-group-btn">
     <button type="submit" class="btn btn-primary">Buscar</button>
   </span>
@@ -57,36 +54,44 @@
 
 
         @endforeach
-        <td>{{ $proyecto -> profesional->pluck('full_name', 'id')->implode(',')}} </td>
-        <td>
-            <div class="text-center">
-                <h4>
-                  <a href='{{ route('proyecto.edit',$proyecto->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">
-                      <i class="fas fa-pencil-alt"aria-hidden="true"></i>
-                  </a>
-              </h4>
-            </div>
-        </td>
 
         <td>
-            <div class="text-center">
-                <h4>
+          @foreach ($proyecto->profesional as $tribunal)
+
+            {{ $tribunal->NOM_PROF.' '.$p->AP_PAT_PROF.' '.$p->AP_MAT_PROF.','}}
+          @endforeach
+
+      </td>
+        <td>
+          <div class="text-center">
+            <h4>
+              <a href='{{ route('proyecto.edit',$proyecto->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">
+                <i class="fas fa-pencil-alt"aria-hidden="true"></i>
+              </a>
+
+
+
+
+
                   <a href='{{ url('proyecto/ocultar',$proyecto->id)}}' onclick="return confirm('¿Esta seguro de eliminar este Proyecto?')" data-toggle="tooltip" data-placement="right" title="Eliminar">
                       <i class="fas fa-trash-alt" aria-hidden="true"></i>
                   </a>
-              </h4>
-            </div>
-        </td>
 
-        <td>
-            <div class="text-center">
-                <h4>
-                  <a href='{{ route('tribunal.asignar',$e->id) }}' data-toggle="tooltip" data-placement="right" title="Asignar tribunales">
+
+
+
+
+
+
+                  <a href='{{ route('tribunal.asignar',$proyecto) }}' data-toggle="tooltip" data-placement="right" title="Asignar tribunales">
                       <i class="fas fa-gavel" aria-hidden="true"></i>
                   </a>
               </h4>
+
             </div>
+
         </td>
+
       </tr>
       @endforeach
     </tbody>

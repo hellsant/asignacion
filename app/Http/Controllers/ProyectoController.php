@@ -36,16 +36,7 @@ class ProyectoController extends Controller
         // });
 
         $proyectos = Proyecto::nombre($request->busqueda)->orderBy('GESTION_LIMITE', 'DESC')->paginate(20);
-        $tutores=[];
-        $tut=Estudiante::make($tutores);
-        foreach ($proyectos as $proyecto) {
-          $t= Estudiante::find($proyecto->estudiante);
-        //  array_Push($tut,$t);
-          //dd($t);
-        }
-
-      //  dd($tut);
-
+  
         return view('proyecto.lista')->with(compact('proyectos'));
     }
 

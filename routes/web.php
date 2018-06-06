@@ -39,9 +39,10 @@ Route::get('modalidad/ocultar/{id}', 'ModalidadController@ocultar');
 Route::resource('modalidad', 'ModalidadController');
 Route::get('carrera/ocultar/{id}', 'CarreraController@ocultar');
 Route::resource('carrera', 'CarreraController');
-Route::get('subarea/{area}/{id}/create', 'SubAreatoController@recibe');
-Route::get('subarea/ocultar/{id}', 'SubAreatoController@ocultar');
-Route::resource('subarea', 'SubAreatoController');
+Route::get('subarea/{area}/{id}/create', 'SubAreaController@recibe');
+Route::get('subarea/ocultar/{id}', 'SubAreaController@ocultar');
+Route::get('subarea/edit/{id}', 'SubAreaController@edit')->name('subarea.edit');
+Route::any('subarea', 'SubAreaController@index')->name('subarea.index');
 Route::resource('tribunal', 'TribunalController');
-Route::any('tribunal/registrar/{id}', 'TribunalController@registrar')
+Route::any('tribunal/registrar/{p}', 'TribunalController@registrar')
 ->name('tribunal.asignar');

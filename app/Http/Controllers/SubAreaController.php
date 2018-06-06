@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Subarea;
 use App\Area;
-class SubAreatoController extends Controller
+class SubAreaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +23,7 @@ class SubAreatoController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
-     */ 
+     */
     public function create()
     {
         return view('subarea.registrar');
@@ -38,7 +38,7 @@ class SubAreatoController extends Controller
     public function store(Request $request)
     {
         SubArea::create($request->all());
-        return redirect('subarea'); 
+        return redirect('subarea');
     }
 
     /**
@@ -49,7 +49,7 @@ class SubAreatoController extends Controller
      */
     public function show($id)
     {
-        
+
     }
 
     /**

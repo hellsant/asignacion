@@ -45,7 +45,6 @@
                 <a class="dropdown-item" href="{{ route('estudiante.create') }}">Registrar Estudiantes</a>
                 <a class="dropdown-item" href="{{ route('carrera.create') }}">Registrar Carreras</a>
                 <a class="dropdown-item" href="{{ route('area.create') }}">Registrar Area</a>
-                <a class="dropdown-item" href="{{ route('subarea.create') }}">Registrar Subarea</a>
                 <a class="dropdown-item" href="{{ route('modalidad.create') }}">Registrar Modalidad</a>
               </div>
             </li>
@@ -88,9 +87,9 @@
       </div>
     </header>
     <div class="container">
-      
+
       @yield('content')
-    
+
     </div>
     <hr>
     <!-- Footer -->

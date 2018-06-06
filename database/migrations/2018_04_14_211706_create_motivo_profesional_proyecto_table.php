@@ -15,15 +15,12 @@ class CreatemotivoprofesionalProyectoTable extends Migration
     {
         Schema::create('motivo_profesional_proyecto', function (Blueprint $table) {
             $table->increments('id');
-
             $table->integer('motivo_id')->unsigned();
-            $table->foreign('motivo_id')->references('id')->on('motivos')->onDelete('cascade');
-
+            $table->foreign('motivo_id')->references('id')->on('motivos');
             $table->integer('profesional_id')->unsigned();
-		    $table->foreign('profesional_id')->references('id')->on('profesional')->onDelete('cascade');
-
+		        $table->foreign('profesional_id')->references('id')->on('profesional');
             $table->integer('proyecto_id')->unsigned();
-		    $table->foreign('proyecto_id')->references('id')->on('proyectos')->onDelete('cascade');
+		        $table->foreign('proyecto_id')->references('id')->on('proyectos');
             $table->softDeletes();
             $table->timestamps();
         });

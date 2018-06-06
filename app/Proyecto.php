@@ -33,8 +33,13 @@ class Proyecto extends Model
 
     public function profesional()
     {
-        return $this->belongsToMany(Profesional::class,'motivo_profesional_proyecto','motivo_id','profesional_id','proyecto_id')->withTimestamps();
+        return $this->belongsToMany(Profesional::class,'motivo_profesional_proyecto')->withPivot('profesional_id')->withTimestamps();
     }
+    public function motivo()
+    {
+        return $this->belongsToMany(Motivo::class,'motivo_profesional_proyecto')->withPivot('motivo_id')->withTimestamps();
+    }
+
     public function estudiante(){
         return $this->belongsToMany(Estudiante::class)->withTimestamps();
     }

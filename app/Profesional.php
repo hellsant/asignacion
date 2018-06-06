@@ -26,7 +26,11 @@ class Profesional extends Model
     protected $dates=['delete_at'];
     public function proyecto()
     {
-        return $this->belongsToMany(Proyecto::class,'motivo_profesional_proyecto','motivo_id','profesional_id','proyecto_id')->withTimestamps();
+        return $this->belongsToMany(Proyecto::class,'motivo_profesional_proyecto')->withPivot('proyecto_id')->withTimestamps();
+    }
+    public function motivo()
+    {
+        return $this->belongsToMany(Motivo::class,'motivo_profesional_proyecto')->withPivot('motivo_id')->withTimestamps();
     }
     public function estudiante()
     {
@@ -54,6 +58,6 @@ class Profesional extends Model
       if($titulo= $t->get('nombre')){
        $query->where(titulo_id,'=', $t->get('id'));
      }
-     dd($t);
+
     }
 }

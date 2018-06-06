@@ -60,6 +60,7 @@
             </h4>
           </div>
       </td>
+      <td>
             <div class="text-center">
                 <h4>
                   <a href='{{ url('profesional.ocultar',$profesional->id)}}' onclick="return confirm('¿Esta seguro de eliminar este Profesional?')" data-toggle="tooltip" data-placement="right" title="Eliminar">
@@ -67,7 +68,7 @@
                   </a>
               </h4>
             </div>
-        </td>
+      </td>
       </tr>
       @endforeach
     </tbody>

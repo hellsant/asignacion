@@ -14,10 +14,10 @@ class Area extends Model
     'DESC_AREA'];
 
     protected $dates=['delete_at'];
-    
-    public function subareas()
+
+    public function subarea()
     {
-        return $this->belongsTo(SubArea::class)->withTimestamps();
+        return $this->hasMany(Subarea::class);
     }
     public function proyecto()
     {
