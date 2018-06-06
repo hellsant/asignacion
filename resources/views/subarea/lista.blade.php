@@ -3,6 +3,8 @@
 @section('titulo2', 'DE SUBAREAS')
 @section('content')
 
+
+{!! Form::open(['route'=>['subarea.index','method'=>'GET']]) !!}
 <div class="table-responsive">
 <table class="table">
     <thead class="thead-light">
@@ -12,24 +14,15 @@
           <th scope="col">Descripcion</th>
           <th scope="col">Nombre del Area al que pertenece</th>
           <th></th>
-          <th scope="col">
-            <div class="text-center">
-              <h3>
-                <a href='{{ route('subarea.create')}}' data-toggle="tooltip" data-placement="right" title="Registar">
-                  <i class="fas fa-plus-square" aria-hidden="true" ></i>
-                </a>
-              </h3>
-            </div>
-          </th>
-        </tr>
+
     </thead>
     <tbody>
       @foreach($subareas as $subarea)
       <tr>
         <td>{{ $subarea -> COD_SUBAREA}} </td>
-        <td>{{ $subarea -> NOM_SUBAREA}} </td>
+        <td>{{ $subarea -> NOMBRE_SUBAREA}} </td>
         <td>{{ $subarea -> DESC_SUBAREA}} </td>
-        <td>{{ $subarea -> NOMBRE_AREA}} </td>
+        <td>{{ $subarea->area->NOMBRE_AREA}}</td>
         <td>
             <div class="text-center">
                 <h4>
@@ -37,7 +30,7 @@
                       <i class="fas fa-pencil-alt"aria-hidden="true"></i>
                   </a>
               </h4>
-            </div> 
+            </div>
         </td>
         <td>
             <div class="text-center">
@@ -46,12 +39,12 @@
                       <i class="fas fa-trash-alt" aria-hidden="true"></i>
                   </a>
               </h4>
-            </div> 
+            </div>
         </td>
       </tr>
       @endforeach
     </tbody>
   </table>
 </div>
-  
+
 @endsection
