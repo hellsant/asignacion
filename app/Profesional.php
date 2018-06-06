@@ -38,7 +38,8 @@ class Profesional extends Model
     }
     public function area()
     {
-        return $this->belongsToMany(Area::class,'area_profesional')->withTimestamps();
+        return $this->belongsToMany(Area::class,'area_profesional')
+            ->withTimestamps();
     }
 
     public function titulo()
