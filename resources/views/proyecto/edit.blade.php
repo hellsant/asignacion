@@ -18,21 +18,21 @@
     <div class="form-group row">
         {!! Form::label('OBJ_GRAL','Objetivo General',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('objetivo_general', $proyecto->OBJ_GRAL, ['class'=>'form-control','placeholder'=>"Ingrese el Objetivo General"]) !!}
+            {!! Form::textarea('objetivo_general', $proyecto->OBJ_GRAL, ['class'=>'form-control','placeholder'=>"Ingrese el Objetivo General"]) !!}
         </div>
     </div>
 
     <div class="form-group row">
         {!! Form::label('OBJ_ESP','Objetivos Especificos',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('objetivos_especificos',$proyecto->OBJ_ESP, ['class'=>'form-control','placeholder'=>"Ingrese Objetivos Especificos"]) !!}
+            {!! Form::textarea('objetivos_especificos',$proyecto->OBJ_ESP, ['class'=>'form-control','placeholder'=>"Ingrese Objetivos Especificos"]) !!}
         </div>
     </div>
 
     <div class="form-group row">
         {!! Form::label('DESCRIPCION','Descripcion',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('descripcion', $proyecto->DESC, ['class'=>'form-control','placeholder'=>"Ingrese la Descripcion"]) !!}
+            {!! Form::textarea('descripcion', $proyecto->DESC, ['class'=>'form-control','placeholder'=>"Ingrese la Descripcion"]) !!}
         </div>
     </div>
 

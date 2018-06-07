@@ -16,7 +16,7 @@
     <div class="form-group row">
         {!! Form::label('DESC','Descripcion',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('DESC',$modalidad->DESC, ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese descripcion de la Modalidad",'data-parsley-error-message'=>"Ingrese solo letras y espacios"]) !!}
+            {!! Form::textarea('DESC',$modalidad->DESC, ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese descripcion de la Modalidad",'data-parsley-error-message'=>"Ingrese solo letras y espacios"]) !!}
         </div>
     </div>
     <a href="{{ route('modalidad.index') }}" class="btn btn-danger">Cancel</a>
