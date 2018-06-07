@@ -32,7 +32,7 @@
     <div class="form-group row">
             {!! Form::label('DESC_AREA','Descripcion',['class'=>'col-sm-2 col-form-label']) !!}
             <div class="col-sm-10">
-                {!! Form::text('DESC_AREA', $area->DESC_AREA, ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese la Descripcion del Area",'data-parsley-error-message'=>"Ingrese solo letras y espacios",'minlength'=>'3']) !!}
+                {!! Form::textarea('DESC_AREA', $area->DESC_AREA, ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese la Descripcion del Area",'data-parsley-error-message'=>"Ingrese solo letras y espacios",'minlength'=>'3']) !!}
             </div>
         </div>
         <a href="{{ route('area.index') }}" class="btn btn-danger">Cancel</a>

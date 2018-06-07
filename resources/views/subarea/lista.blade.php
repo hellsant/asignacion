@@ -6,13 +6,13 @@
 
 {!! Form::open(['route'=>['subarea.index','method'=>'GET']]) !!}
 <div class="table-responsive">
-<table class="table">
+<table class="table" id="table_id">
     <thead class="thead-light">
       <tr>
           <th scope="col">Codigo</th>
           <th scope="col">Nombre</th>
           <th scope="col">Descripcion</th>
-          <th scope="col">Nombre del Area al que pertenece</th>
+          <th scope="col">Area</th>
           <th></th>
 
     </thead>

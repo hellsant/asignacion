@@ -18,7 +18,7 @@
 
 
 <div class="table-responsive">
-<table class="table">
+<table class="table" id="table_id">
     <thead class="thead-light">
       <tr>
           <th scope="col">Código</th>

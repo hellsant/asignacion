@@ -61,7 +61,7 @@
         </div>
     </div>
 
-        <table class="table" id="asignar">
+        <table class="table" id="table_id">
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Codigo</th>
@@ -106,6 +106,5 @@
             {!! Form::submit('Siguiente', ['type'=>"submit",'class'=>'btn btn-success', 'id'=>"btnreg"]) !!}
         </div>
         {!! Form::close() !!}
-        
     </div>
-@endsection
+    @endsection

@@ -12,6 +12,7 @@
     <link rel="icon" href="{{ asset ('img/fav-icon.png')}}" type="image/x-icon" />
     {!!Html::style('css/bootstrap.min.css')!!}
     {!!Html::style('css/parsley.css')!!}
+    {!!Html::style('css/dataTables.css')!!}
     {!!Html::style('web-fonts-with-css/css/fontawesome-all.min.css')!!}
     {!!Html::style('web-fonts-with-css/css/fa-solid.min.css')!!}
     {!!Html::style('web-fonts-with-css/css/fa-brands.min.css')!!}
@@ -107,10 +108,12 @@
   {!! Html::script('jquery/jquery.js') !!}
   {!! Html::script('jquery/parsley.min.js') !!}
   {!! Html::script('jquery/parsley.js') !!}
+  {!! Html::script('jquery/jquery.dataTables.js') !!}
   {!! Html::script('js/main.js') !!}
   {!! Html::script('js/bootstrap.min.js') !!}
   {!! Html::script('js/bootstrap.js') !!}
   {!! Html::script('js/bootstrap.bundle.min.js') !!}
   {!! Html::script('js/jqBootstrapValidation.min.js') !!}
   {!! Html::script('js/clean-blog.min.js') !!}
+  {!! Html::script('js/buscador.js') !!}
 </html>
