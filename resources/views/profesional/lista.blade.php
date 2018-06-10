@@ -63,6 +63,13 @@
                   </a>
               </h4>
             </div>
+            <div class="text-center">
+                <h4>
+                  <a href='{{ route('tribunal.listaReasignar',$profesional->id)}}' data-toggle="tooltip" data-placement="right" title="reasignar trinubal">
+                      <i class="fas fa-eraser" aria-hidden="true"></i>
+                  </a>
+              </h4>
+            </div>
         </td>
       </tr>
       @endforeach

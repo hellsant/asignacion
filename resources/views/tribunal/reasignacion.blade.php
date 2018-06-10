@@ -74,25 +74,22 @@
             <tbody>
                 @foreach ($areas as $area)
                 @foreach ($area->profesional as $tribunal)
+                @if ($tribunal->id != $tribunalId)
                 <tr>
                     <td>{{ $tribunal->id }}</td>
                     <td>{{ $tribunal->NOM_PROF }} {{ $tribunal->AP_PAT_PROF }} {{ $tribunal->AP_MAT_PROF }}</td>
                     <td>
                         @foreach ($tutores as $tutor)
                         @if ($tribunal -> id == $tutor->id )
-                        <a href='{{ route('tribunal.listaTutores',$tutor->id )}}' data-toggle="tooltip" data-placement="right" title="retirar">
                         {{ $tutor -> tutor}}
-                        </a>
                         @endif
                         @endforeach
                     </td>
                     <td>
                         @foreach ($tribunalesN as $t )
                         @if ($t->id == $tribunal->id)
-                            <a href='{{ route('tribunal.listaReasignar',$tribunal->id )}}' data-toggle="tooltip" data-placement="right" title="retirar">
-                                {{ $t -> tribunal}}
-                            </a>
-                            @endif
+                        {{ $t -> tribunal}}
+                        @endif
                         @endforeach
                     </td>
                     <td>
@@ -101,15 +98,16 @@
                         </div>
                     </td>
                 </tr>
+                @endif
                 @endforeach
                 @endforeach
             </tbody>
         </table>
     </div>
         <div class="form-group ">
-            <a href="{{ route('proyecto.index') }}" class="btn btn-danger">Cancel</a>
+            <a href="{{ route('tribunal.index') }}" class="btn btn-danger">Cancel</a>
             {!! Form::submit('Siguiente', ['type'=>"submit",'class'=>'btn btn-success', 'id'=>"btnreg"]) !!}
         </div>
-            {!! Form::close() !!}
+        {!! Form::close() !!}
     </div>
     @endsection
