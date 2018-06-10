@@ -22,7 +22,7 @@ class ProfesionalController extends Controller
 
       //->Titulo($request->titulo)
       ->orderBy('AP_PAT_PROF','ASC')
-      ->paginate(10);
+      ->paginate(1000);
       $profesionales->each(function($profesionales){
         $profesionales->titulo;
 

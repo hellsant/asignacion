@@ -35,9 +35,15 @@ class SubareaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Area $area)
     {
-        SubArea::create($request->all());
+      //$area=Area::findOrFail($area);
+      $subarea=new Subarea;
+
+      $subarea->NOMBRE_SUBAREA=$request->nombre;
+      $subarea->DESC_SUBAREA=$request->descripcion;
+      $subarea->area_id=$area->id;
+      $subarea->save();
         return redirect('subarea');
     }
 
@@ -73,7 +79,11 @@ class SubareaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Subarea::findOrFail($id)->update($request->all());
+      //dd($request->descripcion);
+      $subarea=Subarea::findOrFail($id);
+      $subarea->NOMBRE_SUBAREA=$request->nombre;
+      $subarea->DESC_SUBAREA=$request->descripcion;
+      $subarea->save();
         return redirect('subarea');
     }
 
@@ -89,9 +99,10 @@ class SubareaController extends Controller
         return redirect('subarea');
     }
 
-    public function recibe($area,$id)
+    public function recibe(Request $request,$area)
     {
-        return view('subarea.registrar')->with(compact('area','id'));
+        $a= Area::findOrFail($area);
+        return view('subarea.registrar')->with(compact('a'));
     }
 
     public function ocultar($id)

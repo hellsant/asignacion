@@ -5,49 +5,34 @@
 
 <div>
 
-    {!! Form::open(['route'=>'subarea.store','method'=>'POST','data-parsley-validate'=>""]) !!}
-    <div class="form-group row">
-        {!! Form::label('COD_SUBAREA','Codigo de la subarea',['class'=>'col-sm-2 col-form-label']) !!}
-        <div class="col-sm-10">
-            {!! Form::text('COD_SUBAREA', old('COD_SUBAREA'), ['class'=>'form-control',  'data-parsley-type'=>"number",'placeholder'=>"Ingrese el Codigo de la Subarea",'data-parsley-error-message'=>"Ingrese solo numeros",'required' =>'true','minlength'=>'1']) !!}
-        </div>
-    </div>
+    {!! Form::open(['route'=>['subarea.store',$a],'method'=>'POST']) !!}
+
     <div class="form-group row">
         {!! Form::label('NOM_SUBAREA','Nombre de la subarea',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('NOM_SUBAREA', old('NOM_SUBAREA'), ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese el Nombre de la Subarea", 'required' =>'true','data-parsley-error-message'=>"Ingrese solo letras y espacios",'minlength'=>'3']) !!}
+            {!! Form::text('nombre', old('NOM_SUBAREA'), ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese el Nombre de la Subarea", 'required' =>'true','data-parsley-error-message'=>"Ingrese solo letras y espacios",'minlength'=>'3']) !!}
         </div>
     </div>
     <div class="form-group row">
         {!! Form::label('DESC_SUBAREA','Descripcion de la subarea',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::textarea('DESC_SUBAREA', old('DESC_SUBAREA'), ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese la Descripcion de la Subarea",'data-parsley-error-message'=>"Ingrese solo letras y espacios",'minlength'=>'3']) !!}
+            {!! Form::textarea('descripcion', old('DESC_SUBAREA'), ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese la Descripcion de la Subarea",'data-parsley-error-message'=>"Ingrese solo letras y espacios",'minlength'=>'3']) !!}
         </div>
     </div>
-    @if(route::is('subarea.create'))
+
         <div class="form-group row">
             {!! Form::label('NOMBRE_AREA','Nombre del area al que pertenece',['class'=>'col-sm-2 col-form-label']) !!}
             <div class="col-sm-10">
-                {!! Form::text('NOMBRE_AREA', old('NOMBRE_AREA'), ['class'=>'form-control', 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'placeholder'=>"Ingrese el Area",'data-parsley-error-message'=>"Ingrese solo letras y espacios",'minlength'=>'3']) !!}
-            </div>    
+                {!! Form::label('nombre_area',$a->NOMBRE_AREA, ['class'=>'form-control']) !!}
+            </div>
         </div>
         <div class="form-group row">
-            {!! Form::label('area_id','ID del area al que pertenece',['class'=>'col-sm-2 col-form-label']) !!}
+            {!! Form::label('AREA_ID','ID del area al que pertenece',['class'=>'col-sm-2 col-form-label']) !!}
             <div class="col-sm-10">
-                {!! Form::text('area_id', old('area_id'), ['class'=>'form-control', 'data-parsley-type'=>"number",'placeholder'=>"Ingrese el ID del Area",'data-parsley-error-message'=>"Ingrese solo numeros",'required' =>'true','minlength'=>'1']) !!}
-            </div>    
+                {!! Form::label('areaId', $a->id, ['class'=>'form-control', 'data-parsley-type'=>"number",'placeholder'=>"Ingrese el ID del Area",'data-parsley-error-message'=>"Ingrese solo numeros",'required' =>'true','minlength'=>'1']) !!}
+            </div>
         </div>
-    @else
-        <div class="form-group row">
-            {!! Form::label('NOMBRE_AREA','Nombre del area al que pertenece',['class'=>'col-sm-2 col-form-label']) !!}
-            <div class="col-sm-10">
-                {!! Form::text('NOMBRE_AREA', $area, ['class'=>'form-control','readonly']) !!}
-            </div>    
-        </div>
-        <div class="form-group row">
-            {!! Form::hidden('area_id', $id) !!}
-        </div>
-    @endif
+
     <a href="{{ route('subarea.index') }}" class="btn btn-danger">Cancel</a>
     {!! Form::submit('registrar', ['class'=>'btn btn-success']) !!}
     {!! Form::close() !!}
