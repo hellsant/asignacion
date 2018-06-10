@@ -53,12 +53,44 @@ class Proyecto extends Model
     }
     public function scopeNombre($query, $nombre){
       //return $query->where(DB::raw("CONCAT(NOM_PROF, ' ', AP_PAT_PROF, ' ', AP_MAT_PROF, ' ',CI_PROF, ' ' )"), "LIKE", "%$cadena%");
-      return $query->where("TITULO_PERFIL", "LIKE", "%$nombre%");
+            // $noticia = Noticia::with(['notas'=>function($query)use($data){
+            //   $query->where('nombre_nota',"Una nota")->where('duracion_nota',$data);
+            // }])->get();
+      $q = DB::table('proyectos')
+         ->join('estudiante_proyecto', 'estudiante_proyecto.proyecto_id', '=', 'proyectos.id')
+         ->join('estudiantes', 'estudiante_proyecto.estudiante_id', '=', 'estudiantes.id')
+         // ->join('motivo_profesional_proyecto', 'proyectos.id', '=', 'motivo_profesional_proyecto.proyecto_id')
+         // // ->join('profesional', 'profesional.id', '=', 'motivo_profesional_proyecto.profesional_id')
+         // // ->join('proyectos', 'proyectos.id', '=', 'motivo_profesional_proyecto.proyecto_id')
+         //->join('estudiante_profesionals as tutor', 'estudiantes.id', '=', 'tutor.estudiante_id')
+         ->select("*")
+         ->where("TITULO_PERFIL", "LIKE", "%$nombre%")
+         ->orWhere("proyectos.id", "LIKE", "%$nombre%")
+         ->orwhere("NOM_EST", "LIKE", "%$nombre%")
+         ->orWhere("AP_PAT_EST", "LIKE", "%$nombre%")
+         ->orWhere("AP_MAT_EST", "LIKE", "%$nombre%")
+         ->orWhere("NOM_PROF", "LIKE", "%$nombre%")
+         ->orWhere("AP_PAT_PROF", "LIKE", "%$nombre%")
+         ->orWhere("AP_MAT_PROF", "LIKE", "%$nombre%")
+         ->get();
+         //dd($q);
+
+
+
+
+      return $query=$q;
+
+      // return $query->where("TITULO_PERFIL", "LIKE", "%$nombre%")
+      //               ->orWhere("id", "LIKE", "%$nombre%");
+
+
     }
-    public function scopeGestReg($query, $ges_reg){
-      return $query->where("GESTION_REGISTRO", "LIKE", "%$ges_reg%");
+
+    public function scopeTutor($query,$nombre){
+      return $query->where("NOM_PROF", "LIKE", "%$nombre%")
+                    ->orWhere("AP_PAT_PROF", "LIKE", "%$nombre%")
+                    ->orWhere("AP_MAT_PROF", "LIKE", "%$nombre%");
     }
-    public function scopeGestLim($query, $ges_lim){
-      return $query->where("GESTION_REGISTRO", "LIKE", "%$ges_lim%");
-    }
+
+
 }

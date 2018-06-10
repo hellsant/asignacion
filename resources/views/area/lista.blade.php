@@ -26,7 +26,7 @@
     <tbody>
         @foreach($areas as $area)
       <tr>
-        <td>{{ $area -> COD_AREA}} </td>
+        <td>{{ $area -> id}} </td>
         <td>{{ $area -> NOMBRE_AREA}} </td>
         <td>{{ $area -> DESC_AREA}} </td>
         <td>
@@ -36,16 +36,16 @@
                   <i class="fas fa-pencil-alt"aria-hidden="true"></i>
                 </a>
               </h4>
-            </div> 
+            </div>
         </td>
         <td>
             <div class="text-center">
               <h4>
-                <a href='{{ url('subarea/'.$area->NOMBRE_AREA.'/'.$area->id.'/create') }}' data-toggle="tooltip" data-placement="right" title="Registar Subarea">
+                <a href='{{ route('subarea.recibe',$area->id) }}' data-toggle="tooltip" data-placement="right" title="Registar Subarea">
                   <i class="fas fa-plus-square" aria-hidden="true"></i>
                 </a>
               </h4>
-            </div> 
+            </div>
         </td>
         <td>
             <div class="text-center">
@@ -54,12 +54,12 @@
                       <i class="fas fa-trash-alt" aria-hidden="true"></i>
                   </a>
               </h4>
-            </div> 
+            </div>
         </td>
       </tr>
       @endforeach
     </tbody>
   </table>
 </div>
-  
+
 @endsection

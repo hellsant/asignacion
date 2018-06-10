@@ -5,13 +5,7 @@
 
 {!! Form::open((array('url'=>'profesional','method'=>'GET','class' => 'navbar-form navbar-left pull-right'))) !!}
 
-  <div class="input-group">
 
-    {!! Form::text('nombre', null, ['class'=> 'form-control','placeholder'=>'Buscar profesional', 'aria-describedby'=>'buscar']) !!}
-    <span class="input-group-btn">
-      <button type="submit" class="btn btn-primary">Buscar</button>
-    </span>
-  </div>
   {!! Form::close() !!}
 
 
@@ -68,7 +62,7 @@
       @endforeach
     </tbody>
   </table>
-{!!$profesionales->appends(Request::only(['nombre']))->render("pagination::bootstrap-4")!!}
+
 
 </div>
 
