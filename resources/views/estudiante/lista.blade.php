@@ -5,16 +5,7 @@
 <div>
   {!! Form::open(array('url'=>'estudiante','method'=>'GET','class' => 'navbar-form pull-right')) !!}
 
-    <div class="input-group">
-
-      {!! Form::text('nombre', null, ['class'=> 'form-control','placeholder'=>'Buscar estudiante', 'aria-describedby'=>'buscar']) !!}
-
-
-      <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary">Buscar</button>
-      </span>
-    </div>
-    {!! Form::close() !!}
+    
 
 
 {{Form::close()}}

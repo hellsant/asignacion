@@ -21,22 +21,28 @@ class ProyectoController extends Controller
      */
     public function index(Request $request)
     {
-        // $proyectos = Proyecto::Nombre($request->nombre)->orderBy('GESTION_LIMITE', 'DESC')->paginate(20);
-        // $proyectos->each(function($proyectos){
-        //
-        //
-        //   //El campo full_name no existe en la base de datos, más está declarado en el proveedor estudiante como un ACCESOR
-        //   //Este accesor se llama getFullNameAttribute . se usa full_name .el accesor debe tener getAttribute!
-        //   //$proyectos->estudiante->pluck('full_name', 'id');
-        //
-        //
-        //   $proyectos->estudiante;
-        //   $proyectos->profesional;
-        //
-        // });
+        $nombre = $request->busqueda;
+        $proyectos = Proyecto::orderBy('id', 'DESC')
+            ->where("TITULO_PERFIL", "LIKE", "%$nombre%")
+            ->orWhere("proyectos.id", "LIKE", "%$nombre%")
+            ->orWhereHas('estudiante', function ($query) use ($nombre) {
+                    $query->where('NOM_EST', 'LIKE', "%$nombre%")
+                    ->orWhere("AP_PAT_EST", "LIKE", "%$nombre%")
+                    ->orWhere("AP_MAT_EST", "LIKE", "%$nombre%")
+                    ->orWhereHas('profesional', function($query) use ($nombre){
+                        $query->Where("NOM_PROF", "LIKE", "%$nombre%")
+                        ->orWhere("AP_PAT_PROF", "LIKE", "%$nombre%")
+                        ->orWhere("AP_MAT_PROF", "LIKE", "%$nombre%");
+                });
+            })
+            ->orWhereHas('profesional', function($query) use ($nombre){
+                    $query->Where("NOM_PROF", "LIKE", "%$nombre%")
+                    ->orWhere("AP_PAT_PROF", "LIKE", "%$nombre%")
+                    ->orWhere("AP_MAT_PROF", "LIKE", "%$nombre%");
+                })
+            ->paginate(10);
 
-        $proyectos = Proyecto::nombre($request->busqueda)->orderBy('GESTION_LIMITE', 'DESC')->paginate(20);
-  
+
         return view('proyecto.lista')->with(compact('proyectos'));
     }
 
