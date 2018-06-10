@@ -21,10 +21,10 @@ class Area extends Model
     }
     public function proyecto()
     {
-        return $this->belongsTo(Proyecto::class)->withTimestamps();
+        return $this->belongsToMany(Proyecto::class, 'area_proyecto')->withTimestamps();
     }
     public function profesional()
     {
-        return $this->belongsTo(Profesional::class)->withTimestamps();
+        return $this->belongsToMany(Profesional::class, 'area_profesional')->withTimestamps();
     }
 }

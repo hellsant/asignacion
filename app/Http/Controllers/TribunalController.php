@@ -101,7 +101,7 @@ class TribunalController extends Controller
     public function registrar($proyectoid)
     {
         $now=Carbon::now();
-       
+
         $proyectos = Proyecto::findOrFail($proyectoid);
 
         $estudiantes = $proyectos->estudiante->each(function($estudiante){
@@ -115,23 +115,23 @@ class TribunalController extends Controller
         $subareas=$proyectos->subarea->each(function($subarea){
             $subarea->profesional;
         });
-        
-        $querytutor=DB::select( 
-        'SELECT profesional.id,COUNT(estudiante_profesionals.id) tutor 
-         FROM profesional 
-         INNER JOIN estudiante_profesionals ON estudiante_profesionals.profesional_id=profesional.id 
+
+        $querytutor=DB::select(
+        'SELECT profesional.id,COUNT(estudiante_profesionals.id) tutor
+         FROM profesional
+         INNER JOIN estudiante_profesionals ON estudiante_profesionals.profesional_id=profesional.id
          GROUP BY profesional.id');
 
         $querytribunal=DB::select(
-        'SELECT profesional.id, COUNT(motivo_profesional_proyecto.profesional_id) tribunal 
-        FROM profesional 
-        INNER JOIN motivo_profesional_proyecto ON motivo_profesional_proyecto.profesional_id=profesional.id 
+        'SELECT profesional.id, COUNT(motivo_profesional_proyecto.profesional_id) tribunal
+        FROM profesional
+        INNER JOIN motivo_profesional_proyecto ON motivo_profesional_proyecto.profesional_id=profesional.id
         GROUP BY profesional.id');
 
         $tutores = Collection::make($querytutor);
         $tribunalesN = Collection::make($querytribunal);
-        
-        return view('tribunal.asignacion')->with(compact('tribunales','subareas','areas','now','proyectos','estudiantes','tutores','tribunalesN'));  
+
+        return view('tribunal.asignacion')->with(compact('tribunales','subareas','areas','now','proyectos','estudiantes','tutores','tribunalesN'));
     }
 
 }
