@@ -20,7 +20,7 @@
 {{Form::close()}}
 </div>
 <div class="table-responsive table-striped">
-<table class="table">
+<table class="table" id="table_id">
     <thead class="thead-light">
       <tr>
           <th >CódigoSis</th>
