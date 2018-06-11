@@ -25,9 +25,9 @@ Route::resource('proyecto', 'ProyectoController');
 //     'tutor/{id}' => 'tutor.index',
 //     'tutor/store/{id}' => 'tutor.store'
 // ]]);
-Route::any('tutor/{id}', 'TutorController@index')->name('tutor.index');
+//Route::any('tutor/{id}', 'TutorController@index')->name('tutor.index');
 // Route::post('tutor/{id}', 'TutorController@index')->name('tutor.index');
-Route::any('tutor/store/{id}', 'TutorController@store')->name('tutor.store');
+//Route::any('tutor/store/{id}', 'TutorController@store')->name('tutor.store');
 // Route::post('tutor/store/{id}', 'TutorController@store')->name('tutor.store');
 
 
@@ -53,3 +53,13 @@ Route::any('subarea/registrar/{area}', 'SubareaController@recibe')->name('subare
 Route::resource('tribunal', 'TribunalController');
 Route::any('tribunal/registrar/{p}', 'TribunalController@registrar')
 ->name('tribunal.asignar');
+Route::any('tribunal/listaTutores/{p}', 'TribunalController@listaTutores')
+->name('tribunal.listaTutores');
+Route::any('tribunal/reasignar/{idprofesional}/{idproyecto}', 'TribunalController@reasignar')
+->name('tribunal.reasignar');
+Route::any('tribunal/cambiar/{idprofesional}/{idproyecto}', 'TribunalController@cambiar')
+->name('tribunal.cambiar');
+Route::any('tribunal/retirar/{idprofesional}/{idproyecto}', 'TribunalController@retirar')
+->name('tribunal.retirar');
+Route::any('tribunal/listaReasignar/{id}', 'TribunalController@listaReasignar')
+->name('tribunal.listaReasignar');
