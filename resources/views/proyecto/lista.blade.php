@@ -23,10 +23,7 @@
           <th scope="col">Estudiante</th>
           <th scope="col">Tutor</th>
           <th scope="col">Tribunal</th>
-          <th scope="col">Opciones</th>
-
-          <th></th>
-          <th scope="col">
+          <th scope="col">Opciones
             <div class="text-center">
               <h3>
                 <a href='{{ route('proyecto.create')}}' data-toggle="tooltip" data-placement="right" title="Registar">
@@ -43,24 +40,18 @@
         <td>{{ $proyecto -> id}} </td>
         <td>{{ $proyecto -> TITULO_PERFIL}} </td>
         <td>{{ $proyecto -> estudiante->pluck('full_name', 'id')->implode(' ')}} </td>
-        @foreach ($proyecto->estudiante as $e)
         <td>
+          @foreach ($proyecto->estudiante as $e)
           @foreach ($e->profesional as $p)
-
-              {{ $p->NOM_PROF.' '.$p->AP_PAT_PROF.' '.$p->AP_MAT_PROF.',' }}
-
+          {{ $p->NOM_PROF.' '.$p->AP_PAT_PROF.' '.$p->AP_MAT_PROF.',' }}
+          @endforeach
           @endforeach
         </td>
-
-
-        @endforeach
-
         <td>
           @foreach ($proyecto->profesional as $tribunal)
 
             {{ $tribunal->NOM_PROF.' '.$tribunal->AP_PAT_PROF.' '.$tribunal->AP_MAT_PROF.','}}
           @endforeach
-
       </td>
         <td>
           <div class="text-center">
