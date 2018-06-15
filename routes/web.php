@@ -45,6 +45,9 @@ Route::any('subarea/create/{area}', 'SubareaController@store')->name('subarea.st
 Route::any('subarea/ocultar/{id}', 'SubareaController@ocultar');
 Route::any('subarea/edit/{id}', 'SubareaController@edit')->name('subarea.edit');
 Route::any('subarea/update/{id}', 'SubareaController@update')->name('subarea.update');
+Route::any('subarea/profesionales/{s}', 'SubareaController@indexProfesionales')->name('subarea.profesional');
+Route::any('subarea/eliminarProfesional/{idprofesional}/{idsubarea}', 'SubareaController@ocultarProfesional')->name('subarea.ocultarProfesional');
+
 
 Route::any('subarea/registrar/{area}', 'SubareaController@recibe')->name('subarea.recibe');
 
