@@ -121,12 +121,14 @@ class TribunalController extends Controller
         'SELECT profesional.id,COUNT(estudiante_profesionals.id) tutor
          FROM profesional
          INNER JOIN estudiante_profesionals ON estudiante_profesionals.profesional_id=profesional.id
+
          GROUP BY profesional.id');
 
         $querytribunal=DB::select(
         'SELECT profesional.id, COUNT(motivo_profesional_proyecto.profesional_id) tribunal
         FROM profesional
         INNER JOIN motivo_profesional_proyecto ON motivo_profesional_proyecto.profesional_id=profesional.id
+        where motivo_profesional_proyecto.deleted_at is null and motivo_id=1
         GROUP BY profesional.id');
 
         $tutores = Collection::make($querytutor);
@@ -210,7 +212,7 @@ class TribunalController extends Controller
         return view('tribunal.listaTibunales')->with(compact('profesional','proyectos', 'areas', 'subareas'));
     }
 
-    
+
     public function cambiar($idprofesional,$idproyecto)
     {
         $profesional = Profesional::findOrFail($idprofesional);
@@ -218,10 +220,11 @@ class TribunalController extends Controller
         $motivos= Motivo::pluck('NOM_MOT', 'id');
         return view('tribunal.retirar')->with(compact('profesional','proyecto', 'motivos'));
     }
-    
+
     public function retirar(Request $request, $idprofesional,$idproyecto)
     {
-        Proyecto::findOrFail($idproyecto)->profesional()->detach($idprofesional,['motivo_id' => 1,'proyecto_id'=>$idproyecto]);
+      Proyecto::findOrFail($idproyecto)->profesional()->detach($idprofesional,['motivo_id' => 1,'proyecto_id'=>$idproyecto]);
+        Proyecto::findOrFail($idproyecto)->profesional()->attach($idprofesional,['motivo_id' => 1,'proyecto_id'=>$idproyecto, 'deleted_at'=>Carbon::now()]);
         Proyecto::findOrFail($idproyecto)->profesional()->attach($idprofesional,['motivo_id' => $request->motivo,'proyecto_id'=>$idproyecto]);
         return redirect()->route('tribunal.reasignar', ['idprofesional' => $idprofesional,'idproyecto'=>$idproyecto]);
     }

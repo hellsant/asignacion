@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Subarea;
 use App\Area;
+use App\Profesional;
 class SubareaController extends Controller
 {
     /**
@@ -17,6 +18,13 @@ class SubareaController extends Controller
     {
         $subareas = Subarea::all();
         return view('subarea.lista')->with(compact('subareas'));
+    }
+
+    public function indexProfesionales(Request $request, Subarea $s)
+    {
+        $subarea=Subarea::findOrFail($s->id);
+        // dd($subarea);
+        return view('subarea.profesionales')->with(compact('subarea', 's'));
     }
 
     /**
@@ -108,6 +116,15 @@ class SubareaController extends Controller
     public function ocultar($id)
     {
         Subarea::findOrFail($id)->delete();
+        return redirect('subarea');
+    }
+    public function ocultarProfesional($idprofesional,$idsubarea)
+    {
+
+        $profesional=Profesional::find($idprofesional);
+
+        $profesional->subarea()->detach($idsubarea);
+
         return redirect('subarea');
     }
 }
