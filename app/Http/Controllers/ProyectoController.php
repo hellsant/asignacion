@@ -22,7 +22,11 @@ class ProyectoController extends Controller
     public function index(Request $request)
     {
         $proyectos = Proyecto::all();
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 416f0fd0d1ad64fe7edeccbd43b857f32ece506c
          //$nombre = $request->busqueda;
          // $proyectos = Proyecto::orderBy('id', 'DESC');
          //   ->where("TITULO_PERFIL", "LIKE", "%$nombre%")

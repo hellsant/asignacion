@@ -19,17 +19,9 @@ Route::get('profesional/ocultar/{id}', 'ProfesionalController@ocultar');
 Route::resource('profesional', 'ProfesionalController');
 Route::any('proyecto/ocultar/{id}', 'ProyectoController@ocultar');
 Route::resource('proyecto', 'ProyectoController');
-
-//Route::resource('tutor', 'TutorController');
-// Route::resource('tutor', 'TutorController', ['names' => [
-//     'tutor/{id}' => 'tutor.index',
-//     'tutor/store/{id}' => 'tutor.store'
-// ]]);
-//Route::any('tutor/{id}', 'TutorController@index')->name('tutor.index');
-// Route::post('tutor/{id}', 'TutorController@index')->name('tutor.index');
-//Route::any('tutor/store/{id}', 'TutorController@store')->name('tutor.store');
-// Route::post('tutor/store/{id}', 'TutorController@store')->name('tutor.store');
-
+Route::any('proyecto/finalizar/{id}', 'ProyectoController@finalizar')->name('proyecto.finalizar');
+Route::any('proyectosCulminados', 'ProyectoController@proyectosCulminados')->name('proyecto.proyectosCulminados');
+Route::any('terminarCiclo/{id}', 'ProyectoController@terminarCiclo')->name('proyecto.terminarCiclo');
 
 Route::get('area/ocultar/{id}', 'AreasController@ocultar');
 Route::resource('area', 'AreasController');
@@ -50,7 +42,6 @@ Route::any('subarea/eliminarProfesional/{idprofesional}/{idsubarea}', 'SubareaCo
 
 
 Route::any('subarea/registrar/{area}', 'SubareaController@recibe')->name('subarea.recibe');
-
 
 
 Route::resource('tribunal', 'TribunalController');

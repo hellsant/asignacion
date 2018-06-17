@@ -21,7 +21,8 @@ class Proyecto extends Model
             'FECHA_INI',
             'FECHA_DEF',
             'GESTION_PRORROGA',
-            'modalidad_id'
+            'modalidad_id',
+            'CICLO'
     ];
 
     protected $dates=['delete_at'];
@@ -51,6 +52,7 @@ class Proyecto extends Model
     {
         return $this->belongsToMany(Subarea::class)->withTimestamps();
     }
+   
     public function scopeNombre($query, $nombre){
       //return $query->where(DB::raw("CONCAT(NOM_PROF, ' ', AP_PAT_PROF, ' ', AP_MAT_PROF, ' ',CI_PROF, ' ' )"), "LIKE", "%$cadena%");
             // $noticia = Noticia::with(['notas'=>function($query)use($data){

@@ -25,10 +25,10 @@ class CreateProyectosTable extends Migration
 		    $table->date('FECHA_INI')->nullable()->default(null);
 		    $table->date('FECHA_DEF')->nullable()->default(null);
 		    $table->text('GESTION_PRORROGA')->nullable()->default(null);
-            
+            $table->enum('CICLO', ['en progreso', 'defendido','expirado']);
 		    $table->integer('modalidad_id')->unsigned();
             $table->foreign('modalidad_id')->references('id')->on('modalidades')->onDelete('cascade');
-
+		   
             $table->softDeletes();
             $table->timestamps();
         });
