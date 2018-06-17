@@ -21,26 +21,28 @@ class ProyectoController extends Controller
      */
     public function index(Request $request)
     {
-        $nombre = $request->busqueda;
-        $proyectos = Proyecto::orderBy('id', 'DESC')
-            ->where("TITULO_PERFIL", "LIKE", "%$nombre%")
-            ->orWhere("proyectos.id", "LIKE", "%$nombre%")
-            ->orWhereHas('estudiante', function ($query) use ($nombre) {
-                    $query->where('NOM_EST', 'LIKE', "%$nombre%")
-                    ->orWhere("AP_PAT_EST", "LIKE", "%$nombre%")
-                    ->orWhere("AP_MAT_EST", "LIKE", "%$nombre%")
-                    ->orWhereHas('profesional', function($query) use ($nombre){
-                        $query->Where("NOM_PROF", "LIKE", "%$nombre%")
-                        ->orWhere("AP_PAT_PROF", "LIKE", "%$nombre%")
-                        ->orWhere("AP_MAT_PROF", "LIKE", "%$nombre%");
-                });
-            })
-            ->orWhereHas('profesional', function($query) use ($nombre){
-                    $query->Where("NOM_PROF", "LIKE", "%$nombre%")
-                    ->orWhere("AP_PAT_PROF", "LIKE", "%$nombre%")
-                    ->orWhere("AP_MAT_PROF", "LIKE", "%$nombre%");
-                })
-            ->paginate(10);
+        $proyectos = Proyecto::all();
+
+         //$nombre = $request->busqueda;
+         // $proyectos = Proyecto::orderBy('id', 'DESC');
+         //   ->where("TITULO_PERFIL", "LIKE", "%$nombre%")
+         //   ->orWhere("proyectos.id", "LIKE", "%$nombre%")
+         //   ->orWhereHas('estudiante', function ($query) use ($nombre) {
+         //           $query->where('NOM_EST', 'LIKE', "%$nombre%")
+         //           ->orWhere("AP_PAT_EST", "LIKE", "%$nombre%")
+         //           ->orWhere("AP_MAT_EST", "LIKE", "%$nombre%")
+         //           ->orWhereHas('profesional', function($query) use ($nombre){
+         //               $query->Where("NOM_PROF", "LIKE", "%$nombre%")
+         //               ->orWhere("AP_PAT_PROF", "LIKE", "%$nombre%")
+         //               ->orWhere("AP_MAT_PROF", "LIKE", "%$nombre%");
+         //       });
+         //   })
+         //   ->orWhereHas('profesional', function($query) use ($nombre){
+         //           $query->Where("NOM_PROF", "LIKE", "%$nombre%")
+         //           ->orWhere("AP_PAT_PROF", "LIKE", "%$nombre%")
+         //           ->orWhere("AP_MAT_PROF", "LIKE", "%$nombre%");
+         //       })
+         //   ->paginate(10);
 
 
         return view('proyecto.lista')->with(compact('proyectos'));
@@ -77,7 +79,6 @@ class ProyectoController extends Controller
      */
     public function store(PerfilesFormRequest $request)
     {
-
         $proyecto = new Proyecto;
         $proyecto->TITULO_PERFIL= $request->titulo;
         $proyecto->FECHA_REGISTRO=$request->fecha_registro;
@@ -89,8 +90,8 @@ class ProyectoController extends Controller
         $proyecto->FECHA_INI=$request->fecha_inicio;
         $proyecto->FECHA_DEF=$request->fecha_defensa;
         $proyecto->modalidad_id=$request->modalidad;
+        $proyecto->CICLO='en progreso';
         $proyecto->save();
-
 
         $estudiante= Estudiante::find($request->estudiante);
         $estudiante->profesional()->attach($request->tutor);
@@ -99,9 +100,7 @@ class ProyectoController extends Controller
         $perfil->estudiante()->attach($request->estudiante);
         $perfil->area()->attach($request->area);
 
-
         return redirect('proyecto');
-
     }
 
     /**
@@ -191,7 +190,25 @@ class ProyectoController extends Controller
       $proyecto= Proyecto::findOrFail($id);
 
       return view('tutor.registrar')->with(compact('estudiantes', 'tutores', 'proyecto'));
+    }
 
+    public function finalizar($id){
+        $proyectos = Proyecto::findOrFail($id);
+        $estudiante= $proyectos->estudiante;
+        return view('ciclo.culminarCiclo')->with(compact('proyectos','estudiante'));
+    }
 
+    public function terminarCiclo(Request $request,$id)
+    {
+        $proyectos = Proyecto::findOrFail($id);
+        $proyectos ->CICLO=$request->CICLO;
+        $proyectos->save();
+        return redirect('proyecto');
+    }
+
+    public function proyectosCulminados(Request $request){
+
+        $proyectos = Proyecto::all();
+        return view('proyecto.listaCulminados')->with(compact('proyectos'));
     }
 }

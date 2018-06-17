@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('profesional/ocultar/{id}', 'ProfesionalController@ocultar');
 Route::resource('profesional', 'ProfesionalController');
-Route::get('proyecto/ocultar/{id}', 'ProyectoController@ocultar');
+Route::any('proyecto/ocultar/{id}', 'ProyectoController@ocultar');
 Route::resource('proyecto', 'ProyectoController');
 
 //Route::resource('tutor', 'TutorController');

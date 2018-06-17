@@ -11,10 +11,10 @@ class Motivo extends Model
     protected $dates=['delete_at'];
     public function profesional()
     {
-        return $this->belongsToMany(Profesional::class,'motivo_profesional_proyecto')->withPivot('profesional_id')->withTimestamps();
+        return $this->belongsToMany(Profesional::class,'motivo_profesional_proyecto')->withPivot('profesional_id','proyecto_id', 'motivo_id')->withTimestamps();
     }
     public function proyecto()
     {
-        return $this->belongsToMany(Proyecto::class,'motivo_profesional_proyecto')->withPivot('proyecto_id')->withTimestamps();
+        return $this->belongsToMany(Proyecto::class,'motivo_profesional_proyecto')->withPivot('profesional_id','proyecto_id', 'motivo_id')->withTimestamps();
     }
 }
