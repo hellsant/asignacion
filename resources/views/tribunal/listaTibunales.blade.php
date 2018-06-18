@@ -23,11 +23,11 @@
     <div class="form-group row">
         {!! Form::label('profesional','Profesional',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-           
+
             {!! Form::text('profesional', "$profesional->NOM_PROF $profesional->AP_PAT_PROF $profesional->AP_MAT_PROF" , ['class'=>'form-control','readonly']) !!}
         </div>
     </div>
-    
+
     <div class="form-group row">
         {!! Form::label('area','Area',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="form-group col-sm-4">
@@ -54,20 +54,31 @@
             </thead>
             <tbody>
                @foreach ($proyectos as $proyecto )
-                   <tr>
-                       <td>{{ $proyecto->id }}</td>
-                       <td>{{ $proyecto->TITULO_PERFIL }}</td>
-                        @foreach ( $proyecto-> estudiante as $estudiante )
-                        <td>{{ $estudiante->NOM_EST}} {{ $estudiante->AP_PAT_EST}} {{ $estudiante->AP_MAT_EST}}</td>
-                        @endforeach
-                        <td>
-                            <h4>
-                                <a href='{{ route('tribunal.cambiar',[$profesional->id, $proyecto->id] )}}' data-toggle="tooltip" data-placement="right" title="retirar">
-                                  <i class="fas fa-minus-circle"aria-hidden="true"></i>
-                                </a>
-                            </h4>
-                       </td>
-                   </tr>
+
+                 @foreach ($proyecto->profesional as $tribunal)
+
+                     @if ($tribunal->pivot->motivo_id==1 and $tribunal->pivot->profesional_id==$profesional->id)
+
+                       <tr>
+                         <td>{{ $proyecto->id }}</td>
+                         <td>{{ $proyecto->TITULO_PERFIL }}</td>
+                         @foreach ( $proyecto-> estudiante as $estudiante )
+                           <td>{{ $estudiante->NOM_EST}} {{ $estudiante->AP_PAT_EST}} {{ $estudiante->AP_MAT_EST}}</td>
+                         @endforeach
+                         <td>
+                           <h4>
+                             <a href='{{ route('tribunal.cambiar',[$profesional->id, $proyecto->id] )}}' data-toggle="tooltip" data-placement="right" title="retirar">
+                               <i class="fas fa-minus-circle"aria-hidden="true"></i>
+                             </a>
+                           </h4>
+                         </td>
+                       </tr>
+
+
+                     @endif
+
+                 @endforeach
+
                @endforeach
             </tbody>
         </table>

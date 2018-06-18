@@ -60,6 +60,22 @@
             {!! Form::date('fecha_registro',$proyectos -> FECHA_REGISTRO, ['class'=>'form-control','readonly']) !!}
         </div>
     </div>
+    <div class="form-group row">
+        {!! Form::label('TRIBUNALES','Tribunales',['class'=>'col-sm-2 col-form-label']) !!}
+        <div class="form-group col-sm-4">
+          @foreach ($proyectos->profesional as $tribunal)
+
+              @if ($tribunal->pivot->motivo_id==1)
+
+                {{ $tribunal->NOM_PROF.' '.$tribunal->AP_PAT_PROF.' '.$tribunal->AP_MAT_PROF.','}}
+
+              @endif
+
+          @endforeach
+
+          
+        </div>
+    </div>
     <div class="table-responsive">
         <table class="table" id="table_id">
             <thead class="thead-light">

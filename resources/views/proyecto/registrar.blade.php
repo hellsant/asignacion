@@ -12,7 +12,7 @@
 
     {!! Form::open(['route'=>'proyecto.store','method'=>'POST']) !!}
     <div class="form-group row">
-        {!! Form::label('TITULO_PERFIL','Titulo Perfil',['class'=>'col-sm-2 col-form-label']) !!}
+        {!! Form::label('TITULO_PERFIL','Título Perfil',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
             {!! Form::text('titulo', old('titulo'), ['class'=>'form-control','placeholder'=>"Ingrese el Titulo del Perfil"]) !!}
         </div>
@@ -27,14 +27,14 @@
     </div>
 
     <div class="form-group row">
-        {!! Form::label('OBJ_ESP','Objetivos Especificos',['class'=>'col-sm-2 col-form-label']) !!}
+        {!! Form::label('OBJ_ESP','Objetivos Específicos',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
             {!! Form::textarea('objetivos_especificos', old('objetivos_especificos'), ['class'=>'form-control','placeholder'=>"Ingrese Objetivos Especificos"]) !!}
         </div>
     </div>
 
     <div class="form-group row">
-        {!! Form::label('DESCRIPCION','Descripcion',['class'=>'col-sm-2 col-form-label']) !!}
+        {!! Form::label('DESCRIPCION','Descripción',['class'=>'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
             {!! Form::textarea('descripcion', old('DESCRIPCION'), ['class'=>'form-control','placeholder'=>"Ingrese la Descripcion"]) !!}
         </div>

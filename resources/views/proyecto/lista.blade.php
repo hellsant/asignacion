@@ -33,14 +33,19 @@
         <td>
           @foreach ($proyecto->estudiante as $e)
           @foreach ($e->profesional as $p)
-          {{ $p->NOM_PROF.' '.$p->AP_PAT_PROF.' '.$p->AP_MAT_PROF.',' }}
+              {{ $p->NOM_PROF.' '.$p->AP_PAT_PROF.' '.$p->AP_MAT_PROF.',' }}
           @endforeach
           @endforeach
         </td>
         <td>
           @foreach ($proyecto->profesional as $tribunal)
-            
-          {{ $tribunal->NOM_PROF.' '.$tribunal->AP_PAT_PROF.' '.$tribunal->AP_MAT_PROF.','}}
+
+              @if ($tribunal->pivot->motivo_id==1)
+
+                {{ $tribunal->NOM_PROF.' '.$tribunal->AP_PAT_PROF.' '.$tribunal->AP_MAT_PROF.','}}
+
+              @endif
+
           @endforeach
         </td>
         <td>

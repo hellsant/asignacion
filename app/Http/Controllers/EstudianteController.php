@@ -17,7 +17,7 @@ class EstudianteController extends Controller
 
     public function index(Request $request)
     {
-            $estudiantes = Estudiante::Buscar($request->nombre)->orderBy('AP_PAT_EST','ASC')->paginate(10);
+            $estudiantes = Estudiante::all();
 
 
             return view('estudiante.lista')->with(compact('estudiantes'));
@@ -46,6 +46,7 @@ class EstudianteController extends Controller
      */
     public function store(EstudianteFormRequest $request)
     {
+      // dd($request);
       $estudiante= new Estudiante;
       $estudiante->COD_SIS=$request->cod_sis;
       $estudiante->NOM_EST=$request->nombre;
