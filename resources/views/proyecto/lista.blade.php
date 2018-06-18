@@ -39,6 +39,7 @@
         </td>
         <td>
           @foreach ($proyecto->profesional as $tribunal)
+            
           {{ $tribunal->NOM_PROF.' '.$tribunal->AP_PAT_PROF.' '.$tribunal->AP_MAT_PROF.','}}
           @endforeach
         </td>

@@ -121,15 +121,18 @@ class TribunalController extends Controller
         'SELECT profesional.id,COUNT(estudiante_profesionals.id) tutor
          FROM profesional
          INNER JOIN estudiante_profesionals ON estudiante_profesionals.profesional_id=profesional.id
-
+         INNER JOIN estudiantes ON estudiante_profesionals.estudiante_id=estudiantes.id
+         INNER JOIN estudiante_proyecto ON estudiante_proyecto.estudiante_id=estudiantes.id
+         INNER JOIN proyectos ON estudiante_proyecto.proyecto_id=proyectos.id WHERE proyectos.CICLO="en progreso"
          GROUP BY profesional.id');
 
         $querytribunal=DB::select(
-        'SELECT profesional.id, COUNT(motivo_profesional_proyecto.profesional_id) tribunal
-        FROM profesional
-        INNER JOIN motivo_profesional_proyecto ON motivo_profesional_proyecto.profesional_id=profesional.id
-        where motivo_profesional_proyecto.deleted_at is null and motivo_id=1
-        GROUP BY profesional.id');
+          'SELECT profesional.id, COUNT(motivo_profesional_proyecto.profesional_id) tribunal
+          FROM profesional
+          INNER JOIN motivo_profesional_proyecto ON motivo_profesional_proyecto.profesional_id=profesional.id
+          INNER JOIN proyectos ON motivo_profesional_proyecto.proyecto_id=proyectos.id
+          WHERE motivo_profesional_proyecto.deleted_at IS null AND motivo_profesional_proyecto.motivo_id=1 AND proyectos.CICLO="en progreso"
+          GROUP BY profesional.id');
 
         $tutores = Collection::make($querytutor);
         $tribunalesN = Collection::make($querytribunal);
@@ -179,12 +182,17 @@ class TribunalController extends Controller
         'SELECT profesional.id,COUNT(estudiante_profesionals.id) tutor
          FROM profesional
          INNER JOIN estudiante_profesionals ON estudiante_profesionals.profesional_id=profesional.id
+         INNER JOIN estudiantes ON estudiante_profesionals.estudiante_id=estudiantes.id
+         INNER JOIN estudiante_proyecto ON estudiante_proyecto.estudiante_id=estudiantes.id
+         INNER JOIN proyectos ON estudiante_proyecto.proyecto_id=proyectos.id WHERE proyectos.CICLO="en progreso"
          GROUP BY profesional.id');
 
         $querytribunal=DB::select(
         'SELECT profesional.id, COUNT(motivo_profesional_proyecto.profesional_id) tribunal
         FROM profesional
         INNER JOIN motivo_profesional_proyecto ON motivo_profesional_proyecto.profesional_id=profesional.id
+        INNER JOIN proyectos ON motivo_profesional_proyecto.proyecto_id=proyectos.id
+        WHERE motivo_profesional_proyecto.deleted_at IS null AND motivo_profesional_proyecto.motivo_id=1 AND proyectos.CICLO="en progreso"
         GROUP BY profesional.id');
 
         $tutores = Collection::make($querytutor);
@@ -223,8 +231,8 @@ class TribunalController extends Controller
 
     public function retirar(Request $request, $idprofesional,$idproyecto)
     {
-      Proyecto::findOrFail($idproyecto)->profesional()->detach($idprofesional,['motivo_id' => 1,'proyecto_id'=>$idproyecto]);
-        Proyecto::findOrFail($idproyecto)->profesional()->attach($idprofesional,['motivo_id' => 1,'proyecto_id'=>$idproyecto, 'deleted_at'=>Carbon::now()]);
+        Proyecto::findOrFail($idproyecto)->profesional()->detach($idprofesional,['motivo_id' => 1,'proyecto_id'=>$idproyecto]);
+        Proyecto::findOrFail($idproyecto)->profesional()->attach($idprofesional,['motivo_id' => 1,'proyecto_id'=>$idproyecto, 'deleted_at'=>Carbon::now(), 'DESCRIPCION'=>$request->descripcion]);
         Proyecto::findOrFail($idproyecto)->profesional()->attach($idprofesional,['motivo_id' => $request->motivo,'proyecto_id'=>$idproyecto]);
         return redirect()->route('tribunal.reasignar', ['idprofesional' => $idprofesional,'idproyecto'=>$idproyecto]);
     }
