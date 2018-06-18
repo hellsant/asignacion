@@ -46,7 +46,7 @@ class ProyectoController extends Controller
         ->orderBy('AP_PAT_PROF')
         ->pluck('nombre_completo', 'id');
 
-        $areas= Area::pluck('NOMBRE_AREA', 'id');
+        $areas= Area::orderBy('NOMBRE_AREA')->pluck('NOMBRE_AREA', 'id');
         return view('proyecto.registrar')->with(compact('modalidades','now','gestiones', 'estudiantes', 'tutores', 'areas'));
     }
 
