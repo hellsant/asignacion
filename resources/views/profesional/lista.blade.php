@@ -64,6 +64,22 @@
                   </a>
               </h4>
             </div>
+
+            <div class="text-center">
+              <h4>
+                <a href='{{ route('tribunal.listaTutores',$profesional->id )}}' data-toggle="tooltip" data-placement="right" title="ver lista de tutorías">
+                  <i class="fa fa-book" aria-hidden="true"></i>
+                </a>
+                <a href='{{ route('tribunal.listaReasignar',$profesional->id )}}' data-toggle="tooltip" data-placement="right" title="ver proyectos de los que ha sido tribunal">
+                  <i class="fa fa-book" aria-hidden="true"></i>
+                </a>
+              </h4>
+            </div>
+
+
+
+
+
         </td>
       </tr>
       @endforeach

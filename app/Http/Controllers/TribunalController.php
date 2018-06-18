@@ -117,6 +117,8 @@ class TribunalController extends Controller
             $subarea->profesional;
         });
 
+        
+
         $querytutor=DB::select(
         'SELECT profesional.id,COUNT(estudiante_profesionals.id) tutor
          FROM profesional
@@ -232,8 +234,8 @@ class TribunalController extends Controller
     public function retirar(Request $request, $idprofesional,$idproyecto)
     {
         Proyecto::findOrFail($idproyecto)->profesional()->detach($idprofesional,['motivo_id' => 1,'proyecto_id'=>$idproyecto]);
-        Proyecto::findOrFail($idproyecto)->profesional()->attach($idprofesional,['motivo_id' => 1,'proyecto_id'=>$idproyecto, 'deleted_at'=>Carbon::now(), 'DESCRIPCION'=>$request->descripcion]);
-        Proyecto::findOrFail($idproyecto)->profesional()->attach($idprofesional,['motivo_id' => $request->motivo,'proyecto_id'=>$idproyecto]);
+
+        Proyecto::findOrFail($idproyecto)->profesional()->attach($idprofesional,['motivo_id' => $request->motivo,'proyecto_id'=>$idproyecto, 'DESCRIPCION'=>$request->descripcion]);
         return redirect()->route('tribunal.reasignar', ['idprofesional' => $idprofesional,'idproyecto'=>$idproyecto]);
     }
 }

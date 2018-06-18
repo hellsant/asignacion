@@ -24,9 +24,9 @@ class EstudianteFormEditRequest extends FormRequest
     public function rules()
     {
         return [
-          'nombre'=>'required|alpha',
-          'apellido_paterno'=>'required|alpha',
-          'apellido_materno'=>'nullable|alpha',
+          'nombre'=>'required|string',
+          'apellido_paterno'=>'required|string',
+          'apellido_materno'=>'nullable|string',
           'telefono'=>'nullable|numeric',
           'ci'=>'required|numeric',
           'cod_sis'=>'required|numeric',

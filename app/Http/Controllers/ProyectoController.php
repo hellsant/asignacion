@@ -23,28 +23,6 @@ class ProyectoController extends Controller
     {
         $proyectos = Proyecto::all();
 
-         //$nombre = $request->busqueda;
-         // $proyectos = Proyecto::orderBy('id', 'DESC');
-         //   ->where("TITULO_PERFIL", "LIKE", "%$nombre%")
-         //   ->orWhere("proyectos.id", "LIKE", "%$nombre%")
-         //   ->orWhereHas('estudiante', function ($query) use ($nombre) {
-         //           $query->where('NOM_EST', 'LIKE', "%$nombre%")
-         //           ->orWhere("AP_PAT_EST", "LIKE", "%$nombre%")
-         //           ->orWhere("AP_MAT_EST", "LIKE", "%$nombre%")
-         //           ->orWhereHas('profesional', function($query) use ($nombre){
-         //               $query->Where("NOM_PROF", "LIKE", "%$nombre%")
-         //               ->orWhere("AP_PAT_PROF", "LIKE", "%$nombre%")
-         //               ->orWhere("AP_MAT_PROF", "LIKE", "%$nombre%");
-         //       });
-         //   })
-         //   ->orWhereHas('profesional', function($query) use ($nombre){
-         //           $query->Where("NOM_PROF", "LIKE", "%$nombre%")
-         //           ->orWhere("AP_PAT_PROF", "LIKE", "%$nombre%")
-         //           ->orWhere("AP_MAT_PROF", "LIKE", "%$nombre%");
-         //       })
-         //   ->paginate(10);
-
-
         return view('proyecto.lista')->with(compact('proyectos'));
     }
 
@@ -64,9 +42,10 @@ class ProyectoController extends Controller
         ->orderBy('AP_PAT_EST')
         ->pluck('nombre_completo', 'id');
 
-        $tutores= Profesional::select(DB::raw('CONCAT(AP_PAT_PROF, " ", AP_MAT_PROF, " ", NOM_PROF) as nombre_completo'), 'id')
+        $tutores= Profesional::select(DB::raw('CONCAT(AP_PAT_PROF, " ", NOM_PROF) as nombre_completo'), 'id')
         ->orderBy('AP_PAT_PROF')
         ->pluck('nombre_completo', 'id');
+
         $areas= Area::pluck('NOMBRE_AREA', 'id');
         return view('proyecto.registrar')->with(compact('modalidades','now','gestiones', 'estudiantes', 'tutores', 'areas'));
     }

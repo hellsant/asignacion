@@ -18,24 +18,8 @@ class ProfesionalController extends Controller
     public function index(Request $request)
     {
       $titulos = Titulo::pluck('nombre', 'id');
-      $profesionales = Profesional::Nombre($request->nombre)
+      $profesionales = Profesional::all();
 
-      //->Titulo($request->titulo)
-      ->orderBy('AP_PAT_PROF','ASC')
-      ->paginate(1000);
-      $profesionales->each(function($profesionales){
-        $profesionales->titulo;
-
-      });
-
-
-        //// $profesionales = Profesional::all();
-        //// $titulos= Titulo::all();
-        //foreach ($data as $key) {
-        //   $titulo = Titulo::findOrFail($key->titulo_id)->profesional();
-        //  dd($titulo);
-        //}
-        ////return view('profesional.lista')->with(compact('profesionales','titulos'));
         return view('profesional.lista')->with(compact('profesionales', 'titulos'));
     }
 

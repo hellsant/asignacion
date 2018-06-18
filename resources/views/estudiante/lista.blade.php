@@ -2,14 +2,7 @@
 @section('titulo1', 'LISTA')
 @section('titulo2', 'DE ESTUDIANTES')
 @section('content')
-<div>
-  {!! Form::open(array('url'=>'estudiante','method'=>'GET','class' => 'navbar-form pull-right')) !!}
 
-    
-
-
-{{Form::close()}}
-</div>
 <div class="table-responsive table-striped">
 <table class="table" id="table_id">
     <thead class="thead-light">
@@ -66,7 +59,7 @@
       @endforeach
     </tbody>
   </table>
-{!!$estudiantes->appends(Request::only(['nombre']))->render("pagination::bootstrap-4")!!}
+
 </div>
 
 @endsection

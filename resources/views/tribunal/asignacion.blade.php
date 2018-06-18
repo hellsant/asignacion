@@ -80,7 +80,7 @@
                     <td>
                         @foreach ($tutores as $tutor)
                         @if ($tribunal -> id == $tutor->id )
-                        <a href='{{ route('tribunal.listaTutores',$tutor->id )}}' data-toggle="tooltip" data-placement="right" title="retirar">
+                        <a href='{{ route('tribunal.listaTutores',$tutor->id )}}' data-toggle="tooltip" data-placement="right" title="ver lista de tutorías">
                         {{ $tutor -> tutor}}
                         </a>
                         @endif
@@ -89,7 +89,7 @@
                     <td>
                         @foreach ($tribunalesN as $t )
                         @if ($t->id == $tribunal->id)
-                            <a href='{{ route('tribunal.listaReasignar',$tribunal->id )}}' data-toggle="tooltip" data-placement="right" title="retirar">
+                            <a href='{{ route('tribunal.listaReasignar',$tribunal->id )}}' data-toggle="tooltip" data-placement="right" title="ver lista de proyectos en los que ha sido tribunal">
                                 {{ $t -> tribunal}}
                             </a>
                             @endif
